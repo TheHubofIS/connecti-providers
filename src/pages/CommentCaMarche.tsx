@@ -1,7 +1,7 @@
 
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { ArrowRight, CheckCircle, FilePlus, Search, MessageCircle, CreditCard, Shield } from "lucide-react";
+import { ArrowRight, Check, HelpCircle, FileText, MessageSquare, Briefcase } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const CommentCaMarche = () => {
@@ -14,137 +14,285 @@ const CommentCaMarche = () => {
             <div className="max-w-3xl mx-auto text-center mb-16 animate-fade-in">
               <span className="text-sm font-medium text-primary">Guide d'utilisation</span>
               <h1 className="text-4xl md:text-5xl font-bold mt-2 mb-4">
-                Comment ça marche
+                Comment fonctionne ConnectiPro ?
               </h1>
               <p className="text-muted-foreground">
-                Découvrez comment notre plateforme vous permet de connecter facilement avec 
-                des prestataires français à l'étranger.
+                Découvrez comment notre plateforme vous met en relation avec des experts français
+                basés à l'étranger, en quelques étapes simples.
               </p>
             </div>
 
-            <div className="max-w-4xl mx-auto">
-              <div className="space-y-12 mb-16">
-                <div className="relative pl-16 animate-fade-in delay-100">
-                  <div className="absolute left-0 top-0 h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                    <Search className="h-6 w-6" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 animate-fade-in delay-100">
+              <div className="space-y-8">
+                <h2 className="text-2xl font-bold border-b pb-2 border-primary/20">
+                  Pour les entreprises
+                </h2>
+                
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">1</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Inscrivez-vous gratuitement</h3>
+                      <p className="text-muted-foreground">
+                        Créez votre compte entreprise en quelques clics pour accéder à notre réseau d'experts.
+                      </p>
+                    </div>
                   </div>
-                  <h2 className="text-2xl font-bold mb-3">1. Recherchez un prestataire</h2>
-                  <p className="text-muted-foreground mb-4">
-                    Utilisez notre moteur de recherche avancé pour trouver le prestataire qui correspond 
-                    à vos besoins. Filtrez par domaine, compétence, langue, localisation, ou tarif.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Accédez à des profils détaillés avec évaluations</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Utilisez des filtres précis pour affiner votre recherche</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Comparez les prestataires selon vos critères</span>
-                    </li>
-                  </ul>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">2</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Décrivez votre besoin</h3>
+                      <p className="text-muted-foreground">
+                        Utilisez notre formulaire RFQ (Request for Quote) pour détailler votre projet et vos exigences.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">3</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Recevez des propositions</h3>
+                      <p className="text-muted-foreground">
+                        Les prestataires qualifiés vous envoient leurs devis et propositions adaptées à vos besoins.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">4</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Sélectionnez votre prestataire</h3>
+                      <p className="text-muted-foreground">
+                        Comparez les offres, échangez avec les prestataires via notre messagerie sécurisée et choisissez le meilleur.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">5</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Collaborez efficacement</h3>
+                      <p className="text-muted-foreground">
+                        Utilisez nos outils de gestion de projet pour suivre l'avancement et communiquer avec votre prestataire.
+                      </p>
+                    </div>
+                  </div>
                 </div>
-
-                <div className="relative pl-16 animate-fade-in delay-200">
-                  <div className="absolute left-0 top-0 h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                    <FilePlus className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-3">2. Soumettez votre demande</h2>
-                  <p className="text-muted-foreground mb-4">
-                    Décrivez votre projet ou votre besoin spécifique en remplissant un formulaire RFQ 
-                    (Request For Quote). Soyez précis pour recevoir des offres adaptées.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Formulaire intuitif et guidé pour décrire votre besoin</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Possibilité de joindre des documents</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Définissez votre budget et vos délais</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="relative pl-16 animate-fade-in delay-300">
-                  <div className="absolute left-0 top-0 h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                    <MessageCircle className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-3">3. Recevez des propositions</h2>
-                  <p className="text-muted-foreground mb-4">
-                    Les prestataires qualifiés vous envoient leurs propositions. Vous pouvez discuter avec 
-                    eux via notre messagerie sécurisée pour affiner les détails.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Recevez des notifications par email lorsqu'une proposition arrive</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Comparez les offres dans votre espace dédié</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Posez des questions complémentaires aux prestataires</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div className="relative pl-16 animate-fade-in delay-400">
-                  <div className="absolute left-0 top-0 h-12 w-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                    <CreditCard className="h-6 w-6" />
-                  </div>
-                  <h2 className="text-2xl font-bold mb-3">4. Sélectionnez et collaborez</h2>
-                  <p className="text-muted-foreground mb-4">
-                    Choisissez la proposition qui vous convient et lancez votre collaboration en toute 
-                    sécurité. Notre plateforme sécurise vos paiements et vos échanges.
-                  </p>
-                  <ul className="space-y-2">
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Système de paiement sécurisé</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Suivi de l'avancement de votre projet</span>
-                    </li>
-                    <li className="flex items-start">
-                      <CheckCircle className="h-5 w-5 text-primary mr-2 mt-0.5" />
-                      <span>Communication intégrée avec votre prestataire</span>
-                    </li>
-                  </ul>
+                
+                <div className="pt-4">
+                  <Link
+                    to="/register?type=client"
+                    className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all"
+                  >
+                    <span>S'inscrire comme entreprise</span>
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
                 </div>
               </div>
-
-              <div className="bg-primary/5 rounded-xl p-8 border border-primary/10 animate-fade-in delay-500">
-                <div className="flex items-start">
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 text-primary flex-shrink-0 flex items-center justify-center mr-4">
-                    <Shield className="h-6 w-6" />
+              
+              <div className="space-y-8">
+                <h2 className="text-2xl font-bold border-b pb-2 border-primary/20">
+                  Pour les prestataires
+                </h2>
+                
+                <div className="space-y-6">
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">1</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Créez votre profil professionnel</h3>
+                      <p className="text-muted-foreground">
+                        Renseignez vos compétences, expériences, tarifs et disponibilités pour attirer les clients.
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="text-xl font-bold mb-2">Sécurité et confiance</h3>
-                    <p className="text-muted-foreground mb-4">
-                      Notre plateforme garantit une expérience sécurisée à tous les niveaux. Nous vérifions 
-                      l'identité et les qualifications de tous nos prestataires avant de les accepter sur ConnectiPro.
-                    </p>
-                    <Link
-                      to="/inscription"
-                      className="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-all"
-                    >
-                      <span>Commencer maintenant</span>
-                      <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">2</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Parcourez les projets</h3>
+                      <p className="text-muted-foreground">
+                        Consultez les demandes des clients correspondant à votre domaine d'expertise.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">3</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Proposez vos services</h3>
+                      <p className="text-muted-foreground">
+                        Envoyez des propositions personnalisées et compétitives aux clients intéressés.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">4</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Échangez avec les clients</h3>
+                      <p className="text-muted-foreground">
+                        Utilisez notre messagerie intégrée pour discuter des détails du projet et répondre aux questions.
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex gap-4">
+                    <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <span className="font-medium">5</span>
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-medium mb-1">Développez votre activité</h3>
+                      <p className="text-muted-foreground">
+                        Recevez des évaluations positives et construisez votre réputation sur la plateforme.
+                      </p>
+                    </div>
                   </div>
                 </div>
+                
+                <div className="pt-4">
+                  <Link
+                    to="/register?type=provider"
+                    className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all"
+                  >
+                    <span>S'inscrire comme prestataire</span>
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            <div className="max-w-4xl mx-auto bg-white dark:bg-secondary/50 rounded-xl shadow-sm p-8 border border-border animate-fade-in delay-200">
+              <h2 className="text-2xl font-bold mb-6 text-center">Questions fréquentes</h2>
+              
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <div className="flex items-start gap-3">
+                    <HelpCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <h3 className="text-lg font-medium">Comment sont vérifiés les prestataires ?</h3>
+                  </div>
+                  <p className="text-muted-foreground pl-8">
+                    Tous nos prestataires passent par un processus rigoureux de vérification incluant la validation des diplômes, 
+                    compétences linguistiques, expériences professionnelles et références. Nous vérifions également leur situation 
+                    légale dans leur pays de résidence.
+                  </p>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex items-start gap-3">
+                    <HelpCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <h3 className="text-lg font-medium">Quels sont les frais de service ?</h3>
+                  </div>
+                  <p className="text-muted-foreground pl-8">
+                    L'inscription et la recherche de prestataires sont gratuites pour les entreprises. Une commission de 10% est 
+                    prélevée sur les transactions effectuées via notre plateforme. Les prestataires paient des frais d'abonnement 
+                    mensuels variables selon le type de compte choisi.
+                  </p>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex items-start gap-3">
+                    <HelpCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <h3 className="text-lg font-medium">Comment sont gérés les paiements ?</h3>
+                  </div>
+                  <p className="text-muted-foreground pl-8">
+                    Notre système d'escrow sécurise vos transactions. Les fonds sont bloqués jusqu'à la validation de la mission, 
+                    assurant ainsi une protection optimale pour les deux parties. Plusieurs méthodes de paiement sont acceptées.
+                  </p>
+                </div>
+                
+                <div className="space-y-2">
+                  <div className="flex items-start gap-3">
+                    <HelpCircle className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                    <h3 className="text-lg font-medium">Quelle est la procédure en cas de litige ?</h3>
+                  </div>
+                  <p className="text-muted-foreground pl-8">
+                    Notre équipe de médiation intervient pour résoudre les différends entre clients et prestataires. 
+                    Le processus inclut une phase de dialogue, suivie si nécessaire d'une médiation formelle et, 
+                    en dernier recours, d'un arbitrage par notre comité indépendant.
+                  </p>
+                </div>
+              </div>
+              
+              <div className="mt-10 text-center">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center px-6 py-3 border border-primary/20 rounded-lg text-primary hover:bg-primary/5 transition-all"
+                >
+                  <span>Plus de questions ? Contactez-nous</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 animate-fade-in delay-300">
+              <div className="bg-white dark:bg-secondary/50 rounded-xl p-6 border border-border hover:shadow-md transition-all text-center">
+                <div className="h-12 w-12 mx-auto rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <FileText className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Guides & Tutoriels</h3>
+                <p className="text-muted-foreground mb-4">
+                  Consultez nos guides détaillés et vidéos pour tirer le meilleur parti de notre plateforme.
+                </p>
+                <Link
+                  to="/ressources"
+                  className="flex items-center justify-center text-primary font-medium"
+                >
+                  <span>Voir les ressources</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+              
+              <div className="bg-white dark:bg-secondary/50 rounded-xl p-6 border border-border hover:shadow-md transition-all text-center">
+                <div className="h-12 w-12 mx-auto rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <MessageSquare className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Support client</h3>
+                <p className="text-muted-foreground mb-4">
+                  Notre équipe de support est disponible 7j/7 pour vous aider dans toutes vos démarches.
+                </p>
+                <Link
+                  to="/support"
+                  className="flex items-center justify-center text-primary font-medium"
+                >
+                  <span>Contacter le support</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </div>
+              
+              <div className="bg-white dark:bg-secondary/50 rounded-xl p-6 border border-border hover:shadow-md transition-all text-center">
+                <div className="h-12 w-12 mx-auto rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <Briefcase className="h-6 w-6 text-primary" />
+                </div>
+                <h3 className="text-xl font-semibold mb-2">Cas d'usage</h3>
+                <p className="text-muted-foreground mb-4">
+                  Découvrez comment d'autres entreprises ont réussi grâce à notre réseau d'experts.
+                </p>
+                <Link
+                  to="/success-stories"
+                  className="flex items-center justify-center text-primary font-medium"
+                >
+                  <span>Lire les témoignages</span>
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
               </div>
             </div>
           </div>
