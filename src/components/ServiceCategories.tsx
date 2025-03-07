@@ -1,6 +1,6 @@
 
 import { useState, useRef, useEffect } from "react";
-import { ArrowRight, Scale, Calculator, Code, Heart, Tooth } from "lucide-react";
+import { ArrowRight, Scale, Calculator, Code, Heart, Stethoscope } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const categories = [
@@ -36,7 +36,7 @@ const categories = [
     id: "dentaire",
     title: "Dentaire",
     description: "Dentistes, orthodontistes et prothésistes dentaires",
-    icon: Tooth,
+    icon: Stethoscope, // Changing from Tooth to Stethoscope which exists in lucide-react
     color: "bg-amber-50 text-amber-500 dark:bg-amber-900/20 dark:text-amber-400",
   }
 ];
