@@ -20,3 +20,9 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
+
+
+export default defineConfig({
+  base: '/connecti-providers/',
+  plugins: [react()],
+})
