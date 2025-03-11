@@ -2,45 +2,46 @@
 import React, { useState } from 'react';
 import SearchBar from '@/components/SearchBar';
 import ProviderFilters, { FilterOptions } from '@/components/ProviderFilters';
-import ProviderCard, { Provider } from '@/components/ProviderCard';
+import PrestaireCard from '@/components/PrestaireCard';
+import type { Provider } from '@/types/provider';
 
-// Données simulées pour la démonstration
+// Mock data
 const mockProviders: Provider[] = [
   {
     id: '1',
     name: 'Sophie Martin',
     title: 'Consultante en Stratégie Internationale',
     rating: 4.8,
-    reviewCount: 127,
+    reviews: 127,
     location: 'Londres',
-    imageUrl: '/placeholder.svg',
-    categories: ['Stratégie', 'Business Development', 'Consulting'],
+    image: '/placeholder.svg',
+    category: 'Stratégie',
+    subcategory: 'Business Development',
+    skills: ['Stratégie', 'Business Development', 'Consulting'],
     hourlyRate: 120,
-    availability: 'available'
+    availability: 'Disponible maintenant',
+    languages: ['Français', 'Anglais'],
+    responseTime: '< 2 heures',
+    completionRate: 98,
+    verified: true
   },
   {
     id: '2',
     name: 'Jean Dupont',
     title: 'Expert-Comptable International',
     rating: 4.9,
-    reviewCount: 84,
+    reviews: 84,
     location: 'New York',
-    imageUrl: '/placeholder.svg',
-    categories: ['Finance', 'Comptabilité', 'Fiscalité'],
+    image: '/placeholder.svg',
+    category: 'Finance',
+    subcategory: 'Comptabilité',
+    skills: ['Finance', 'Comptabilité', 'Fiscalité'],
     hourlyRate: 150,
-    availability: 'this_week'
-  },
-  {
-    id: '3',
-    name: 'Marie Bernard',
-    title: 'Avocate d\'Affaires',
-    rating: 4.7,
-    reviewCount: 93,
-    location: 'Paris',
-    imageUrl: '/placeholder.svg',
-    categories: ['Droit', 'Contrats', 'Propriété Intellectuelle'],
-    hourlyRate: 200,
-    availability: 'this_month'
+    availability: 'Cette semaine',
+    languages: ['Français', 'Anglais', 'Espagnol'],
+    responseTime: '< 4 heures',
+    completionRate: 95,
+    verified: true
   }
 ];
 
@@ -76,7 +77,7 @@ export default function Prestataires() {
         <main className="lg:col-span-3">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {mockProviders.map(provider => (
-              <ProviderCard key={provider.id} provider={provider} />
+              <PrestaireCard key={provider.id} provider={provider} />
             ))}
           </div>
         </main>

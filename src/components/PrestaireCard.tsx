@@ -1,11 +1,10 @@
-
 import { Star, MapPin, Clock, CheckCircle, MessageCircle, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
-import type { Provider } from "@/pages/Prestataires";
+import type { Provider } from "@/types/provider";
 
 type ProviderCardProps = {
   provider: Provider;
