@@ -1,58 +1,44 @@
 
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/components/ui/use-toast";
-import { Eye, EyeOff, Mail, Lock } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, ArrowRight } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export default function Connexion() {
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [rememberMe, setRememberMe] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!email || !password) {
-      toast({
-        title: "Erreur",
-        description: "Veuillez remplir tous les champs obligatoires.",
-        variant: "destructive",
-      });
-      return;
-    }
-    
     setIsLoading(true);
-    
+
     try {
-      // Simulate authentication
+      // Simuler une connexion
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       toast({
         title: "Connexion réussie",
-        description: "Vous êtes maintenant connecté.",
+        description: "Bienvenue sur ConnectiPro",
       });
       
-      // Redirect based on user type (for demo purposes)
-      if (email.includes("admin")) {
-        navigate("/admin/dashboard");
-      } else if (email.includes("prestataire")) {
-        navigate("/fournisseur/dashboard");
-      } else {
-        navigate("/client/dashboard");
-      }
+      navigate("/client/dashboard");
     } catch (error) {
       toast({
         title: "Erreur de connexion",
-        description: "Identifiants incorrects. Veuillez réessayer.",
+        description: "Email ou mot de passe incorrect.",
         variant: "destructive",
       });
     } finally {
@@ -63,155 +49,161 @@ export default function Connexion() {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      
       <main className="pt-24 pb-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-md mx-auto bg-white dark:bg-secondary/50 rounded-xl shadow-sm border border-border p-6">
-            <Tabs defaultValue="login" className="w-full">
-              <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="login">Connexion</TabsTrigger>
-                <TabsTrigger value="register">Inscription</TabsTrigger>
+        <div className="container mx-auto px-4 max-w-md">
+          <Card className="shadow-sm border-border/40">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl">Connexion</CardTitle>
+              <CardDescription>
+                Connectez-vous à votre compte ConnectiPro
+              </CardDescription>
+            </CardHeader>
+            
+            <Tabs defaultValue="email" className="w-full">
+              <TabsList className="grid grid-cols-2 mb-4 mx-4">
+                <TabsTrigger value="email">Email</TabsTrigger>
+                <TabsTrigger value="phone">Téléphone</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="login">
-                <div className="text-center mb-6">
-                  <h1 className="text-2xl font-bold">Connectez-vous</h1>
-                  <p className="text-muted-foreground mt-2">
-                    Accédez à votre compte Connecti
-                  </p>
-                </div>
-                
-                <form onSubmit={handleLogin} className="space-y-4">
-                  <div className="space-y-2">
-                    <label htmlFor="email" className="text-sm font-medium">
-                      Email
-                    </label>
-                    <div className="relative">
-                      <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="votre@email.com"
-                        className="pl-10"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                      />
+              <TabsContent value="email">
+                <CardContent>
+                  <form onSubmit={handleSubmit}>
+                    <div className="space-y-4">
+                      <div className="space-y-2">
+                        <Label htmlFor="email">Email</Label>
+                        <div className="relative">
+                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                          <Input
+                            id="email"
+                            type="email"
+                            placeholder="exemple@email.com"
+                            className="pl-10"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                          />
+                        </div>
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <div className="flex items-center justify-between">
+                          <Label htmlFor="password">Mot de passe</Label>
+                          <Link to="/mot-de-passe-oublie" className="text-xs text-primary hover:underline">
+                            Mot de passe oublié?
+                          </Link>
+                        </div>
+                        <div className="relative">
+                          <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                          <Input
+                            id="password"
+                            type={showPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            className="pl-10"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                          />
+                          <button
+                            type="button"
+                            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground"
+                            onClick={() => setShowPassword(!showPassword)}
+                          >
+                            {showPassword ? (
+                              <EyeOff className="h-4 w-4" />
+                            ) : (
+                              <Eye className="h-4 w-4" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center space-x-2">
+                        <Checkbox
+                          id="remember"
+                          checked={rememberMe}
+                          onCheckedChange={(checked) => 
+                            setRememberMe(checked as boolean)
+                          }
+                        />
+                        <Label htmlFor="remember" className="text-sm">
+                          Rester connecté
+                        </Label>
+                      </div>
+                      
+                      <Button type="submit" className="w-full" disabled={isLoading}>
+                        {isLoading ? "Connexion en cours..." : "Se connecter"}
+                      </Button>
+                    </div>
+                  </form>
+                  
+                  <div className="relative my-6">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-border"></div>
+                    </div>
+                    <div className="relative flex justify-center text-xs">
+                      <span className="bg-card px-2 text-muted-foreground">
+                        Ou continuer avec
+                      </span>
                     </div>
                   </div>
                   
-                  <div className="space-y-2">
-                    <div className="flex justify-between">
-                      <label htmlFor="password" className="text-sm font-medium">
-                        Mot de passe
-                      </label>
-                      <Link
-                        to="/mot-de-passe-oublie"
-                        className="text-xs text-primary hover:underline"
-                      >
-                        Mot de passe oublié ?
-                      </Link>
-                    </div>
-                    <div className="relative">
-                      <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                      <Input
-                        id="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="••••••••"
-                        className="pl-10"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                      />
-                      <button
-                        type="button"
-                        className="absolute right-3 top-1/2 transform -translate-y-1/2"
-                        onClick={() => setShowPassword(!showPassword)}
-                      >
-                        {showPassword ? (
-                          <EyeOff className="h-5 w-5 text-muted-foreground" />
-                        ) : (
-                          <Eye className="h-5 w-5 text-muted-foreground" />
-                        )}
-                      </button>
-                    </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <Button variant="outline" type="button" className="w-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                      </svg>
+                      Facebook
+                    </Button>
+                    <Button variant="outline" type="button" className="w-full">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                      </svg>
+                      Google
+                    </Button>
                   </div>
-                  
-                  <div className="flex items-center space-x-2">
-                    <Checkbox id="remember" />
-                    <label
-                      htmlFor="remember"
-                      className="text-sm text-muted-foreground cursor-pointer"
-                    >
-                      Se souvenir de moi
-                    </label>
-                  </div>
-                  
-                  <Button type="submit" className="w-full" disabled={isLoading}>
-                    {isLoading ? "Connexion en cours..." : "Se connecter"}
-                  </Button>
-                
-                  <div className="text-center text-sm text-muted-foreground mt-6">
-                    Pas encore de compte?{" "}
-                    <Link to="/inscription" className="text-primary hover:underline">
-                      Inscrivez-vous
-                    </Link>
-                  </div>
-                </form>
+                </CardContent>
               </TabsContent>
               
-              <TabsContent value="register">
-                <div className="text-center mb-6">
-                  <h1 className="text-2xl font-bold">Inscrivez-vous</h1>
-                  <p className="text-muted-foreground mt-2">
-                    Rejoignez la communauté Connecti
-                  </p>
-                </div>
-                
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <Link
-                      to="/inscription/client"
-                      className="flex flex-col items-center p-4 border border-input rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
-                    >
-                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-medium">Client</span>
-                      <span className="text-xs text-muted-foreground mt-1">
-                        Je cherche des prestataires
-                      </span>
-                    </Link>
-                    
-                    <Link
-                      to="/inscription/prestataire"
-                      className="flex flex-col items-center p-4 border border-input rounded-lg hover:border-primary hover:bg-primary/5 transition-colors"
-                    >
-                      <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                        </svg>
-                      </div>
-                      <span className="text-sm font-medium">Prestataire</span>
-                      <span className="text-xs text-muted-foreground mt-1">
-                        Je propose mes services
-                      </span>
-                    </Link>
-                  </div>
-                  
-                  <div className="text-center text-sm text-muted-foreground mt-6">
-                    Déjà inscrit ?{" "}
-                    <Link to="/connexion" className="text-primary hover:underline">
-                      Connectez-vous
-                    </Link>
-                  </div>
-                </div>
+              <TabsContent value="phone">
+                <CardContent>
+                  <form className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Numéro de téléphone</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="+33 6 12 34 56 78"
+                      />
+                    </div>
+                    <Button type="button" className="w-full">
+                      Recevoir un code
+                    </Button>
+                  </form>
+                </CardContent>
               </TabsContent>
             </Tabs>
-          </div>
+            
+            <CardFooter className="flex flex-col items-center justify-center space-y-2">
+              <div className="text-sm text-center text-muted-foreground">
+                Vous n'avez pas de compte?{" "}
+                <Link to="/inscription-client" className="text-primary hover:underline">
+                  Créer un compte
+                </Link>
+              </div>
+              
+              <div className="text-xs text-center text-muted-foreground">
+                Vous êtes un prestataire?{" "}
+                <Link to="/inscription-prestataire" className="text-primary hover:underline">
+                  Rejoindre le réseau
+                  <ArrowRight className="inline-block ml-1 h-3 w-3" />
+                </Link>
+              </div>
+            </CardFooter>
+          </Card>
         </div>
       </main>
+      
       <Footer />
     </div>
   );
