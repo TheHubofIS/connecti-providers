@@ -1,7 +1,7 @@
 
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useAuth } from "./AuthContext";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/ui/use-toast";
 
 export type AppointmentStatus = "pending" | "confirmed" | "completed" | "cancelled";
 
@@ -11,6 +11,7 @@ export interface Appointment {
   providerName: string;
   clientId: string;
   clientName: string;
+  serviceName: string;
   title: string;
   description: string;
   date: Date;
@@ -32,18 +33,21 @@ interface AppointmentContextType {
   updateAppointment: (id: string, updates: Partial<Appointment>) => Promise<void>;
   cancelAppointment: (id: string) => Promise<void>;
   confirmAppointment: (id: string) => Promise<void>;
-  completeAppointment: (id: string) => Promise<void>;
+  completeAppointment: (id: string, notes?: string) => Promise<void>;
 }
 
 const AppointmentContext = createContext<AppointmentContextType | undefined>(undefined);
 
-export const useAppointments = () => {
+export const useAppointment = () => {
   const context = useContext(AppointmentContext);
   if (context === undefined) {
-    throw new Error("useAppointments must be used within an AppointmentProvider");
+    throw new Error("useAppointment must be used within an AppointmentProvider");
   }
   return context;
 };
+
+// Alias for backward compatibility
+export const useAppointments = useAppointment;
 
 // Mock data - would be replaced with API calls in a real app
 const mockAppointments: Appointment[] = [
@@ -53,6 +57,7 @@ const mockAppointments: Appointment[] = [
     providerName: "Provider User",
     clientId: "1",
     clientName: "Client User",
+    serviceName: "Consultation",
     title: "Consultation initiale",
     description: "Première réunion pour discuter du projet",
     date: new Date(2023, 6, 20),
@@ -70,6 +75,7 @@ const mockAppointments: Appointment[] = [
     providerName: "Provider User",
     clientId: "1",
     clientName: "Client User",
+    serviceName: "Suivi de projet",
     title: "Suivi du projet",
     description: "Point d'avancement sur le projet en cours",
     date: new Date(2023, 6, 25),
@@ -204,8 +210,8 @@ export const AppointmentProvider: React.FC<{ children: React.ReactNode }> = ({ c
   };
 
   // Mark an appointment as completed
-  const completeAppointment = async (id: string) => {
-    return updateAppointment(id, { status: "completed" });
+  const completeAppointment = async (id: string, notes?: string) => {
+    return updateAppointment(id, { status: "completed", notes });
   };
 
   // Load appointments when user changes

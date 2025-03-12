@@ -9,6 +9,12 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  address?: string;
+  companyName?: string;
+  bio?: string;
   role: UserRole;
   profileCompleted: boolean;
 }
@@ -66,9 +72,40 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       // Mock user data - in a real app, this would come from the backend
       const mockUsers = [
-        { id: "1", email: "client@example.com", password: "password", name: "Client User", role: "client", profileCompleted: true },
-        { id: "2", email: "provider@example.com", password: "password", name: "Provider User", role: "provider", profileCompleted: true },
-        { id: "3", email: "admin@example.com", password: "password", name: "Admin User", role: "admin", profileCompleted: true }
+        { 
+          id: "1", 
+          email: "client@example.com", 
+          password: "password", 
+          name: "Client User", 
+          firstName: "Jean", 
+          lastName: "Dupont", 
+          phone: "+33612345678", 
+          address: "123 Rue de Paris, 75001 Paris", 
+          role: "client", 
+          profileCompleted: true 
+        },
+        { 
+          id: "2", 
+          email: "provider@example.com", 
+          password: "password", 
+          name: "Provider User", 
+          firstName: "Marie", 
+          lastName: "Martin", 
+          phone: "+33687654321", 
+          address: "456 Avenue des Champs-Élysées, 75008 Paris", 
+          companyName: "Services Pro", 
+          bio: "Prestataire professionnel avec plus de 10 ans d'expérience", 
+          role: "provider", 
+          profileCompleted: true 
+        },
+        { 
+          id: "3", 
+          email: "admin@example.com", 
+          password: "password", 
+          name: "Admin User", 
+          role: "admin", 
+          profileCompleted: true 
+        }
       ];
       
       const foundUser = mockUsers.find(u => u.email === email);
