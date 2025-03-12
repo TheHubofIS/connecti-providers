@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useAppointments } from "@/contexts/AppointmentContext";
 import { useMessages } from "@/contexts/MessageContext";
-import { Calendar, UserRound, MessageSquare, CalendarClock, LogOut, DollarSign, Star } from "lucide-react";
+import { Calendar, UserRound, MessageSquare, CalendarClock, LogOut } from "lucide-react";
 import Navbar from "@/components/Navbar";
 
-export default function FournisseurDashboard() {
+export default function ClientDashboard() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const { appointments, getAppointments } = useAppointments();
@@ -33,7 +33,7 @@ export default function FournisseurDashboard() {
       <div className="container mx-auto py-24 px-4">
         <div className="flex flex-col md:flex-row items-start justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold">Tableau de bord Prestataire</h1>
+            <h1 className="text-3xl font-bold">Tableau de bord</h1>
             <p className="text-muted-foreground">
               Bienvenue, {user?.name}
             </p>
@@ -48,7 +48,7 @@ export default function FournisseurDashboard() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium">
-                Demandes en attente
+                Rendez-vous en attente
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -61,7 +61,7 @@ export default function FournisseurDashboard() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium">
-                Rendez-vous à venir
+                Prochains rendez-vous
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -74,7 +74,7 @@ export default function FournisseurDashboard() {
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium">
-                Messages clients
+                Messages non lus
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -93,71 +93,7 @@ export default function FournisseurDashboard() {
             <CardContent>
               <div className="flex items-center">
                 <UserRound className="h-5 w-5 text-purple-500 mr-2" />
-                <span className="text-2xl font-bold">{user?.profileCompleted ? "100%" : "75%"}</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid gap-6 md:grid-cols-2 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Performance</CardTitle>
-              <CardDescription>Vos statistiques de performance</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Évaluation moyenne</span>
-                  <div className="flex items-center">
-                    <Star className="h-4 w-4 text-yellow-400 mr-1" />
-                    <span className="font-medium">4.8/5</span>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Taux de réponse</span>
-                  <span className="font-medium">95%</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Temps de réponse moyen</span>
-                  <span className="font-medium">2h</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Projets complétés</span>
-                  <span className="font-medium">12</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Revenus</CardTitle>
-              <CardDescription>Aperçu de vos revenus</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Ce mois-ci</span>
-                  <div className="flex items-center">
-                    <DollarSign className="h-4 w-4 text-green-500 mr-1" />
-                    <span className="font-medium">1,250 €</span>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">Mois dernier</span>
-                  <div className="flex items-center">
-                    <DollarSign className="h-4 w-4 text-green-500 mr-1" />
-                    <span className="font-medium">980 €</span>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-sm">En attente de paiement</span>
-                  <div className="flex items-center">
-                    <DollarSign className="h-4 w-4 text-orange-500 mr-1" />
-                    <span className="font-medium">320 €</span>
-                  </div>
-                </div>
+                <span className="text-2xl font-bold">{user?.profileCompleted ? "100%" : "50%"}</span>
               </div>
             </CardContent>
           </Card>
@@ -171,17 +107,21 @@ export default function FournisseurDashboard() {
             </CardHeader>
             <CardContent>
               <div className="grid gap-2">
-                <Button onClick={() => navigate("/fournisseur/appointments")} className="justify-start">
+                <Button onClick={() => navigate("/prestataires")} className="justify-start">
+                  <UserRound className="mr-2 h-4 w-4" />
+                  Rechercher des prestataires
+                </Button>
+                <Button onClick={() => navigate("/client/appointments")} className="justify-start">
                   <Calendar className="mr-2 h-4 w-4" />
                   Gérer mes rendez-vous
                 </Button>
-                <Button onClick={() => navigate("/fournisseur/messages")} className="justify-start">
+                <Button onClick={() => navigate("/client/messages")} className="justify-start">
                   <MessageSquare className="mr-2 h-4 w-4" />
                   Mes messages
                 </Button>
-                <Button onClick={() => navigate("/fournisseur/profile")} variant="outline" className="justify-start">
+                <Button onClick={() => navigate("/client/profile")} variant="outline" className="justify-start">
                   <UserRound className="mr-2 h-4 w-4" />
-                  Modifier mon profil
+                  Compléter mon profil
                 </Button>
               </div>
             </CardContent>
@@ -189,7 +129,7 @@ export default function FournisseurDashboard() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Dernières activités</CardTitle>
+              <CardTitle>Activités récentes</CardTitle>
               <CardDescription>Vos dernières activités sur la plateforme</CardDescription>
             </CardHeader>
             <CardContent>
@@ -205,7 +145,7 @@ export default function FournisseurDashboard() {
                       <div className="space-y-1">
                         <p className="text-sm font-medium">{appointment.title}</p>
                         <p className="text-xs text-muted-foreground">
-                          Client: {appointment.clientName} - {new Date(appointment.date).toLocaleDateString()}
+                          {new Date(appointment.date).toLocaleDateString()} - {appointment.startTime}
                         </p>
                       </div>
                     </div>
