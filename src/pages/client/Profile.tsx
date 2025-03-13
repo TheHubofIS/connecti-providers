@@ -22,7 +22,7 @@ export default function ClientProfile() {
   };
   
   return (
-    <div className="container py-10">
+    <div className="container py-10 pt-24">
       <h1 className="text-3xl font-bold mb-6">Mon Profil</h1>
       
       <Tabs defaultValue="personal-info" className="w-full">

@@ -1,8 +1,10 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/use-toast";
 import { 
   Card, 
   CardContent, 
@@ -12,6 +14,20 @@ import {
 } from "@/components/ui/card";
 
 const SettingsTab = () => {
+  const [emailNotifications, setEmailNotifications] = useState(true);
+  const [appointmentReminders, setAppointmentReminders] = useState(true);
+  const [publicProfile, setPublicProfile] = useState(true);
+  const [availableForClients, setAvailableForClients] = useState(true);
+  const [language, setLanguage] = useState("fr");
+
+  const handleSave = () => {
+    // Ici, vous implémenteriez la logique pour sauvegarder les paramètres
+    toast({
+      title: "Paramètres enregistrés",
+      description: "Vos paramètres ont été mis à jour avec succès."
+    });
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -29,7 +45,10 @@ const SettingsTab = () => {
               <p className="font-medium">Notifications par email</p>
               <p className="text-sm text-muted-foreground">Recevez des emails concernant vos rendez-vous et messages.</p>
             </div>
-            <Switch defaultChecked />
+            <Switch 
+              checked={emailNotifications} 
+              onCheckedChange={setEmailNotifications} 
+            />
           </div>
           
           <div className="flex items-center justify-between">
@@ -37,7 +56,10 @@ const SettingsTab = () => {
               <p className="font-medium">Rappels de rendez-vous</p>
               <p className="text-sm text-muted-foreground">Recevez des rappels avant vos rendez-vous programmés.</p>
             </div>
-            <Switch defaultChecked />
+            <Switch 
+              checked={appointmentReminders} 
+              onCheckedChange={setAppointmentReminders} 
+            />
           </div>
         </div>
         
@@ -51,7 +73,10 @@ const SettingsTab = () => {
               <p className="font-medium">Profil public</p>
               <p className="text-sm text-muted-foreground">Rendez votre profil visible pour tous les utilisateurs.</p>
             </div>
-            <Switch defaultChecked />
+            <Switch 
+              checked={publicProfile} 
+              onCheckedChange={setPublicProfile} 
+            />
           </div>
           
           <div className="flex items-center justify-between">
@@ -59,7 +84,10 @@ const SettingsTab = () => {
               <p className="font-medium">Disponible pour de nouveaux clients</p>
               <p className="text-sm text-muted-foreground">Indiquez si vous acceptez actuellement de nouveaux clients.</p>
             </div>
-            <Switch defaultChecked />
+            <Switch 
+              checked={availableForClients} 
+              onCheckedChange={setAvailableForClients} 
+            />
           </div>
         </div>
         
@@ -72,7 +100,8 @@ const SettingsTab = () => {
             <select 
               id="language" 
               className="w-full p-2 border rounded-md" 
-              defaultValue="fr"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
             >
               <option value="fr">Français</option>
               <option value="en">English</option>
@@ -81,7 +110,7 @@ const SettingsTab = () => {
           </div>
         </div>
         
-        <Button>Enregistrer les paramètres</Button>
+        <Button onClick={handleSave}>Enregistrer les paramètres</Button>
       </CardContent>
     </Card>
   );

@@ -25,7 +25,7 @@ export default function FournisseurProfile() {
   };
   
   return (
-    <div className="container py-10">
+    <div className="container py-10 pt-24">
       <h1 className="text-3xl font-bold mb-6">Mon Profil Prestataire</h1>
       
       <Tabs defaultValue="personal-info" className="w-full">

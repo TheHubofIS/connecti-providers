@@ -1,21 +1,22 @@
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navLinks = [
   { name: "Accueil", href: "/" },
   { name: "Services", href: "/services" },
   { name: "Prestataires", href: "/prestataires" },
   { name: "Comment ça marche", href: "/comment-ca-marche" },
-  { name: "Blog", href: "/blog" },
-  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
+  const { isAuthenticated, user, logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,6 +30,11 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
     <header
@@ -63,18 +69,38 @@ export default function Navbar() {
 
             <div className="flex items-center space-x-4">
               <ThemeToggle />
-              <Link
-                to="/connexion"
-                className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
-              >
-                Connexion
-              </Link>
-              <Link
-                to="/inscription"
-                className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
-              >
-                Inscription
-              </Link>
+              
+              {isAuthenticated ? (
+                <div className="flex items-center space-x-4">
+                  <Link
+                    to={user?.role === "provider" ? "/fournisseur/dashboard" : "/client/dashboard"}
+                    className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+                  >
+                    Tableau de bord
+                  </Link>
+                  <button
+                    onClick={logout}
+                    className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
+                  >
+                    Déconnexion
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <Link
+                    to="/connexion"
+                    className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+                  >
+                    Connexion
+                  </Link>
+                  <Link
+                    to="/inscription-client"
+                    className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
+                  >
+                    Inscription
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 
@@ -114,20 +140,43 @@ export default function Navbar() {
             </Link>
           ))}
           <div className="flex flex-col space-y-3 pt-4 border-t border-border">
-            <Link
-              to="/connexion"
-              className="py-2 px-4 text-center rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
-              onClick={() => setIsOpen(false)}
-            >
-              Connexion
-            </Link>
-            <Link
-              to="/inscription"
-              className="py-2 px-4 text-center rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
-              onClick={() => setIsOpen(false)}
-            >
-              Inscription
-            </Link>
+            {isAuthenticated ? (
+              <>
+                <Link
+                  to={user?.role === "provider" ? "/fournisseur/dashboard" : "/client/dashboard"}
+                  className="py-2 px-4 text-center rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Tableau de bord
+                </Link>
+                <button
+                  onClick={() => {
+                    logout();
+                    setIsOpen(false);
+                  }}
+                  className="py-2 px-4 text-center rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
+                >
+                  Déconnexion
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/connexion"
+                  className="py-2 px-4 text-center rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Connexion
+                </Link>
+                <Link
+                  to="/inscription-client"
+                  className="py-2 px-4 text-center rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Inscription
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

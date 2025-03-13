@@ -24,60 +24,72 @@ import ClientMessages from "./pages/client/Messages";
 import FournisseurMessages from "./pages/fournisseur/Messages";
 import ClientAppointments from "./pages/client/Appointments";
 import FournisseurAppointments from "./pages/fournisseur/Appointments";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const queryClient = new QueryClient();
 
+// Wrapper component for adding layout to routes that need it
+const LayoutWrapper = ({ children }: { children: React.ReactNode }) => (
+  <>
+    <Navbar />
+    {children}
+    <Footer />
+  </>
+);
+
 const AppRoutes = () => (
   <Routes>
-    <Route path="/" element={<Index />} />
-    <Route path="/services" element={<Services />} />
-    <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
-    <Route path="/prestataires" element={<Prestataires />} />
+    <Route path="/" element={<LayoutWrapper><Index /></LayoutWrapper>} />
+    <Route path="/services" element={<LayoutWrapper><Services /></LayoutWrapper>} />
+    <Route path="/comment-ca-marche" element={<LayoutWrapper><CommentCaMarche /></LayoutWrapper>} />
+    <Route path="/prestataires" element={<LayoutWrapper><Prestataires /></LayoutWrapper>} />
     <Route path="/connexion" element={<Connexion />} />
     <Route path="/inscription-client" element={<InscriptionClient />} />
     <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
+    <Route path="/inscription" element={<InscriptionClient />} />
     
     {/* Client routes */}
     <Route path="/client/dashboard" element={
       <ProtectedRoute allowedRoles={["client"]}>
-        <ClientDashboard />
+        <LayoutWrapper><ClientDashboard /></LayoutWrapper>
       </ProtectedRoute>
     } />
     <Route path="/client/profile" element={
       <ProtectedRoute allowedRoles={["client"]}>
-        <ClientProfile />
+        <LayoutWrapper><ClientProfile /></LayoutWrapper>
       </ProtectedRoute>
     } />
     <Route path="/client/messages" element={
       <ProtectedRoute allowedRoles={["client"]}>
-        <ClientMessages />
+        <LayoutWrapper><ClientMessages /></LayoutWrapper>
       </ProtectedRoute>
     } />
     <Route path="/client/appointments" element={
       <ProtectedRoute allowedRoles={["client"]}>
-        <ClientAppointments />
+        <LayoutWrapper><ClientAppointments /></LayoutWrapper>
       </ProtectedRoute>
     } />
     
     {/* Provider routes */}
     <Route path="/fournisseur/dashboard" element={
       <ProtectedRoute allowedRoles={["provider"]}>
-        <FournisseurDashboard />
+        <LayoutWrapper><FournisseurDashboard /></LayoutWrapper>
       </ProtectedRoute>
     } />
     <Route path="/fournisseur/profile" element={
       <ProtectedRoute allowedRoles={["provider"]}>
-        <FournisseurProfile />
+        <LayoutWrapper><FournisseurProfile /></LayoutWrapper>
       </ProtectedRoute>
     } />
     <Route path="/fournisseur/messages" element={
       <ProtectedRoute allowedRoles={["provider"]}>
-        <FournisseurMessages />
+        <LayoutWrapper><FournisseurMessages /></LayoutWrapper>
       </ProtectedRoute>
     } />
     <Route path="/fournisseur/appointments" element={
       <ProtectedRoute allowedRoles={["provider"]}>
-        <FournisseurAppointments />
+        <LayoutWrapper><FournisseurAppointments /></LayoutWrapper>
       </ProtectedRoute>
     } />
     

@@ -1,8 +1,8 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Separator } from "@/components/ui/separator";
+import { Label } from "@/components/ui/label";
 import { 
   Card, 
   CardContent, 
@@ -10,55 +10,90 @@ import {
   CardHeader, 
   CardTitle 
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "@/components/ui/use-toast";
 
 const PreferencesTab = () => {
+  const [emailNotifications, setEmailNotifications] = useState(true);
+  const [smsNotifications, setSmsNotifications] = useState(false);
+  const [language, setLanguage] = useState("fr");
+  const [darkMode, setDarkMode] = useState(false);
+
+  const handleSave = () => {
+    // Ici, vous pouvez ajouter la logique pour sauvegarder les préférences
+    toast({
+      title: "Préférences mises à jour",
+      description: "Vos préférences ont été mises à jour avec succès."
+    });
+  };
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Préférences</CardTitle>
         <CardDescription>
-          Gérez vos préférences de communication et de notification.
+          Personnalisez votre expérience
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-6">
         <div className="space-y-4">
           <h3 className="text-lg font-medium">Notifications</h3>
           
           <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Notifications par email</p>
-              <p className="text-sm text-muted-foreground">Recevez des emails concernant vos rendez-vous et messages.</p>
+            <div className="space-y-0.5">
+              <Label htmlFor="email-notifications">Notifications par email</Label>
+              <p className="text-sm text-muted-foreground">
+                Recevez des mises à jour par email
+              </p>
             </div>
-            <Switch defaultChecked />
+            <Switch
+              id="email-notifications"
+              checked={emailNotifications}
+              onCheckedChange={setEmailNotifications}
+            />
           </div>
           
           <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Notifications de nouveaux prestataires</p>
-              <p className="text-sm text-muted-foreground">Recevez des notifications lorsque de nouveaux prestataires rejoignent la plateforme.</p>
+            <div className="space-y-0.5">
+              <Label htmlFor="sms-notifications">Notifications par SMS</Label>
+              <p className="text-sm text-muted-foreground">
+                Recevez des mises à jour par SMS
+              </p>
             </div>
-            <Switch />
-          </div>
-          
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Rappels de rendez-vous</p>
-              <p className="text-sm text-muted-foreground">Recevez des rappels avant vos rendez-vous programmés.</p>
-            </div>
-            <Switch defaultChecked />
+            <Switch
+              id="sms-notifications"
+              checked={smsNotifications}
+              onCheckedChange={setSmsNotifications}
+            />
           </div>
         </div>
         
-        <Separator className="my-4" />
+        <Separator />
         
         <div className="space-y-4">
-          <h3 className="text-lg font-medium">Préférences de langue</h3>
+          <h3 className="text-lg font-medium">Affichage</h3>
+          
+          <div className="flex items-center justify-between">
+            <div className="space-y-0.5">
+              <Label htmlFor="dark-mode">Mode sombre</Label>
+              <p className="text-sm text-muted-foreground">
+                Utiliser un thème sombre
+              </p>
+            </div>
+            <Switch
+              id="dark-mode"
+              checked={darkMode}
+              onCheckedChange={setDarkMode}
+            />
+          </div>
+          
           <div className="space-y-2">
-            <Label htmlFor="language">Langue préférée</Label>
+            <Label htmlFor="language">Langue</Label>
             <select 
               id="language" 
-              className="w-full p-2 border rounded-md"
-              defaultValue="fr"
+              className="w-full p-2 border rounded-md" 
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
             >
               <option value="fr">Français</option>
               <option value="en">English</option>
@@ -67,7 +102,7 @@ const PreferencesTab = () => {
           </div>
         </div>
         
-        <Button>Enregistrer les préférences</Button>
+        <Button onClick={handleSave}>Enregistrer les préférences</Button>
       </CardContent>
     </Card>
   );
