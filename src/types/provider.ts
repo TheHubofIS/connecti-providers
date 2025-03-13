@@ -16,4 +16,14 @@ export type Provider = {
   verified: boolean;
   featured: boolean;
   available: boolean;
+  
+  // Additional properties needed for PrestaireCard
+  title?: string;
+  reviews?: number;
+  location?: string;
+  availability?: string;
+  skills?: string[];
+  hourlyRate?: number;
+  responseTime?: string;
+  completionRate?: number;
 };

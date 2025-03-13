@@ -1,3 +1,4 @@
+
 import { Star, MapPin, Clock, CheckCircle, MessageCircle, Calendar } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
@@ -28,6 +29,16 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
       variant: "default",
     });
   };
+  
+  // Set defaults for optional properties
+  const title = provider.title || provider.subcategory;
+  const reviews = provider.reviews || provider.reviewCount;
+  const location = provider.location || provider.city;
+  const availability = provider.availability || "Disponible";
+  const skills = provider.skills || provider.services;
+  const hourlyRate = provider.hourlyRate || 50;
+  const responseTime = provider.responseTime || "< 24h";
+  const completionRate = provider.completionRate || 98;
 
   return (
     <div className="bg-card border border-border rounded-xl overflow-hidden transition-all duration-300 hover:shadow-md group">
@@ -56,12 +67,12 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
                     {provider.name}
                   </Link>
                 </h3>
-                <p className="text-sm text-muted-foreground">{provider.title}</p>
+                <p className="text-sm text-muted-foreground">{title}</p>
               </div>
               <div className="flex items-center">
                 <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
                 <span className="ml-1 font-semibold">{provider.rating.toFixed(1)}</span>
-                <span className="text-xs text-muted-foreground ml-1">({provider.reviews})</span>
+                <span className="text-xs text-muted-foreground ml-1">({reviews})</span>
               </div>
             </div>
             
@@ -79,30 +90,30 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
         <div className="space-y-2">
           <div className="flex items-center text-sm text-muted-foreground">
             <MapPin className="h-4 w-4 mr-2" />
-            {provider.location}
+            {location}
           </div>
           
           <div className="flex items-center text-sm text-muted-foreground">
             <Clock className="h-4 w-4 mr-2" />
-            {provider.availability}
+            {availability}
           </div>
           
           <div className="flex flex-wrap gap-1 mt-3">
-            {provider.skills.slice(0, 3).map((skill, idx) => (
+            {skills.slice(0, 3).map((skill, idx) => (
               <Badge key={idx} variant="secondary" className="text-xs">
                 {skill}
               </Badge>
             ))}
-            {provider.skills.length > 3 && (
+            {skills.length > 3 && (
               <Badge variant="secondary" className="text-xs">
-                +{provider.skills.length - 3}
+                +{skills.length - 3}
               </Badge>
             )}
           </div>
         </div>
         
         <div className="mt-4 text-sm font-medium">
-          <span className="text-primary text-lg">{provider.hourlyRate}€</span>
+          <span className="text-primary text-lg">{hourlyRate}€</span>
           <span className="text-muted-foreground"> / heure</span>
         </div>
         
@@ -127,17 +138,17 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
                   </div>
                   <div>
                     <h2 className="text-xl font-semibold">{provider.name}</h2>
-                    <p className="text-muted-foreground">{provider.title}</p>
+                    <p className="text-muted-foreground">{title}</p>
                     
                     <div className="flex items-center mt-1">
                       <Star className="h-4 w-4 text-amber-500 fill-amber-500" />
                       <span className="ml-1 font-semibold">{provider.rating.toFixed(1)}</span>
-                      <span className="text-xs text-muted-foreground ml-1">({provider.reviews} avis)</span>
+                      <span className="text-xs text-muted-foreground ml-1">({reviews} avis)</span>
                     </div>
                     
                     <div className="flex items-center mt-1 text-sm text-muted-foreground">
                       <MapPin className="h-4 w-4 mr-1" />
-                      {provider.location}
+                      {location}
                     </div>
                   </div>
                 </div>
@@ -146,7 +157,7 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-xs text-muted-foreground">Tarif horaire</p>
-                      <p className="font-medium">{provider.hourlyRate}€ / heure</p>
+                      <p className="font-medium">{hourlyRate}€ / heure</p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Langues</p>
@@ -154,11 +165,11 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Temps de réponse</p>
-                      <p>{provider.responseTime}</p>
+                      <p>{responseTime}</p>
                     </div>
                     <div>
                       <p className="text-xs text-muted-foreground">Taux de complétion</p>
-                      <p>{provider.completionRate}%</p>
+                      <p>{completionRate}%</p>
                     </div>
                   </div>
                 </div>
@@ -166,7 +177,7 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
                 <div>
                   <h3 className="text-sm font-medium mb-2">Compétences</h3>
                   <div className="flex flex-wrap gap-1">
-                    {provider.skills.map((skill, idx) => (
+                    {skills.map((skill, idx) => (
                       <Badge key={idx} variant="secondary" className="text-xs">
                         {skill}
                       </Badge>
