@@ -12,6 +12,8 @@ import Prestataires from "./pages/Prestataires";
 import Connexion from "./pages/Connexion";
 import InscriptionClient from "./pages/InscriptionClient";
 import InscriptionPrestataire from "./pages/InscriptionPrestataire";
+import Contact from "./pages/Contact";
+import Register from "./pages/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MessageProvider } from "./contexts/MessageContext";
 import { AppointmentProvider } from "./contexts/AppointmentContext";
@@ -26,6 +28,7 @@ import ClientAppointments from "./pages/client/Appointments";
 import FournisseurAppointments from "./pages/fournisseur/Appointments";
 import ClientCompleteProfile from "./pages/client/CompleteProfile";
 import FournisseurCompleteProfile from "./pages/fournisseur/CompleteProfile";
+import ServiceDetail from "./pages/ServiceDetail";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -35,7 +38,9 @@ const queryClient = new QueryClient();
 const LayoutWrapper = ({ children }: { children: React.ReactNode }) => (
   <>
     <Navbar />
-    {children}
+    <div className="min-h-screen pt-24 pb-16">
+      {children}
+    </div>
     <Footer />
   </>
 );
@@ -44,12 +49,14 @@ const AppRoutes = () => (
   <Routes>
     <Route path="/" element={<LayoutWrapper><Index /></LayoutWrapper>} />
     <Route path="/services" element={<LayoutWrapper><Services /></LayoutWrapper>} />
+    <Route path="/services/:categoryId" element={<LayoutWrapper><ServiceDetail /></LayoutWrapper>} />
     <Route path="/comment-ca-marche" element={<LayoutWrapper><CommentCaMarche /></LayoutWrapper>} />
     <Route path="/prestataires" element={<LayoutWrapper><Prestataires /></LayoutWrapper>} />
     <Route path="/connexion" element={<Connexion />} />
     <Route path="/inscription-client" element={<InscriptionClient />} />
     <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
-    <Route path="/inscription" element={<Navigate to="/inscription-client" replace />} />
+    <Route path="/inscription" element={<Register />} />
+    <Route path="/contact" element={<LayoutWrapper><Contact /></LayoutWrapper>} />
     
     {/* Client routes */}
     <Route path="/client/dashboard" element={
@@ -72,7 +79,11 @@ const AppRoutes = () => (
         <LayoutWrapper><ClientAppointments /></LayoutWrapper>
       </ProtectedRoute>
     } />
-    <Route path="/client/complete-profile" element={<ClientCompleteProfile />} />
+    <Route path="/client/complete-profile" element={
+      <ProtectedRoute allowedRoles={["client"]}>
+        <ClientCompleteProfile />
+      </ProtectedRoute>
+    } />
     
     {/* Provider routes */}
     <Route path="/fournisseur/dashboard" element={
@@ -95,7 +106,11 @@ const AppRoutes = () => (
         <LayoutWrapper><FournisseurAppointments /></LayoutWrapper>
       </ProtectedRoute>
     } />
-    <Route path="/fournisseur/complete-profile" element={<FournisseurCompleteProfile />} />
+    <Route path="/fournisseur/complete-profile" element={
+      <ProtectedRoute allowedRoles={["provider"]}>
+        <FournisseurCompleteProfile />
+      </ProtectedRoute>
+    } />
     
     {/* Admin routes */}
     <Route path="/admin/dashboard" element={
@@ -114,7 +129,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter basename="/">
+      <BrowserRouter>
         <AuthProvider>
           <MessageProvider>
             <AppointmentProvider>

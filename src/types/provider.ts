@@ -2,18 +2,18 @@
 export type Provider = {
   id: string;
   name: string;
-  title: string;
-  rating: number;
-  reviews: number;
-  location: string;
-  image: string;
+  companyName: string;
   category: string;
   subcategory: string;
-  skills: string[];
-  hourlyRate: number;
-  availability: string;
+  description: string;
+  city: string;
+  services: string[];
+  rating: number;
+  reviewCount: number;
+  priceLevel: string;
   languages: string[];
-  responseTime: string;
-  completionRate: number;
+  image: string;
   verified: boolean;
+  featured: boolean;
+  available: boolean;
 };
