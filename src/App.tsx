@@ -24,6 +24,8 @@ import ClientMessages from "./pages/client/Messages";
 import FournisseurMessages from "./pages/fournisseur/Messages";
 import ClientAppointments from "./pages/client/Appointments";
 import FournisseurAppointments from "./pages/fournisseur/Appointments";
+import ClientCompleteProfile from "./pages/client/CompleteProfile";
+import FournisseurCompleteProfile from "./pages/fournisseur/CompleteProfile";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
@@ -47,7 +49,7 @@ const AppRoutes = () => (
     <Route path="/connexion" element={<Connexion />} />
     <Route path="/inscription-client" element={<InscriptionClient />} />
     <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
-    <Route path="/inscription" element={<InscriptionClient />} />
+    <Route path="/inscription" element={<Navigate to="/inscription-client" replace />} />
     
     {/* Client routes */}
     <Route path="/client/dashboard" element={
@@ -70,6 +72,7 @@ const AppRoutes = () => (
         <LayoutWrapper><ClientAppointments /></LayoutWrapper>
       </ProtectedRoute>
     } />
+    <Route path="/client/complete-profile" element={<ClientCompleteProfile />} />
     
     {/* Provider routes */}
     <Route path="/fournisseur/dashboard" element={
@@ -92,6 +95,7 @@ const AppRoutes = () => (
         <LayoutWrapper><FournisseurAppointments /></LayoutWrapper>
       </ProtectedRoute>
     } />
+    <Route path="/fournisseur/complete-profile" element={<FournisseurCompleteProfile />} />
     
     {/* Admin routes */}
     <Route path="/admin/dashboard" element={

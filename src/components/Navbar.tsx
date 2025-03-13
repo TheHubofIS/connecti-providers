@@ -1,9 +1,10 @@
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Home, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { Button } from "@/components/ui/button";
 
 const navLinks = [
   { name: "Accueil", href: "/" },
@@ -16,6 +17,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
 
   useEffect(() => {
@@ -36,6 +38,16 @@ export default function Navbar() {
     setIsOpen(false);
   }, [location.pathname]);
 
+  // Check if we are on a dashboard or auth page to show back button
+  const isDashboardPage = location.pathname.includes('/client/') || 
+                          location.pathname.includes('/fournisseur/') || 
+                          location.pathname.includes('/admin/');
+  
+  const isAuthPage = location.pathname.includes('/connexion') || 
+                     location.pathname.includes('/inscription');
+  
+  const showBackButton = isDashboardPage || isAuthPage;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -46,26 +58,49 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
-          <Link
-            to="/"
-            className="text-2xl font-bold text-primary transition-all duration-300"
-          >
-            Connecti<span className="text-foreground">Pro</span>
-          </Link>
+          {showBackButton ? (
+            <div className="flex items-center">
+              <Button 
+                variant="ghost" 
+                size="sm"
+                onClick={() => navigate(-1)} 
+                className="mr-4"
+                aria-label="Retour"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" /> Retour
+              </Button>
+              <Link
+                to="/"
+                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+              >
+                <Home className="h-4 w-4 mr-2" />
+                Accueil
+              </Link>
+            </div>
+          ) : (
+            <Link
+              to="/"
+              className="text-2xl font-bold text-primary transition-all duration-300"
+            >
+              Connecti<span className="text-foreground">Pro</span>
+            </Link>
+          )}
 
           {/* Desktop navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            <div className="flex items-center space-x-6">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="font-medium text-foreground/80 hover:text-primary transition-colors duration-200 py-1 px-2 rounded-md"
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </div>
+            {!isDashboardPage && (
+              <div className="flex items-center space-x-6">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.href}
+                    className="font-medium text-foreground/80 hover:text-primary transition-colors duration-200 py-1 px-2 rounded-md"
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            )}
 
             <div className="flex items-center space-x-4">
               <ThemeToggle />
@@ -129,7 +164,7 @@ export default function Navbar() {
         } glass shadow-sm`}
       >
         <div className="container mx-auto px-4 flex flex-col space-y-4">
-          {navLinks.map((link) => (
+          {!isDashboardPage && navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.href}

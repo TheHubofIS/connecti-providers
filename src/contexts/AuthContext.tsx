@@ -26,6 +26,7 @@ interface AuthContextType {
   register: (email: string, password: string, name: string, role: UserRole) => Promise<void>;
   logout: () => void;
   isAuthenticated: boolean;
+  updateUser: (userData: Partial<User>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -57,6 +58,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     checkUser();
   }, []);
 
+  // Update user data
+  const updateUser = (userData: Partial<User>) => {
+    if (user) {
+      const updatedUser = { ...user, ...userData };
+      setUser(updatedUser);
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+    }
+  };
+
   // Mock login function - in a real app, this would make an API call
   const login = async (email: string, password: string) => {
     try {
@@ -67,7 +77,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       
       // Simple validation - in a real app, this would be handled by the backend
       if (!email || !password) {
-        throw new Error("Email and password are required");
+        throw new Error("Email et mot de passe requis");
       }
       
       // Mock user data - in a real app, this would come from the backend
@@ -105,13 +115,29 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
           name: "Admin User", 
           role: "admin", 
           profileCompleted: true 
+        },
+        {
+          id: "4",
+          email: "new-client@example.com",
+          password: "password",
+          name: "New Client",
+          role: "client",
+          profileCompleted: false
+        },
+        {
+          id: "5",
+          email: "new-provider@example.com",
+          password: "password",
+          name: "New Provider",
+          role: "provider",
+          profileCompleted: false
         }
       ];
       
       const foundUser = mockUsers.find(u => u.email === email);
       
       if (!foundUser || foundUser.password !== password) {
-        throw new Error("Invalid email or password");
+        throw new Error("Email ou mot de passe invalide");
       }
       
       // Remove password from user data before storing
@@ -126,11 +152,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         description: `Bienvenue, ${userWithoutPassword.name}!`,
       });
       
-      // Redirect based on role
+      // Redirect based on role and profile completion
       if (userWithoutPassword.role === "client") {
-        navigate("/client/dashboard");
+        if (!userWithoutPassword.profileCompleted) {
+          navigate("/client/complete-profile");
+        } else {
+          navigate("/client/dashboard");
+        }
       } else if (userWithoutPassword.role === "provider") {
-        navigate("/fournisseur/dashboard");
+        if (!userWithoutPassword.profileCompleted) {
+          navigate("/fournisseur/complete-profile");
+        } else {
+          navigate("/fournisseur/dashboard");
+        }
       } else if (userWithoutPassword.role === "admin") {
         navigate("/admin/dashboard");
       }
@@ -212,6 +246,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         register,
         logout,
         isAuthenticated: !!user,
+        updateUser
       }}
     >
       {children}

@@ -1,86 +1,194 @@
 
-import React, { useState } from 'react';
-import SearchBar from '@/components/SearchBar';
-import ProviderFilters, { FilterOptions } from '@/components/ProviderFilters';
-import PrestaireCard from '@/components/PrestaireCard';
-import type { Provider } from '@/types/provider';
-
-// Mock data
-const mockProviders: Provider[] = [
-  {
-    id: '1',
-    name: 'Sophie Martin',
-    title: 'Consultante en Stratégie Internationale',
-    rating: 4.8,
-    reviews: 127,
-    location: 'Londres',
-    image: '/placeholder.svg',
-    category: 'Stratégie',
-    subcategory: 'Business Development',
-    skills: ['Stratégie', 'Business Development', 'Consulting'],
-    hourlyRate: 120,
-    availability: 'Disponible maintenant',
-    languages: ['Français', 'Anglais'],
-    responseTime: '< 2 heures',
-    completionRate: 98,
-    verified: true
-  },
-  {
-    id: '2',
-    name: 'Jean Dupont',
-    title: 'Expert-Comptable International',
-    rating: 4.9,
-    reviews: 84,
-    location: 'New York',
-    image: '/placeholder.svg',
-    category: 'Finance',
-    subcategory: 'Comptabilité',
-    skills: ['Finance', 'Comptabilité', 'Fiscalité'],
-    hourlyRate: 150,
-    availability: 'Cette semaine',
-    languages: ['Français', 'Anglais', 'Espagnol'],
-    responseTime: '< 4 heures',
-    completionRate: 95,
-    verified: true
-  }
-];
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { 
+  generateDummyProviders, 
+  categories, 
+  searchProviders, 
+  getProvidersByCategory 
+} from "@/utils/serviceData";
+import { Provider } from "@/types/provider";
+import ProviderCard from "../components/ProviderCard";
+import PrestatairesFilters from "../components/PrestatairesFilters";
+import SearchBar from "../components/SearchBar";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft, Filter } from "lucide-react";
 
 export default function Prestataires() {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [filters, setFilters] = useState<FilterOptions>({
-    category: 'all',
-    location: 'all',
-    rating: 'all',
-    availability: 'all'
-  });
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [showFilters, setShowFilters] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const handleSearch = (query: string) => {
-    setSearchQuery(query);
+  // Parse URL query parameters
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const categoryParam = searchParams.get("category");
+    if (categoryParam) {
+      setSelectedCategory(categoryParam);
+    }
+  }, [location]);
+
+  // Fetch providers based on filters
+  useEffect(() => {
+    setLoading(true);
+    
+    const getProviders = async () => {
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
+      try {
+        let results;
+        if (selectedCategory === "all") {
+          results = generateDummyProviders();
+        } else {
+          results = getProvidersByCategory(selectedCategory);
+        }
+        setProviders(results);
+      } catch (error) {
+        console.error("Error fetching providers:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    getProviders();
+  }, [selectedCategory]);
+
+  // Handle search
+  const handleSearch = async (query: string, category: string) => {
+    setLoading(true);
+    console.info("Recherche:", { query, category });
+    
+    try {
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      if (!query || query.trim() === "") {
+        // If no query, just filter by category
+        if (category === "all") {
+          setProviders(generateDummyProviders());
+        } else {
+          setProviders(getProvidersByCategory(category));
+        }
+      } else {
+        // If we have a query, search by it
+        const results = searchProviders(query);
+        
+        // Additionally filter by category if needed
+        if (category !== "all") {
+          const categoryObj = categories.find(c => c.id === category);
+          if (categoryObj) {
+            setProviders(results.filter(p => p.category === categoryObj.name));
+          } else {
+            setProviders(results);
+          }
+        } else {
+          setProviders(results);
+        }
+      }
+    } catch (error) {
+      console.error("Error searching providers:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleFilterChange = (newFilters: Partial<FilterOptions>) => {
-    setFilters(prev => ({ ...prev, ...newFilters }));
+  // Handle category change
+  const handleCategoryChange = (categoryId: string) => {
+    setSelectedCategory(categoryId);
+    
+    // Update URL to reflect the selected category
+    const searchParams = new URLSearchParams(location.search);
+    
+    if (categoryId === "all") {
+      searchParams.delete("category");
+    } else {
+      searchParams.set("category", categoryId);
+    }
+    
+    navigate({
+      pathname: location.pathname,
+      search: searchParams.toString()
+    });
+  };
+
+  // Get selected category name
+  const getSelectedCategoryName = () => {
+    if (selectedCategory === "all") return "Tous les prestataires";
+    
+    const category = categories.find(c => c.id === selectedCategory);
+    return category ? `Prestataires ${category.name}` : "Prestataires";
   };
 
   return (
-    <div className="container mx-auto py-8 px-4">
-      <div className="flex flex-col items-center mb-8">
-        <h1 className="text-3xl font-bold mb-6">Trouvez le prestataire idéal</h1>
-        <SearchBar onSearch={handleSearch} />
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        <aside className="lg:col-span-1">
-          <ProviderFilters onFilterChange={handleFilterChange} />
-        </aside>
-
-        <main className="lg:col-span-3">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {mockProviders.map(provider => (
-              <PrestaireCard key={provider.id} provider={provider} />
-            ))}
+    <div className="min-h-screen pb-16 pt-28 px-4">
+      <div className="container mx-auto">
+        <div className="mb-8">
+          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+            <div>
+              <h1 className="text-3xl font-bold">{getSelectedCategoryName()}</h1>
+              <p className="text-muted-foreground mt-2">
+                Trouvez les meilleurs professionnels pour vous accompagner dans votre expatriation
+              </p>
+            </div>
+            
+            <Button 
+              variant="outline" 
+              className="lg:hidden"
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              <Filter className="h-4 w-4 mr-2" />
+              Filtres
+            </Button>
           </div>
-        </main>
+          
+          <SearchBar onSearch={handleSearch} selectedCategory={selectedCategory} />
+        </div>
+        
+        <div className="flex flex-col lg:flex-row gap-8">
+          <aside className={`lg:w-64 shrink-0 ${showFilters ? 'block' : 'hidden'} lg:block`}>
+            <PrestatairesFilters 
+              selectedCategory={selectedCategory}
+              onCategoryChange={handleCategoryChange}
+            />
+          </aside>
+          
+          <main className="flex-1">
+            {loading ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[...Array(9)].map((_, i) => (
+                  <div 
+                    key={i} 
+                    className="bg-card animate-pulse h-64 rounded-lg border border-border/60"
+                  />
+                ))}
+              </div>
+            ) : providers.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {providers.map((provider) => (
+                  <ProviderCard key={provider.id} provider={provider} />
+                ))}
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <h3 className="text-lg font-medium mb-2">Aucun prestataire trouvé</h3>
+                <p className="text-muted-foreground mb-6">
+                  Aucun prestataire ne correspond à vos critères de recherche.
+                </p>
+                <Button onClick={() => {
+                  setSelectedCategory("all");
+                  navigate("/prestataires");
+                }}>
+                  Voir tous les prestataires
+                </Button>
+              </div>
+            )}
+          </main>
+        </div>
       </div>
     </div>
   );
