@@ -3,12 +3,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Services from "./pages/Services";
 import CommentCaMarche from "./pages/CommentCaMarche";
 import Prestataires from "./pages/Prestataires";
+import ProviderDetail from "./pages/ProviderDetail";
 import Connexion from "./pages/Connexion";
 import InscriptionClient from "./pages/InscriptionClient";
 import InscriptionPrestataire from "./pages/InscriptionPrestataire";
@@ -17,6 +18,7 @@ import Register from "./pages/Register";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MessageProvider } from "./contexts/MessageContext";
 import { AppointmentProvider } from "./contexts/AppointmentContext";
+import { LanguageProvider } from "./contexts/LanguageContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import ClientDashboard from "./pages/client/Dashboard";
 import FournisseurDashboard from "./pages/fournisseur/Dashboard";
@@ -52,6 +54,7 @@ const AppRoutes = () => (
     <Route path="/services/:categoryId" element={<LayoutWrapper><ServiceDetail /></LayoutWrapper>} />
     <Route path="/comment-ca-marche" element={<LayoutWrapper><CommentCaMarche /></LayoutWrapper>} />
     <Route path="/prestataires" element={<LayoutWrapper><Prestataires /></LayoutWrapper>} />
+    <Route path="/prestataires/:providerId" element={<LayoutWrapper><ProviderDetail /></LayoutWrapper>} />
     <Route path="/connexion" element={<Connexion />} />
     <Route path="/inscription-client" element={<InscriptionClient />} />
     <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
@@ -130,13 +133,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AuthProvider>
-          <MessageProvider>
-            <AppointmentProvider>
-              <AppRoutes />
-            </AppointmentProvider>
-          </MessageProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          <AuthProvider>
+            <MessageProvider>
+              <AppointmentProvider>
+                <AppRoutes />
+              </AppointmentProvider>
+            </MessageProvider>
+          </AuthProvider>
+        </LanguageProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

@@ -1,4 +1,3 @@
-
 import { Provider } from "@/types/provider";
 
 export const categories = [
@@ -252,4 +251,11 @@ export const searchProviders = (query: string): Provider[] => {
     provider.city.toLowerCase().includes(normalizedQuery) ||
     provider.services.some(service => service.toLowerCase().includes(normalizedQuery))
   );
+};
+
+// New function to find a provider by ID
+export const findProviderById = (id: string): Provider | null => {
+  // Combine all providers from all categories
+  const allProviders = generateDummyProviders();
+  return allProviders.find(provider => provider.id === id) || null;
 };

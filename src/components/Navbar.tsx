@@ -5,20 +5,23 @@ import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { Menu, X, Home, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageSelector from "./LanguageSelector";
 
-const navLinks = [
-  { name: "Accueil", href: "/" },
-  { name: "Services", href: "/services" },
-  { name: "Prestataires", href: "/prestataires" },
-  { name: "Comment ça marche", href: "/comment-ca-marche" },
-];
-
-export default function Navbar() {
+const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   const { isAuthenticated, user, logout } = useAuth();
+  const { translate } = useLanguage();
+
+  const navLinks = [
+    { name: translate('home'), href: "/" },
+    { name: translate('services'), href: "/services" },
+    { name: translate('providers'), href: "/prestataires" },
+    { name: translate('howItWorks'), href: "/comment-ca-marche" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,16 +68,16 @@ export default function Navbar() {
                 size="sm"
                 onClick={() => navigate(-1)} 
                 className="mr-4"
-                aria-label="Retour"
+                aria-label={translate('back')}
               >
-                <ArrowLeft className="h-4 w-4 mr-2" /> Retour
+                <ArrowLeft className="h-4 w-4 mr-2" /> {translate('back')}
               </Button>
               <Link
                 to="/"
                 className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
               >
                 <Home className="h-4 w-4 mr-2" />
-                Accueil
+                {translate('home')}
               </Link>
             </div>
           ) : (
@@ -82,7 +85,7 @@ export default function Navbar() {
               to="/"
               className="text-2xl font-bold text-primary transition-all duration-300"
             >
-              Connecti<span className="text-foreground">Pro</span>
+              {translate('siteName')}
             </Link>
           )}
 
@@ -103,6 +106,7 @@ export default function Navbar() {
             )}
 
             <div className="flex items-center space-x-4">
+              <LanguageSelector />
               <ThemeToggle />
               
               {isAuthenticated ? (
@@ -111,13 +115,13 @@ export default function Navbar() {
                     to={user?.role === "provider" ? "/fournisseur/dashboard" : "/client/dashboard"}
                     className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
                   >
-                    Tableau de bord
+                    {translate('dashboard')}
                   </Link>
                   <button
                     onClick={logout}
                     className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
                   >
-                    Déconnexion
+                    {translate('logout')}
                   </button>
                 </div>
               ) : (
@@ -126,13 +130,13 @@ export default function Navbar() {
                     to="/connexion"
                     className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
                   >
-                    Connexion
+                    {translate('login')}
                   </Link>
                   <Link
                     to="/inscription-client"
                     className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
                   >
-                    Inscription
+                    {translate('register')}
                   </Link>
                 </>
               )}
@@ -141,6 +145,7 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <div className="flex items-center space-x-4 lg:hidden">
+            <LanguageSelector />
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
@@ -182,7 +187,7 @@ export default function Navbar() {
                   className="py-2 px-4 text-center rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Tableau de bord
+                  {translate('dashboard')}
                 </Link>
                 <button
                   onClick={() => {
@@ -191,7 +196,7 @@ export default function Navbar() {
                   }}
                   className="py-2 px-4 text-center rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
                 >
-                  Déconnexion
+                  {translate('logout')}
                 </button>
               </>
             ) : (
@@ -201,14 +206,14 @@ export default function Navbar() {
                   className="py-2 px-4 text-center rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Connexion
+                  {translate('login')}
                 </Link>
                 <Link
                   to="/inscription-client"
                   className="py-2 px-4 text-center rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Inscription
+                  {translate('register')}
                 </Link>
               </>
             )}
@@ -217,4 +222,6 @@ export default function Navbar() {
       </div>
     </header>
   );
-}
+};
+
+export default Navbar;

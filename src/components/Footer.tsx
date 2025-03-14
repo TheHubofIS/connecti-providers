@@ -1,9 +1,11 @@
 
 import { Link } from "react-router-dom";
 import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const { translate } = useLanguage();
 
   return (
     <footer className="bg-secondary/50 dark:bg-secondary/20 border-t border-border mt-20">
@@ -11,7 +13,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
             <Link to="/" className="text-2xl font-bold text-primary mb-4 inline-block">
-              Connecti<span className="text-foreground">Pro</span>
+              {translate('siteName')}
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
               Mise en relation entre clients français et prestataires français basés à l'étranger dans les domaines juridique, comptabilité, IT, médical et dentaire.
@@ -33,26 +35,26 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-4">Liens rapides</h3>
+            <h3 className="font-semibold text-lg mb-4">{translate('footer.quickLinks')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
-                  Accueil
+                  {translate('home')}
                 </Link>
               </li>
               <li>
                 <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
-                  Services
+                  {translate('services')}
                 </Link>
               </li>
               <li>
                 <Link to="/prestataires" className="text-muted-foreground hover:text-primary transition-colors">
-                  Prestataires
+                  {translate('providers')}
                 </Link>
               </li>
               <li>
                 <Link to="/comment-ca-marche" className="text-muted-foreground hover:text-primary transition-colors">
-                  Comment ça marche
+                  {translate('howItWorks')}
                 </Link>
               </li>
               <li>
@@ -64,7 +66,7 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-4">Aide & Support</h3>
+            <h3 className="font-semibold text-lg mb-4">{translate('footer.support')}</h3>
             <ul className="space-y-3">
               <li>
                 <Link to="/faq" className="text-muted-foreground hover:text-primary transition-colors">
@@ -88,18 +90,18 @@ export default function Footer() {
               </li>
               <li>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
+                  {translate('contact')}
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold text-lg mb-4">Contact</h3>
+            <h3 className="font-semibold text-lg mb-4">{translate('footer.contact')}</h3>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Mail className="h-5 w-5 mr-2 text-primary mt-0.5" />
-                <span className="text-muted-foreground">contact@connectipro.fr</span>
+                <span className="text-muted-foreground">contact@hubofis.com</span>
               </li>
               <li className="flex items-start">
                 <Phone className="h-5 w-5 mr-2 text-primary mt-0.5" />
@@ -116,7 +118,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} ConnectiPro. Tous droits réservés.</p>
+          <p>&copy; {currentYear} {translate('siteName')}. {translate('footer.rights')}.</p>
         </div>
       </div>
     </footer>

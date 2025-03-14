@@ -2,13 +2,15 @@
 import { Search, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function Hero() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
+  const { translate } = useLanguage();
 
   const categories = [
-    { id: "all", name: "Tous" },
+    { id: "all", name: translate('all') },
     { id: "juridique", name: "Juridique" },
     { id: "comptabilite", name: "Comptabilité" },
     { id: "it", name: "IT" },
@@ -31,17 +33,16 @@ export default function Hero() {
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           <span className="inline-block animate-fade-in px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
-            Expertise française, rayonnement international
+            {translate('hero.tagline')}
           </span>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in delay-100 text-balance leading-tight">
-            Connectez-vous avec des experts français 
-            <span className="text-primary"> basés à l'étranger</span>
+            {translate('hero.title')}
+            <span className="text-primary"> </span>
           </h1>
           
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in delay-200">
-            Une plateforme unique qui vous met en relation avec des prestataires français 
-            qualifiés dans les domaines juridique, comptable, IT, médical et dentaire.
+            {translate('hero.subtitle')}
           </p>
 
           <div className="bg-white dark:bg-secondary/30 rounded-xl p-2 shadow-lg max-w-2xl mx-auto animate-fade-in delay-300 neo">
@@ -50,7 +51,7 @@ export default function Hero() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
                 <input
                   type="text"
-                  placeholder="Rechercher un service ou un prestataire..."
+                  placeholder={translate('hero.searchPlaceholder')}
                   className="w-full py-3 pl-10 pr-4 bg-transparent rounded-lg border border-input focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
@@ -73,7 +74,7 @@ export default function Hero() {
                 type="submit"
                 className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center"
               >
-                Rechercher
+                {translate('search')}
               </button>
             </form>
           </div>
@@ -83,14 +84,14 @@ export default function Hero() {
               to="/comment-ca-marche"
               className="px-6 py-3 rounded-lg border border-primary/20 text-primary hover:bg-primary/5 transition-all flex items-center gap-2"
             >
-              <span>Comment ça marche</span>
+              <span>{translate('hero.btnHowItWorks')}</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/prestataires"
               className="px-6 py-3 rounded-lg bg-foreground dark:bg-foreground/90 text-background dark:text-background hover:bg-foreground/90 dark:hover:bg-foreground/80 transition-all"
             >
-              Parcourir les prestataires
+              {translate('hero.btnBrowseProviders')}
             </Link>
           </div>
 
@@ -101,7 +102,7 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <span className="text-sm font-medium">Experts vérifiés</span>
+              <span className="text-sm font-medium">{translate('hero.feature1')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -109,7 +110,7 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
               </div>
-              <span className="text-sm font-medium">Échanges sécurisés</span>
+              <span className="text-sm font-medium">{translate('hero.feature2')}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
@@ -117,7 +118,7 @@ export default function Hero() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
               </div>
-              <span className="text-sm font-medium">Support 24/7</span>
+              <span className="text-sm font-medium">{translate('hero.feature3')}</span>
             </div>
           </div>
         </div>
