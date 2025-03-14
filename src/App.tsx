@@ -16,6 +16,10 @@ import InscriptionPrestataire from "./pages/InscriptionPrestataire";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
 import Blog from "./pages/Blog";
+import FAQ from "./pages/FAQ";
+import Support from "./pages/Support";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MessageProvider } from "./contexts/MessageContext";
 import { AppointmentProvider } from "./contexts/AppointmentContext";
@@ -62,6 +66,10 @@ const AppRoutes = () => (
     <Route path="/inscription" element={<Register />} />
     <Route path="/contact" element={<LayoutWrapper><Contact /></LayoutWrapper>} />
     <Route path="/blog" element={<LayoutWrapper><Blog /></LayoutWrapper>} />
+    <Route path="/faq" element={<LayoutWrapper><FAQ /></LayoutWrapper>} />
+    <Route path="/support" element={<LayoutWrapper><Support /></LayoutWrapper>} />
+    <Route path="/confidentialite" element={<LayoutWrapper><Privacy /></LayoutWrapper>} />
+    <Route path="/conditions" element={<LayoutWrapper><Terms /></LayoutWrapper>} />
     
     {/* Client routes */}
     <Route path="/client/dashboard" element={
