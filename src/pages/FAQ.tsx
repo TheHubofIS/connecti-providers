@@ -28,7 +28,7 @@ const FAQ = () => {
             <div className="max-w-3xl mx-auto space-y-8 animate-fade-in delay-100">
               <Accordion type="single" collapsible className="w-full space-y-4">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                  <AccordionItem key={i} value={`item-${i}`} className="border border-border rounded-lg px-6 py-1">
+                  <AccordionItem key={i} value={`item-${i}`} className="border border-border rounded-lg px-6 py-1 hover:bg-accent/50 transition-all duration-300">
                     <AccordionTrigger className="text-left font-medium py-4 hover:no-underline">
                       {translate(`faq.q${i}`)}
                     </AccordionTrigger>

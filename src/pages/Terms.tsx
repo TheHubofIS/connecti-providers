@@ -17,51 +17,51 @@ const Terms = () => {
               <div className="prose prose-lg dark:prose-invert max-w-none">
                 <p className="lead">{translate('terms.lastUpdated')}: 01/06/2023</p>
                 
-                <h2>{translate('terms.acceptanceTitle')}</h2>
-                <p>{translate('terms.acceptanceText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.acceptanceTitle')}</h2>
+                <p className="mb-6">{translate('terms.acceptanceText')}</p>
                 
-                <h2>{translate('terms.accountTitle')}</h2>
-                <p>{translate('terms.accountText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.accountTitle')}</h2>
+                <p className="mb-6">{translate('terms.accountText')}</p>
                 
-                <h2>{translate('terms.servicesTitle')}</h2>
-                <p>{translate('terms.servicesText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.servicesTitle')}</h2>
+                <p className="mb-6">{translate('terms.servicesText')}</p>
                 
-                <h2>{translate('terms.providerTitle')}</h2>
-                <p>{translate('terms.providerText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.providerTitle')}</h2>
+                <p className="mb-6">{translate('terms.providerText')}</p>
                 
-                <h2>{translate('terms.intellectualPropertyTitle')}</h2>
-                <p>{translate('terms.intellectualPropertyText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.intellectualPropertyTitle')}</h2>
+                <p className="mb-6">{translate('terms.intellectualPropertyText')}</p>
                 
-                <h2>{translate('terms.userContentTitle')}</h2>
-                <p>{translate('terms.userContentText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.userContentTitle')}</h2>
+                <p className="mb-6">{translate('terms.userContentText')}</p>
                 
-                <h2>{translate('terms.prohibitedTitle')}</h2>
-                <p>{translate('terms.prohibitedText')}</p>
-                <ul>
-                  <li>{translate('terms.prohibitedPoint1')}</li>
-                  <li>{translate('terms.prohibitedPoint2')}</li>
-                  <li>{translate('terms.prohibitedPoint3')}</li>
-                  <li>{translate('terms.prohibitedPoint4')}</li>
-                  <li>{translate('terms.prohibitedPoint5')}</li>
+                <h2 className="mt-8 mb-4">{translate('terms.prohibitedTitle')}</h2>
+                <p className="mb-6">{translate('terms.prohibitedText')}</p>
+                <ul className="list-disc pl-8 mb-6">
+                  <li className="mb-2">{translate('terms.prohibitedPoint1')}</li>
+                  <li className="mb-2">{translate('terms.prohibitedPoint2')}</li>
+                  <li className="mb-2">{translate('terms.prohibitedPoint3')}</li>
+                  <li className="mb-2">{translate('terms.prohibitedPoint4')}</li>
+                  <li className="mb-2">{translate('terms.prohibitedPoint5')}</li>
                 </ul>
                 
-                <h2>{translate('terms.limitationTitle')}</h2>
-                <p>{translate('terms.limitationText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.limitationTitle')}</h2>
+                <p className="mb-6">{translate('terms.limitationText')}</p>
                 
-                <h2>{translate('terms.indemnificationTitle')}</h2>
-                <p>{translate('terms.indemnificationText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.indemnificationTitle')}</h2>
+                <p className="mb-6">{translate('terms.indemnificationText')}</p>
                 
-                <h2>{translate('terms.terminationTitle')}</h2>
-                <p>{translate('terms.terminationText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.terminationTitle')}</h2>
+                <p className="mb-6">{translate('terms.terminationText')}</p>
                 
-                <h2>{translate('terms.governingLawTitle')}</h2>
-                <p>{translate('terms.governingLawText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.governingLawTitle')}</h2>
+                <p className="mb-6">{translate('terms.governingLawText')}</p>
                 
-                <h2>{translate('terms.changesTitle')}</h2>
-                <p>{translate('terms.changesText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.changesTitle')}</h2>
+                <p className="mb-6">{translate('terms.changesText')}</p>
                 
-                <h2>{translate('terms.contactTitle')}</h2>
-                <p>{translate('terms.contactText')}</p>
+                <h2 className="mt-8 mb-4">{translate('terms.contactTitle')}</h2>
+                <p className="mb-6">{translate('terms.contactText')}</p>
               </div>
             </div>
           </div>
