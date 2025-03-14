@@ -1,4 +1,5 @@
 
+import { useLanguage } from "@/contexts/LanguageContext";
 import Hero from "@/components/Hero";
 import ServiceCategories from "@/components/ServiceCategories";
 import FeaturedProviders from "@/components/FeaturedProviders";
@@ -10,6 +11,8 @@ import Stats from "@/components/Stats";
 import ContactCTA from "@/components/ContactCTA";
 
 const Index = () => {
+  const { language } = useLanguage();
+  
   return (
     <div className="min-h-screen">
       <main>
