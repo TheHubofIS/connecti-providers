@@ -10,9 +10,11 @@ import PersonalInfoTab from "@/components/profile/fournisseur/PersonalInfoTab";
 import ServicesTab from "@/components/profile/fournisseur/ServicesTab";
 import SecurityTab from "@/components/profile/SecurityTab";
 import SettingsTab from "@/components/profile/fournisseur/SettingsTab";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function FournisseurProfile() {
   const { user } = useAuth();
+  const { translate } = useLanguage();
   
   const personalInfo = {
     firstName: user?.firstName || "",
@@ -26,14 +28,14 @@ export default function FournisseurProfile() {
   
   return (
     <div className="container py-10 pt-24">
-      <h1 className="text-3xl font-bold mb-6">Mon Profil Prestataire</h1>
+      <h1 className="text-3xl font-bold mb-6">{translate('provider.profile.title')}</h1>
       
       <Tabs defaultValue="personal-info" className="w-full">
         <TabsList className="grid w-full md:w-auto grid-cols-4">
-          <TabsTrigger value="personal-info">Informations Personnelles</TabsTrigger>
-          <TabsTrigger value="services">Services</TabsTrigger>
-          <TabsTrigger value="security">Sécurité</TabsTrigger>
-          <TabsTrigger value="settings">Paramètres</TabsTrigger>
+          <TabsTrigger value="personal-info">{translate('profile.personalInfo')}</TabsTrigger>
+          <TabsTrigger value="services">{translate('provider.profile.services')}</TabsTrigger>
+          <TabsTrigger value="security">{translate('profile.security')}</TabsTrigger>
+          <TabsTrigger value="settings">{translate('provider.profile.settings')}</TabsTrigger>
         </TabsList>
         
         <TabsContent value="personal-info" className="mt-6">

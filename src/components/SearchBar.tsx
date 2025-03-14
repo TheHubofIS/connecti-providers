@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Search } from "lucide-react";
 import { categories } from "@/utils/serviceData";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface SearchBarProps {
   onSearch: (query: string, category: string) => void;
@@ -11,6 +12,7 @@ interface SearchBarProps {
 export default function SearchBar({ onSearch, selectedCategory = "all" }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState(selectedCategory);
+  const { translate } = useLanguage();
 
   useEffect(() => {
     setCategory(selectedCategory);
@@ -22,24 +24,24 @@ export default function SearchBar({ onSearch, selectedCategory = "all" }: Search
   };
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white dark:bg-secondary/30 rounded-xl p-2 shadow-md neo flex flex-col md:flex-row gap-2">
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-secondary/30 rounded-xl p-2 shadow-md neo flex flex-col md:flex-row gap-2 transition-all duration-300 hover:shadow-lg">
       <div className="relative flex-grow">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-5 w-5" />
         <input
           type="text"
-          placeholder="Rechercher un service ou un prestataire..."
-          className="w-full py-3 pl-10 pr-4 bg-transparent rounded-lg border border-input focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all"
+          placeholder={translate('search.placeholder')}
+          className="w-full py-3 pl-10 pr-4 bg-transparent rounded-lg border border-input focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
       
       <select
-        className="py-3 px-4 border border-input rounded-lg bg-transparent focus:border-primary focus:ring-1 focus:ring-primary/20 outline-none transition-all md:w-auto"
+        className="py-3 px-4 border border-input rounded-lg bg-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all duration-300 md:w-auto"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
       >
-        <option value="all">Toutes les catégories</option>
+        <option value="all">{translate('search.categories')}</option>
         {categories.map((cat) => (
           <option key={cat.id} value={cat.id}>
             {cat.name}
@@ -49,9 +51,9 @@ export default function SearchBar({ onSearch, selectedCategory = "all" }: Search
       
       <button
         type="submit"
-        className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all flex items-center justify-center"
+        className="px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all duration-300 flex items-center justify-center hover:scale-105"
       >
-        Rechercher
+        {translate('search.button')}
       </button>
     </form>
   );

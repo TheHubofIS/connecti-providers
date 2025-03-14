@@ -15,6 +15,7 @@ import InscriptionClient from "./pages/InscriptionClient";
 import InscriptionPrestataire from "./pages/InscriptionPrestataire";
 import Contact from "./pages/Contact";
 import Register from "./pages/Register";
+import Blog from "./pages/Blog";
 import { AuthProvider } from "./contexts/AuthContext";
 import { MessageProvider } from "./contexts/MessageContext";
 import { AppointmentProvider } from "./contexts/AppointmentContext";
@@ -60,6 +61,7 @@ const AppRoutes = () => (
     <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
     <Route path="/inscription" element={<Register />} />
     <Route path="/contact" element={<LayoutWrapper><Contact /></LayoutWrapper>} />
+    <Route path="/blog" element={<LayoutWrapper><Blog /></LayoutWrapper>} />
     
     {/* Client routes */}
     <Route path="/client/dashboard" element={

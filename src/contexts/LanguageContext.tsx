@@ -63,6 +63,52 @@ const translations: Record<Language, Record<string, string>> = {
     'notFound.description': 'La page que vous recherchez n\'existe pas ou a été déplacée.',
     'notFound.back': 'Retour',
     'notFound.home': 'Retour à l\'accueil',
+    
+    // Client Profile
+    'profile.title': 'Mon Profil',
+    'profile.personalInfo': 'Informations Personnelles',
+    'profile.security': 'Sécurité',
+    'profile.preferences': 'Préférences',
+    'profile.save': 'Enregistrer',
+    'profile.firstName': 'Prénom',
+    'profile.lastName': 'Nom',
+    'profile.email': 'Email',
+    'profile.phone': 'Téléphone',
+    'profile.address': 'Adresse',
+    'profile.city': 'Ville',
+    'profile.postalCode': 'Code postal',
+    'profile.country': 'Pays',
+    'profile.bio': 'Présentation',
+    'profile.language': 'Langue préférée',
+    'profile.timezone': 'Fuseau horaire',
+    
+    // Provider Profile
+    'provider.profile.title': 'Mon Profil Prestataire',
+    'provider.profile.services': 'Services',
+    'provider.profile.settings': 'Paramètres',
+    'provider.profile.companyName': 'Nom de l\'entreprise',
+    
+    // Complete Profile
+    'completeProfile.title': 'Complétez votre profil',
+    'completeProfile.step1': 'Informations personnelles',
+    'completeProfile.step2': 'Coordonnées',
+    'completeProfile.step3': 'Préférences',
+    'completeProfile.next': 'Suivant',
+    'completeProfile.previous': 'Précédent',
+    'completeProfile.finish': 'Terminer',
+    
+    // Blog
+    'blog.title': 'Blog & Actualités',
+    'blog.subtitle': 'Dernières actualités',
+    'blog.description': 'Restez informé des dernières tendances et conseils pour collaborer efficacement avec des prestataires français à l\'étranger.',
+    'blog.underConstruction': 'Page en cours de construction',
+    'blog.comingSoon': 'Notre blog est actuellement en développement. Veuillez revenir bientôt pour découvrir nos articles et actualités.',
+    'blog.backToHome': 'Retour à l\'accueil',
+    
+    // Search
+    'search.placeholder': 'Rechercher un service ou un prestataire...',
+    'search.categories': 'Toutes les catégories',
+    'search.button': 'Rechercher',
   },
   en: {
     // General
@@ -111,6 +157,52 @@ const translations: Record<Language, Record<string, string>> = {
     'notFound.description': 'The page you are looking for doesn\'t exist or has been moved.',
     'notFound.back': 'Back',
     'notFound.home': 'Back to Home',
+    
+    // Client Profile
+    'profile.title': 'My Profile',
+    'profile.personalInfo': 'Personal Information',
+    'profile.security': 'Security',
+    'profile.preferences': 'Preferences',
+    'profile.save': 'Save',
+    'profile.firstName': 'First Name',
+    'profile.lastName': 'Last Name',
+    'profile.email': 'Email',
+    'profile.phone': 'Phone',
+    'profile.address': 'Address',
+    'profile.city': 'City',
+    'profile.postalCode': 'Postal Code',
+    'profile.country': 'Country',
+    'profile.bio': 'About Me',
+    'profile.language': 'Preferred Language',
+    'profile.timezone': 'Timezone',
+    
+    // Provider Profile
+    'provider.profile.title': 'My Provider Profile',
+    'provider.profile.services': 'Services',
+    'provider.profile.settings': 'Settings',
+    'provider.profile.companyName': 'Company Name',
+    
+    // Complete Profile
+    'completeProfile.title': 'Complete Your Profile',
+    'completeProfile.step1': 'Personal Information',
+    'completeProfile.step2': 'Contact Details',
+    'completeProfile.step3': 'Preferences',
+    'completeProfile.next': 'Next',
+    'completeProfile.previous': 'Previous',
+    'completeProfile.finish': 'Finish',
+    
+    // Blog
+    'blog.title': 'Blog & News',
+    'blog.subtitle': 'Latest Updates',
+    'blog.description': 'Stay informed about the latest trends and tips for effectively collaborating with French service providers abroad.',
+    'blog.underConstruction': 'Page Under Construction',
+    'blog.comingSoon': 'Our blog is currently under development. Please check back soon to discover our articles and news.',
+    'blog.backToHome': 'Back to Home',
+    
+    // Search
+    'search.placeholder': 'Search for a service or provider...',
+    'search.categories': 'All categories',
+    'search.button': 'Search',
   },
   es: {
     // General
@@ -159,6 +251,52 @@ const translations: Record<Language, Record<string, string>> = {
     'notFound.description': 'La página que buscas no existe o ha sido movida.',
     'notFound.back': 'Volver',
     'notFound.home': 'Volver al Inicio',
+    
+    // Client Profile
+    'profile.title': 'Mi Perfil',
+    'profile.personalInfo': 'Información Personal',
+    'profile.security': 'Seguridad',
+    'profile.preferences': 'Preferencias',
+    'profile.save': 'Guardar',
+    'profile.firstName': 'Nombre',
+    'profile.lastName': 'Apellido',
+    'profile.email': 'Correo Electrónico',
+    'profile.phone': 'Teléfono',
+    'profile.address': 'Dirección',
+    'profile.city': 'Ciudad',
+    'profile.postalCode': 'Código Postal',
+    'profile.country': 'País',
+    'profile.bio': 'Acerca de Mí',
+    'profile.language': 'Idioma Preferido',
+    'profile.timezone': 'Zona Horaria',
+    
+    // Provider Profile
+    'provider.profile.title': 'Mi Perfil de Proveedor',
+    'provider.profile.services': 'Servicios',
+    'provider.profile.settings': 'Configuración',
+    'provider.profile.companyName': 'Nombre de la Empresa',
+    
+    // Complete Profile
+    'completeProfile.title': 'Completa Tu Perfil',
+    'completeProfile.step1': 'Información Personal',
+    'completeProfile.step2': 'Datos de Contacto',
+    'completeProfile.step3': 'Preferencias',
+    'completeProfile.next': 'Siguiente',
+    'completeProfile.previous': 'Anterior',
+    'completeProfile.finish': 'Finalizar',
+    
+    // Blog
+    'blog.title': 'Blog y Noticias',
+    'blog.subtitle': 'Últimas Actualizaciones',
+    'blog.description': 'Mantente informado sobre las últimas tendencias y consejos para colaborar eficazmente con proveedores franceses en el extranjero.',
+    'blog.underConstruction': 'Página En Construcción',
+    'blog.comingSoon': 'Nuestro blog está actualmente en desarrollo. Por favor, vuelve pronto para descubrir nuestros artículos y noticias.',
+    'blog.backToHome': 'Volver al Inicio',
+    
+    // Search
+    'search.placeholder': 'Buscar un servicio o proveedor...',
+    'search.categories': 'Todas las categorías',
+    'search.button': 'Buscar',
   }
 };
 

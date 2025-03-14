@@ -13,15 +13,33 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <main>
-        <Hero />
-        <ServiceCategories />
-        <HowItWorks />
-        <FeaturedProviders />
-        <Stats />
-        <ProjectsCarousel />
-        <FeaturedExpats />
-        <Testimonials />
-        <ContactCTA />
+        <div className="animate-fade-in">
+          <Hero />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "100ms" }}>
+          <ServiceCategories />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "200ms" }}>
+          <HowItWorks />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "300ms" }}>
+          <FeaturedProviders />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "400ms" }}>
+          <Stats />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "500ms" }}>
+          <ProjectsCarousel />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "600ms" }}>
+          <FeaturedExpats />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "700ms" }}>
+          <Testimonials />
+        </div>
+        <div className="animate-fade-in" style={{ animationDelay: "800ms" }}>
+          <ContactCTA />
+        </div>
       </main>
     </div>
   );

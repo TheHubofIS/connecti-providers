@@ -1,3 +1,5 @@
+
+/* Base Styling */
 #root {
   max-width: 1280px;
   margin: 0 auto;
@@ -5,6 +7,7 @@
   text-align: center;
 }
 
+/* Logo Animations */
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -33,10 +36,97 @@
   }
 }
 
+/* Basic Components */
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+/* Page Transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 300ms, transform 300ms;
+}
+
+/* Enhanced Hover Effects */
+.hover-lift {
+  transition: transform 300ms ease-out;
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+
+.hover-glow {
+  transition: box-shadow 300ms ease-out;
+}
+.hover-glow:hover {
+  box-shadow: 0 0 15px rgba(var(--primary-rgb), 0.3);
+}
+
+/* Glass Morphism Effect */
+.glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark .glass {
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Neo-morphism Effect */
+.neo {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.03),
+              -5px -5px 10px rgba(255, 255, 255, 0.05);
+}
+
+.dark .neo {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+              -5px -5px 10px rgba(255, 255, 255, 0.02);
+}
+
+/* Button Animations */
+.btn-pulse {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-pulse::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn-pulse:hover::after {
+  width: 300%;
+  height: 300%;
 }

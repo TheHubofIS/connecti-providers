@@ -12,6 +12,7 @@ import {
   Scale, 
   Stethoscope 
 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const getCategoryIcon = (iconName: string) => {
   switch(iconName) {
@@ -37,28 +38,33 @@ const getCategoryIcon = (iconName: string) => {
 };
 
 export default function ServiceCategories() {
+  const { translate } = useLanguage();
+  
   return (
     <section className="py-24 bg-background">
       <div className="container px-4 mx-auto">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Nos catégories de services
+            {translate('categories.title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Découvrez notre large gamme de services destinés aux expatriés, quelle que soit votre situation.
+            {translate('categories.subtitle')}
           </p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <Link to={`/prestataires?category=${category.id}`} key={category.id}>
-              <Card className="h-full transition-all duration-300 hover:shadow-md hover:-translate-y-1 border border-border/60">
+              <Card 
+                className="h-full transition-all duration-500 hover:shadow-md hover:-translate-y-2 border border-border/60 group animate-fade-in" 
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
                 <CardContent className="p-6 flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4">
+                  <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-primary/20">
                     {getCategoryIcon(category.icon)}
                   </div>
-                  <h3 className="font-bold mb-2">{category.name}</h3>
-                  <p className="text-sm text-muted-foreground">
+                  <h3 className="font-bold mb-2 group-hover:text-primary transition-colors duration-300">{category.name}</h3>
+                  <p className="text-sm text-muted-foreground group-hover:text-muted-foreground/80 transition-colors duration-300">
                     {category.description}
                   </p>
                 </CardContent>

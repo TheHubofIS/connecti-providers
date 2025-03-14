@@ -18,19 +18,23 @@ const NotFound = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30">
-      <div className="text-center max-w-md p-6">
-        <h1 className="text-9xl font-bold text-primary mb-4">404</h1>
+      <div className="text-center max-w-md p-6 animate-fade-in">
+        <h1 className="text-9xl font-bold text-primary mb-4 animate-scale-in">404</h1>
         <p className="text-2xl font-semibold text-foreground mb-6">{translate('notFound.title')}</p>
         <p className="text-muted-foreground mb-8">
           {translate('notFound.description')}
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button variant="outline" onClick={() => window.history.back()} className="flex items-center">
+          <Button 
+            variant="outline" 
+            onClick={() => window.history.back()} 
+            className="flex items-center transition-all duration-300 hover:translate-x-[-2px]"
+          >
             <ArrowLeft className="h-4 w-4 mr-2" />
             {translate('notFound.back')}
           </Button>
           <Link to="/">
-            <Button className="w-full flex items-center">
+            <Button className="w-full flex items-center transition-all duration-300 hover:translate-y-[-2px]">
               <Home className="h-4 w-4 mr-2" />
               {translate('notFound.home')}
             </Button>

@@ -10,10 +10,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, Upload, Check } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ClientCompleteProfile = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { translate, language } = useLanguage();
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -25,7 +27,7 @@ const ClientCompleteProfile = () => {
     country: "",
     postalCode: "",
     bio: "",
-    language: "fr",
+    language: language,
     timezone: "Europe/Paris",
   });
   
@@ -47,7 +49,7 @@ const ClientCompleteProfile = () => {
       await new Promise(resolve => setTimeout(resolve, 1500));
       
       toast({
-        title: "Profil complété !",
+        title: translate('profile.save'),
         description: "Votre profil a été mis à jour avec succès.",
       });
       
@@ -72,16 +74,16 @@ const ClientCompleteProfile = () => {
       <div className="max-w-md mx-auto">
         <div className="text-center mb-8">
           <h1 className="text-2xl font-bold mb-2 text-primary">
-            Connecti<span className="text-foreground">Pro</span>
+            {translate('siteName')}
           </h1>
-          <p className="text-muted-foreground">Complétez votre profil pour continuer</p>
+          <p className="text-muted-foreground">{translate('completeProfile.title')}</p>
         </div>
         
-        <Card className="border border-border/60">
+        <Card className="border border-border/60 animate-fade-in">
           <CardHeader>
-            <CardTitle>Complétez votre profil</CardTitle>
+            <CardTitle>{translate('completeProfile.title')}</CardTitle>
             <CardDescription>
-              Étape {step} sur 3: {step === 1 ? "Informations personnelles" : step === 2 ? "Coordonnées" : "Préférences"}
+              {translate('completeProfile.step' + step)}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -107,128 +109,135 @@ const ClientCompleteProfile = () => {
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="firstName">Prénom</Label>
+                      <Label htmlFor="firstName">{translate('profile.firstName')}</Label>
                       <Input
                         id="firstName"
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleChange}
                         required
+                        className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="lastName">Nom</Label>
+                      <Label htmlFor="lastName">{translate('profile.lastName')}</Label>
                       <Input
                         id="lastName"
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleChange}
                         required
+                        className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Téléphone</Label>
+                    <Label htmlFor="phone">{translate('profile.phone')}</Label>
                     <Input
                       id="phone"
                       name="phone"
                       value={formData.phone}
                       onChange={handleChange}
                       required
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="bio">Présentation</Label>
+                    <Label htmlFor="bio">{translate('profile.bio')}</Label>
                     <Textarea
                       id="bio"
                       name="bio"
                       value={formData.bio}
                       onChange={handleChange}
-                      placeholder="Parlez-nous un peu de vous..."
+                      placeholder="..."
                       rows={4}
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                 </div>
               )}
               
               {step === 2 && (
-                <div className="space-y-4">
+                <div className="space-y-4 animate-fade-in">
                   <div className="space-y-2">
-                    <Label htmlFor="address">Adresse</Label>
+                    <Label htmlFor="address">{translate('profile.address')}</Label>
                     <Input
                       id="address"
                       name="address"
                       value={formData.address}
                       onChange={handleChange}
                       required
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                   
                   <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <Label htmlFor="city">Ville</Label>
+                      <Label htmlFor="city">{translate('profile.city')}</Label>
                       <Input
                         id="city"
                         name="city"
                         value={formData.city}
                         onChange={handleChange}
                         required
+                        className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="postalCode">Code postal</Label>
+                      <Label htmlFor="postalCode">{translate('profile.postalCode')}</Label>
                       <Input
                         id="postalCode"
                         name="postalCode"
                         value={formData.postalCode}
                         onChange={handleChange}
                         required
+                        className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                       />
                     </div>
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="country">Pays</Label>
+                    <Label htmlFor="country">{translate('profile.country')}</Label>
                     <Input
                       id="country"
                       name="country"
                       value={formData.country}
                       onChange={handleChange}
                       required
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                 </div>
               )}
               
               {step === 3 && (
-                <div className="space-y-4">
+                <div className="space-y-4 animate-fade-in">
                   <div className="space-y-2">
-                    <Label htmlFor="language">Langue préférée</Label>
+                    <Label htmlFor="language">{translate('profile.language')}</Label>
                     <Select
                       value={formData.language}
                       onValueChange={handleSelectChange("language")}
                     >
-                      <SelectTrigger id="language">
+                      <SelectTrigger id="language" className="transition-all duration-300 focus:ring-2 focus:ring-primary/20">
                         <SelectValue placeholder="Sélectionnez une langue" />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="fr">Français</SelectItem>
-                        <SelectItem value="en">Anglais</SelectItem>
-                        <SelectItem value="es">Espagnol</SelectItem>
-                        <SelectItem value="de">Allemand</SelectItem>
+                        <SelectItem value="en">English</SelectItem>
+                        <SelectItem value="es">Español</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
                   
                   <div className="space-y-2">
-                    <Label htmlFor="timezone">Fuseau horaire</Label>
+                    <Label htmlFor="timezone">{translate('profile.timezone')}</Label>
                     <Select
                       value={formData.timezone}
                       onValueChange={handleSelectChange("timezone")}
                     >
-                      <SelectTrigger id="timezone">
+                      <SelectTrigger id="timezone" className="transition-all duration-300 focus:ring-2 focus:ring-primary/20">
                         <SelectValue placeholder="Sélectionnez un fuseau horaire" />
                       </SelectTrigger>
                       <SelectContent>
@@ -244,29 +253,29 @@ const ClientCompleteProfile = () => {
               
               <div className="flex justify-between mt-8">
                 {step > 1 ? (
-                  <Button type="button" variant="outline" onClick={prevStep}>
+                  <Button type="button" variant="outline" onClick={prevStep} className="transition-all hover:translate-x-[-2px]">
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Précédent
+                    {translate('completeProfile.previous')}
                   </Button>
                 ) : (
-                  <Button type="button" variant="outline" onClick={() => navigate("/connexion")}>
+                  <Button type="button" variant="outline" onClick={() => navigate("/connexion")} className="transition-all hover:translate-x-[-2px]">
                     <ArrowLeft className="h-4 w-4 mr-2" />
-                    Retour
+                    {translate('back')}
                   </Button>
                 )}
                 
                 {step < 3 ? (
-                  <Button type="button" onClick={nextStep}>
-                    Suivant
+                  <Button type="button" onClick={nextStep} className="transition-all hover:translate-x-[2px]">
+                    {translate('completeProfile.next')}
                   </Button>
                 ) : (
-                  <Button type="submit" disabled={loading}>
+                  <Button type="submit" disabled={loading} className="transition-all hover:scale-105">
                     {loading ? (
                       "Enregistrement..."
                     ) : (
                       <>
                         <Check className="h-4 w-4 mr-2" />
-                        Terminer
+                        {translate('completeProfile.finish')}
                       </>
                     )}
                   </Button>
