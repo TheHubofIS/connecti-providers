@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Define available languages
@@ -63,6 +62,75 @@ const translations: Record<Language, Record<string, string>> = {
     'notFound.description': 'La page que vous recherchez n\'existe pas ou a été déplacée.',
     'notFound.back': 'Retour',
     'notFound.home': 'Retour à l\'accueil',
+    
+    // How It Works
+    'howItWorks.subtitle': 'Simple, rapide et efficace',
+    'howItWorks.title': 'Comment ça marche',
+    'howItWorks.description': 'Notre plateforme vous permet de trouver facilement le prestataire idéal et d\'obtenir rapidement des réponses à vos besoins.',
+    'howItWorks.step': 'Étape',
+    'howItWorks.step1.title': 'Définissez votre besoin',
+    'howItWorks.step1.description': 'Précisez votre projet et vos attentes pour trouver le prestataire qui correspond exactement à vos besoins.',
+    'howItWorks.step2.title': 'Trouvez votre prestataire',
+    'howItWorks.step2.description': 'Parcourez notre réseau d\'experts qualifiés et sélectionnez celui qui vous inspire confiance.',
+    'howItWorks.step3.title': 'Démarrez votre collaboration',
+    'howItWorks.step3.description': 'Échangez directement avec le prestataire choisi et concrétisez votre projet en toute simplicité.',
+    'howItWorks.learnMore': 'En savoir plus',
+    
+    // How It Works Page
+    'howItWorksPage.subtitle': 'Découvrez notre processus',
+    'howItWorksPage.title': 'Comment fonctionne notre plateforme',
+    'howItWorksPage.description': 'Notre plateforme a été conçue pour faciliter la mise en relation entre clients et prestataires français à l\'international. Découvrez comment nous simplifions votre expérience à chaque étape.',
+    'howItWorksPage.forBusinesses': 'Pour les entreprises et particuliers',
+    'howItWorksPage.forProviders': 'Pour les prestataires de services',
+    'howItWorksPage.registerAsBusiness': 'S\'inscrire comme client',
+    'howItWorksPage.registerAsProvider': 'S\'inscrire comme prestataire',
+    
+    // Business steps
+    'howItWorksPage.business.step1.title': 'Inscription gratuite',
+    'howItWorksPage.business.step1.description': 'Créez votre compte gratuitement en quelques minutes et accédez à notre réseau d\'experts.',
+    'howItWorksPage.business.step2.title': 'Recherche personnalisée',
+    'howItWorksPage.business.step2.description': 'Utilisez notre moteur de recherche pour trouver le prestataire qui correspond à vos besoins spécifiques.',
+    'howItWorksPage.business.step3.title': 'Contact direct',
+    'howItWorksPage.business.step3.description': 'Échangez directement avec les prestataires sélectionnés via notre messagerie sécurisée.',
+    'howItWorksPage.business.step4.title': 'Collaboration en toute confiance',
+    'howItWorksPage.business.step4.description': 'Établissez votre partenariat en toute sérénité grâce à nos outils de collaboration sécurisés.',
+    'howItWorksPage.business.step5.title': 'Évaluation du service',
+    'howItWorksPage.business.step5.description': 'Partagez votre expérience et aidez d\'autres utilisateurs à faire le bon choix.',
+    
+    // Provider steps
+    'howItWorksPage.provider.step1.title': 'Création de profil professionnel',
+    'howItWorksPage.provider.step1.description': 'Présentez votre expertise, vos services et vos références pour attirer de nouveaux clients.',
+    'howItWorksPage.provider.step2.title': 'Validation de votre compte',
+    'howItWorksPage.provider.step2.description': 'Notre équipe vérifie vos qualifications pour garantir la qualité de notre réseau.',
+    'howItWorksPage.provider.step3.title': 'Visibilité internationale',
+    'howItWorksPage.provider.step3.description': 'Votre profil est visible par des clients potentiels du monde entier recherchant votre expertise.',
+    'howItWorksPage.provider.step4.title': 'Gestion des demandes',
+    'howItWorksPage.provider.step4.description': 'Recevez et gérez les demandes clients via notre interface intuitive et sécurisée.',
+    'howItWorksPage.provider.step5.title': 'Développement d\'activité',
+    'howItWorksPage.provider.step5.description': 'Développez votre clientèle internationale et construisez votre réputation en ligne.',
+    
+    // FAQ section
+    'howItWorksPage.faq.title': 'Questions fréquentes',
+    'howItWorksPage.faq.q1': 'Comment sont sélectionnés les prestataires sur la plateforme ?',
+    'howItWorksPage.faq.a1': 'Tous nos prestataires font l\'objet d\'une vérification rigoureuse. Nous examinons leurs qualifications, leur expérience et leurs références pour garantir un service de qualité à nos utilisateurs.',
+    'howItWorksPage.faq.q2': 'La plateforme est-elle gratuite pour les clients ?',
+    'howItWorksPage.faq.a2': 'Oui, l\'inscription et l\'utilisation de la plateforme sont entièrement gratuites pour les clients. Vous ne payez que pour les services que vous achetez directement auprès des prestataires.',
+    'howItWorksPage.faq.q3': 'Comment sont gérés les paiements sur la plateforme ?',
+    'howItWorksPage.faq.a3': 'Les modalités de paiement sont convenues directement entre vous et le prestataire. Notre plateforme facilite la mise en relation, mais n\'intervient pas dans les transactions financières.',
+    'howItWorksPage.faq.q4': 'Que faire en cas de litige avec un prestataire ?',
+    'howItWorksPage.faq.a4': 'Notre service client est disponible pour vous accompagner en cas de difficulté. Nous proposons un service de médiation pour faciliter la résolution des litiges entre clients et prestataires.',
+    'howItWorksPage.moreQuestions': 'Vous avez d\'autres questions ?',
+    
+    // Resources
+    'howItWorksPage.resources.title1': 'Guides et ressources',
+    'howItWorksPage.resources.description1': 'Consultez nos guides pratiques pour tirer le meilleur parti de notre plateforme et optimiser votre expérience.',
+    'howItWorksPage.resources.cta1': 'Accéder aux ressources',
+    'howItWorksPage.resources.title2': 'Support client',
+    'howItWorksPage.resources.description2': 'Notre équipe est disponible pour répondre à vos questions et vous accompagner dans votre utilisation de la plateforme.',
+    'howItWorksPage.resources.cta2': 'Contacter le support',
+    'howItWorksPage.resources.title3': 'Témoignages de réussite',
+    'howItWorksPage.resources.description3': 'Découvrez les expériences de nos utilisateurs et les collaborations réussies grâce à notre plateforme.',
+    'howItWorksPage.resources.cta3': 'Voir les témoignages',
     
     // Client Profile
     'profile.title': 'Mon Profil',
@@ -230,6 +298,75 @@ const translations: Record<Language, Record<string, string>> = {
     'notFound.back': 'Back',
     'notFound.home': 'Back to Home',
     
+    // How It Works
+    'howItWorks.subtitle': 'Simple, fast and efficient',
+    'howItWorks.title': 'How It Works',
+    'howItWorks.description': 'Our platform allows you to easily find the ideal service provider and quickly get answers to your needs.',
+    'howItWorks.step': 'Step',
+    'howItWorks.step1.title': 'Define your needs',
+    'howItWorks.step1.description': 'Specify your project and expectations to find the provider that exactly matches your needs.',
+    'howItWorks.step2.title': 'Find your provider',
+    'howItWorks.step2.description': 'Browse our network of qualified experts and select the one who inspires your confidence.',
+    'howItWorks.step3.title': 'Start your collaboration',
+    'howItWorks.step3.description': 'Communicate directly with your chosen provider and bring your project to life with ease.',
+    'howItWorks.learnMore': 'Learn more',
+    
+    // How It Works Page
+    'howItWorksPage.subtitle': 'Discover our process',
+    'howItWorksPage.title': 'How our platform works',
+    'howItWorksPage.description': 'Our platform has been designed to facilitate connections between clients and French service providers internationally. Discover how we simplify your experience at every step.',
+    'howItWorksPage.forBusinesses': 'For businesses and individuals',
+    'howItWorksPage.forProviders': 'For service providers',
+    'howItWorksPage.registerAsBusiness': 'Register as client',
+    'howItWorksPage.registerAsProvider': 'Register as provider',
+    
+    // Business steps
+    'howItWorksPage.business.step1.title': 'Free registration',
+    'howItWorksPage.business.step1.description': 'Create your account for free in minutes and access our network of experts.',
+    'howItWorksPage.business.step2.title': 'Personalized search',
+    'howItWorksPage.business.step2.description': 'Use our search engine to find the provider that matches your specific needs.',
+    'howItWorksPage.business.step3.title': 'Direct contact',
+    'howItWorksPage.business.step3.description': 'Communicate directly with selected providers through our secure messaging system.',
+    'howItWorksPage.business.step4.title': 'Collaboration with confidence',
+    'howItWorksPage.business.step4.description': 'Establish your partnership with peace of mind through our secure collaboration tools.',
+    'howItWorksPage.business.step5.title': 'Service evaluation',
+    'howItWorksPage.business.step5.description': 'Share your experience and help other users make the right choice.',
+    
+    // Provider steps
+    'howItWorksPage.provider.step1.title': 'Create a professional profile',
+    'howItWorksPage.provider.step1.description': 'Present your expertise, services, and references to attract new clients.',
+    'howItWorksPage.provider.step2.title': 'Account validation',
+    'howItWorksPage.provider.step2.description': 'Our team verifies your qualifications to ensure the quality of our network.',
+    'howItWorksPage.provider.step3.title': 'International visibility',
+    'howItWorksPage.provider.step3.description': 'Your profile is visible to potential clients worldwide seeking your expertise.',
+    'howItWorksPage.provider.step4.title': 'Request management',
+    'howItWorksPage.provider.step4.description': 'Receive and manage client requests through our intuitive and secure interface.',
+    'howItWorksPage.provider.step5.title': 'Business development',
+    'howItWorksPage.provider.step5.description': 'Grow your international clientele and build your online reputation.',
+    
+    // FAQ section
+    'howItWorksPage.faq.title': 'Frequently Asked Questions',
+    'howItWorksPage.faq.q1': 'How are service providers selected for the platform?',
+    'howItWorksPage.faq.a1': 'All our providers undergo a rigorous verification process. We examine their qualifications, experience, and references to ensure quality service for our users.',
+    'howItWorksPage.faq.q2': 'Is the platform free for clients?',
+    'howItWorksPage.faq.a2': 'Yes, registration and use of the platform are completely free for clients. You only pay for services you purchase directly from providers.',
+    'howItWorksPage.faq.q3': 'How are payments handled on the platform?',
+    'howItWorksPage.faq.a3': 'Payment terms are agreed directly between you and the service provider. Our platform facilitates connections but does not intervene in financial transactions.',
+    'howItWorksPage.faq.q4': 'What should I do in case of a dispute with a provider?',
+    'howItWorksPage.faq.a4': 'Our customer service is available to assist you in case of difficulties. We offer a mediation service to facilitate dispute resolution between clients and providers.',
+    'howItWorksPage.moreQuestions': 'Have more questions?',
+    
+    // Resources
+    'howItWorksPage.resources.title1': 'Guides and resources',
+    'howItWorksPage.resources.description1': 'Check out our practical guides to get the most out of our platform and optimize your experience.',
+    'howItWorksPage.resources.cta1': 'Access resources',
+    'howItWorksPage.resources.title2': 'Customer support',
+    'howItWorksPage.resources.description2': 'Our team is available to answer your questions and assist you in using the platform.',
+    'howItWorksPage.resources.cta2': 'Contact support',
+    'howItWorksPage.resources.title3': 'Success stories',
+    'howItWorksPage.resources.description3': 'Discover user experiences and successful collaborations through our platform.',
+    'howItWorksPage.resources.cta3': 'See testimonials',
+    
     // Client Profile
     'profile.title': 'My Profile',
     'profile.personalInfo': 'Personal Information',
@@ -396,167 +533,29 @@ const translations: Record<Language, Record<string, string>> = {
     'notFound.back': 'Volver',
     'notFound.home': 'Volver al Inicio',
     
-    // Client Profile
-    'profile.title': 'Mi Perfil',
-    'profile.personalInfo': 'Información Personal',
-    'profile.security': 'Seguridad',
-    'profile.preferences': 'Preferencias',
-    'profile.save': 'Guardar',
-    'profile.firstName': 'Nombre',
-    'profile.lastName': 'Apellido',
-    'profile.email': 'Correo Electrónico',
-    'profile.phone': 'Teléfono',
-    'profile.address': 'Dirección',
-    'profile.city': 'Ciudad',
-    'profile.postalCode': 'Código Postal',
-    'profile.country': 'País',
-    'profile.bio': 'Acerca de Mí',
-    'profile.language': 'Idioma Preferido',
-    'profile.timezone': 'Zona Horaria',
+    // How It Works
+    'howItWorks.subtitle': 'Simple, rápido y eficiente',
+    'howItWorks.title': 'Cómo Funciona',
+    'howItWorks.description': 'Nuestra plataforma te permite encontrar fácilmente al proveedor ideal y obtener respuestas rápidas a tus necesidades.',
+    'howItWorks.step': 'Paso',
+    'howItWorks.step1.title': 'Define tus necesidades',
+    'howItWorks.step1.description': 'Especifica tu proyecto y expectativas para encontrar al proveedor que se adapte exactamente a tus necesidades.',
+    'howItWorks.step2.title': 'Encuentra tu proveedor',
+    'howItWorks.step2.description': 'Explora nuestra red de expertos calificados y selecciona el que te inspire confianza.',
+    'howItWorks.step3.title': 'Inicia tu colaboración',
+    'howItWorks.step3.description': 'Comunícate directamente con el proveedor elegido y haz realidad tu proyecto con facilidad.',
+    'howItWorks.learnMore': 'Saber más',
     
-    // Provider Profile
-    'provider.profile.title': 'Mi Perfil de Proveedor',
-    'provider.profile.services': 'Servicios',
-    'provider.profile.settings': 'Configuración',
-    'provider.profile.companyName': 'Nombre de la Empresa',
+    // How It Works Page
+    'howItWorksPage.subtitle': 'Descubre nuestro proceso',
+    'howItWorksPage.title': 'Cómo funciona nuestra plataforma',
+    'howItWorksPage.description': 'Nuestra plataforma ha sido diseñada para facilitar la conexión entre clientes y proveedores de servicios franceses a nivel internacional. Descubre cómo simplificamos tu experiencia en cada paso.',
+    'howItWorksPage.forBusinesses': 'Para empresas e individuos',
+    'howItWorksPage.forProviders': 'Para proveedores de servicios',
+    'howItWorksPage.registerAsBusiness': 'Registrarse como cliente',
+    'howItWorksPage.registerAsProvider': 'Registrarse como proveedor',
     
-    // Complete Profile
-    'completeProfile.title': 'Completa Tu Perfil',
-    'completeProfile.step1': 'Información Personal',
-    'completeProfile.step2': 'Datos de Contacto',
-    'completeProfile.step3': 'Preferencias',
-    'completeProfile.next': 'Siguiente',
-    'completeProfile.previous': 'Anterior',
-    'completeProfile.finish': 'Finalizar',
-    
-    // Blog
-    'blog.title': 'Blog y Noticias',
-    'blog.subtitle': 'Últimas Actualizaciones',
-    'blog.description': 'Mantente informado sobre las últimas tendencias y consejos para colaborar eficazmente con proveedores franceses en el extranjero.',
-    'blog.underConstruction': 'Página En Construcción',
-    'blog.comingSoon': 'Nuestro blog está actualmente en desarrollo. Por favor, vuelve pronto para descubrir nuestros artículos y noticias.',
-    'blog.backToHome': 'Volver al Inicio',
-    
-    // Search
-    'search.placeholder': 'Buscar un servicio o proveedor...',
-    'search.categories': 'Todas las categorías',
-    'search.button': 'Buscar',
-    
-    // Services page
-    'services.ourServices': 'Nuestros Servicios',
-    'services.mainTitle': 'Servicios adaptados a tus necesidades',
-    'services.mainDescription': 'Descubre nuestra gama completa de servicios ofrecidos por expertos franceses en el extranjero, en diversos campos estratégicos.',
-    'services.exploreCategory': 'Explorar esta categoría',
-    'services.availableServices': 'Servicios Disponibles',
-    'services.howItWorks': '¿Cómo funciona?',
-    'services.step1': 'Describe tus necesidades',
-    'services.step2': 'Recibe presupuestos',
-    'services.step3': 'Elige tu experto',
-    'services.step4': 'Colabora eficientemente',
-    'services.experts': 'expertos',
-    'services.countries': 'países',
-    'services.cannotFind': '¿No encuentras lo que buscas?',
-    'services.networkExpanding': 'Nuestra red de expertos se expande constantemente. Si necesitas un servicio específico que no está en nuestra lista, contáctanos y te ayudaremos a encontrar el proveedor ideal.',
-    'services.contactUs': 'Contáctanos',
-    
-    // Legal services
-    'services.legal.title': 'Servicios Legales',
-    'services.legal.description': 'Experiencia legal internacional para tus actividades en el extranjero',
-    'services.legal.offering1': 'Asesoramiento legal empresarial internacional',
-    'services.legal.offering2': 'Redacción y revisión de contratos internacionales',
-    'services.legal.offering3': 'Propiedad intelectual y protección de marcas',
-    'services.legal.offering4': 'Apoyo para establecimientos en el extranjero',
-    'services.legal.offering5': 'Litigios internacionales y arbitraje',
-    'services.legal.offering6': 'Derecho fiscal internacional',
-    'services.legal.offering7': 'Due diligence legal',
-    
-    // Accounting services
-    'services.accounting.title': 'Servicios Contables y Financieros',
-    'services.accounting.description': 'Gestión contable y financiera conforme a las normas internacionales',
-    'services.accounting.offering1': 'Contabilidad general y analítica',
-    'services.accounting.offering2': 'Optimización fiscal internacional',
-    'services.accounting.offering3': 'Control de gestión e informes financieros',
-    'services.accounting.offering4': 'Mantenimiento de libros contables',
-    'services.accounting.offering5': 'Consolidación de cuentas',
-    'services.accounting.offering6': 'Auditorías financieras',
-    'services.accounting.offering7': 'Asesoramiento en inversiones internacionales',
-    
-    // IT services
-    'services.it.title': 'Servicios de IT y Digitales',
-    'services.it.description': 'Soluciones digitales e informáticas por expertos franceses a nivel internacional',
-    'services.it.offering1': 'Desarrollo web y móvil personalizado',
-    'services.it.offering2': 'Consultoría IT y transformación digital',
-    'services.it.offering3': 'Arquitectura de sistemas de información',
-    'services.it.offering4': 'Integración internacional de ERP y CRM',
-    'services.it.offering5': 'Desarrollo de aplicaciones empresariales',
-    'services.it.offering6': 'Ciberseguridad internacional',
-    'services.it.offering7': 'Ciencia de datos e Inteligencia Artificial',
-    
-    // Medical services
-    'services.medical.title': 'Servicios Médicos',
-    'services.medical.description': 'Consultas y seguimientos médicos por médicos franceses expatriados',
-    'services.medical.offering1': 'Teleconsultas médicas en francés',
-    'services.medical.offering2': 'Seguimiento médico de expatriados',
-    'services.medical.offering3': 'Segunda opinión médica internacional',
-    'services.medical.offering4': 'Coordinación de cuidados en el extranjero',
-    'services.medical.offering5': 'Evaluaciones de salud internacionales',
-    'services.medical.offering6': 'Medicina laboral para empresas francesas',
-    'services.medical.offering7': 'Asistencia médica para viajeros',
-    
-    // Dental services
-    'services.dental.title': 'Servicios Dentales',
-    'services.dental.description': 'Cuidado dental de calidad francesa a nivel internacional',
-    'services.dental.offering1': 'Cuidado dental conservador',
-    'services.dental.offering2': 'Prótesis dentales según estándares franceses',
-    'services.dental.offering3': 'Implantología y cirugía oral',
-    'services.dental.offering4': 'Ortodoncia para adultos y niños',
-    'services.dental.offering5': 'Estética dental',
-    'services.dental.offering6': 'Periodoncia',
-    'services.dental.offering7': 'Consultas preventivas',
-  }
-};
-
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Try to get the language from localStorage or use browser language, defaulting to 'fr'
-  const getBrowserLanguage = (): Language => {
-    const browserLang = navigator.language.split('-')[0];
-    return (browserLang === 'fr' || browserLang === 'en' || browserLang === 'es') 
-      ? browserLang as Language 
-      : 'fr';
-  };
-
-  const [language, setLanguageState] = useState<Language>(
-    () => (localStorage.getItem('language') as Language) || getBrowserLanguage()
-  );
-
-  // Update localStorage when language changes
-  useEffect(() => {
-    localStorage.setItem('language', language);
-  }, [language]);
-
-  // Function to set the language
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-  };
-
-  // Function to translate a key
-  const translate = (key: string): string => {
-    // If the key doesn't exist, return the key itself
-    return translations[language][key] || key;
-  };
-
-  return (
-    <LanguageContext.Provider value={{ language, setLanguage, translate }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-};
-
-// Custom hook to use the language context
-export const useLanguage = () => {
-  const context = useContext(LanguageContext);
-  if (context === undefined) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return context;
-};
+    // Business steps
+    'howItWorksPage.business.step1.title': 'Registro gratuito',
+    'howItWorksPage.business.step1.description': 'Crea tu cuenta gratuitamente en minutos y accede a nuestra red de expertos.',
+    'howItWorksPage.business.step2.title

@@ -48,7 +48,7 @@ const CommentCaMarche = () => {
                 
                 <div className="pt-4">
                   <Link
-                    to="/register?type=client"
+                    to="/inscription-client"
                     className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all"
                   >
                     <span>{translate('howItWorksPage.registerAsBusiness')}</span>
@@ -80,7 +80,7 @@ const CommentCaMarche = () => {
                 
                 <div className="pt-4">
                   <Link
-                    to="/register?type=provider"
+                    to="/inscription-prestataire"
                     className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all"
                   >
                     <span>{translate('howItWorksPage.registerAsProvider')}</span>
