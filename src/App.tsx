@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Services from "./pages/Services";
@@ -64,6 +64,8 @@ const AppRoutes = () => (
     <Route path="/inscription-client" element={<InscriptionClient />} />
     <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
     <Route path="/inscription" element={<Register />} />
+    {/* Redirect for query parameters */}
+    <Route path="/register" element={<Navigate to="/inscription" replace />} />
     <Route path="/contact" element={<LayoutWrapper><Contact /></LayoutWrapper>} />
     <Route path="/blog" element={<LayoutWrapper><Blog /></LayoutWrapper>} />
     <Route path="/faq" element={<LayoutWrapper><FAQ /></LayoutWrapper>} />

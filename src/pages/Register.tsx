@@ -3,8 +3,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft, UserRound, Briefcase } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Register = () => {
+  const { translate } = useLanguage();
+  
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background to-muted/30 px-4 py-12">
       <div className="max-w-md w-full">

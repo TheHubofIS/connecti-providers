@@ -51,12 +51,12 @@ export default function HowItWorks() {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="text-sm font-medium text-primary">{translate('howItWorks.subtitle')}</span>
+          <span className="text-sm font-medium text-primary">{translate('howItWorks.subtitle', 'Simple, rapide et efficace')}</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-            {translate('howItWorks.title')}
+            {translate('howItWorks.title', 'Comment ça marche')}
           </h2>
           <p className="text-muted-foreground">
-            {translate('howItWorks.description')}
+            {translate('howItWorks.description', 'Notre plateforme vous permet de trouver facilement le prestataire idéal et d\'obtenir rapidement des réponses à vos besoins.')}
           </p>
         </div>
 
@@ -80,12 +80,12 @@ export default function HowItWorks() {
                 </div>
                 
                 <div className="absolute top-6 left-6 h-16 w-16 flex items-center justify-center">
-                  <span className="text-xs font-medium text-primary/60">{translate('howItWorks.step')}</span>
+                  <span className="text-xs font-medium text-primary/60">{translate('howItWorks.step', 'Étape')}</span>
                   <span className="text-2xl font-bold text-primary/20 absolute">{step.id}</span>
                 </div>
                 
-                <h3 className="text-xl font-semibold mb-3">{translate(`howItWorks.step${step.id}.title`)}</h3>
-                <p className="text-muted-foreground">{translate(`howItWorks.step${step.id}.description`)}</p>
+                <h3 className="text-xl font-semibold mb-3">{translate(`howItWorks.step${step.id}.title`, `Étape ${step.id}`)}</h3>
+                <p className="text-muted-foreground">{translate(`howItWorks.step${step.id}.description`, `Description de l'étape ${step.id}`)}</p>
               </div>
             </div>
           ))}
@@ -96,7 +96,7 @@ export default function HowItWorks() {
             to="/comment-ca-marche"
             className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all"
           >
-            <span>{translate('howItWorks.learnMore')}</span>
+            <span>{translate('howItWorks.learnMore', 'En savoir plus')}</span>
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>
