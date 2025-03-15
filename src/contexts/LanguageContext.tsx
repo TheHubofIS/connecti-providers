@@ -1,3 +1,4 @@
+
 import React, { createContext, useContext, useState, useEffect } from 'react';
 
 // Define available languages
@@ -558,4 +559,205 @@ const translations: Record<Language, Record<string, string>> = {
     // Business steps
     'howItWorksPage.business.step1.title': 'Registro gratuito',
     'howItWorksPage.business.step1.description': 'Crea tu cuenta gratuitamente en minutos y accede a nuestra red de expertos.',
-    'howItWorksPage.business.step2.title
+    'howItWorksPage.business.step2.title': 'Búsqueda personalizada',
+    'howItWorksPage.business.step2.description': 'Utiliza nuestro motor de búsqueda para encontrar al proveedor que corresponda a tus necesidades específicas.',
+    'howItWorksPage.business.step3.title': 'Contacto directo',
+    'howItWorksPage.business.step3.description': 'Comunícate directamente con los proveedores seleccionados a través de nuestro sistema de mensajería seguro.',
+    'howItWorksPage.business.step4.title': 'Colaboración con confianza',
+    'howItWorksPage.business.step4.description': 'Establece tu asociación con tranquilidad gracias a nuestras herramientas de colaboración seguras.',
+    'howItWorksPage.business.step5.title': 'Evaluación del servicio',
+    'howItWorksPage.business.step5.description': 'Comparte tu experiencia y ayuda a otros usuarios a tomar la decisión correcta.',
+    
+    // Provider steps
+    'howItWorksPage.provider.step1.title': 'Crear un perfil profesional',
+    'howItWorksPage.provider.step1.description': 'Presenta tu experiencia, servicios y referencias para atraer nuevos clientes.',
+    'howItWorksPage.provider.step2.title': 'Validación de cuenta',
+    'howItWorksPage.provider.step2.description': 'Nuestro equipo verifica tus calificaciones para garantizar la calidad de nuestra red.',
+    'howItWorksPage.provider.step3.title': 'Visibilidad internacional',
+    'howItWorksPage.provider.step3.description': 'Tu perfil es visible para clientes potenciales de todo el mundo que buscan tu experiencia.',
+    'howItWorksPage.provider.step4.title': 'Gestión de solicitudes',
+    'howItWorksPage.provider.step4.description': 'Recibe y gestiona las solicitudes de los clientes a través de nuestra interfaz intuitiva y segura.',
+    'howItWorksPage.provider.step5.title': 'Desarrollo de negocio',
+    'howItWorksPage.provider.step5.description': 'Desarrolla tu clientela internacional y construye tu reputación en línea.',
+    
+    // FAQ section
+    'howItWorksPage.faq.title': 'Preguntas frecuentes',
+    'howItWorksPage.faq.q1': '¿Cómo se seleccionan los proveedores de servicios para la plataforma?',
+    'howItWorksPage.faq.a1': 'Todos nuestros proveedores se someten a un riguroso proceso de verificación. Examinamos sus calificaciones, experiencia y referencias para garantizar un servicio de calidad para nuestros usuarios.',
+    'howItWorksPage.faq.q2': '¿Es gratuita la plataforma para los clientes?',
+    'howItWorksPage.faq.a2': 'Sí, el registro y uso de la plataforma son completamente gratuitos para los clientes. Solo pagas por los servicios que compras directamente a los proveedores.',
+    'howItWorksPage.faq.q3': '¿Cómo se gestionan los pagos en la plataforma?',
+    'howItWorksPage.faq.a3': 'Las condiciones de pago se acuerdan directamente entre tú y el proveedor de servicios. Nuestra plataforma facilita las conexiones pero no interviene en las transacciones financieras.',
+    'howItWorksPage.faq.q4': '¿Qué debo hacer en caso de disputa con un proveedor?',
+    'howItWorksPage.faq.a4': 'Nuestro servicio de atención al cliente está disponible para ayudarte en caso de dificultades. Ofrecemos un servicio de mediación para facilitar la resolución de disputas entre clientes y proveedores.',
+    'howItWorksPage.moreQuestions': '¿Tienes más preguntas?',
+    
+    // Resources
+    'howItWorksPage.resources.title1': 'Guías y recursos',
+    'howItWorksPage.resources.description1': 'Consulta nuestras guías prácticas para aprovechar al máximo nuestra plataforma y optimizar tu experiencia.',
+    'howItWorksPage.resources.cta1': 'Acceder a recursos',
+    'howItWorksPage.resources.title2': 'Atención al cliente',
+    'howItWorksPage.resources.description2': 'Nuestro equipo está disponible para responder tus preguntas y ayudarte a utilizar la plataforma.',
+    'howItWorksPage.resources.cta2': 'Contactar con soporte',
+    'howItWorksPage.resources.title3': 'Historias de éxito',
+    'howItWorksPage.resources.description3': 'Descubre experiencias de usuarios y colaboraciones exitosas a través de nuestra plataforma.',
+    'howItWorksPage.resources.cta3': 'Ver testimonios',
+    
+    // Client Profile
+    'profile.title': 'Mi Perfil',
+    'profile.personalInfo': 'Información Personal',
+    'profile.security': 'Seguridad',
+    'profile.preferences': 'Preferencias',
+    'profile.save': 'Guardar',
+    'profile.firstName': 'Nombre',
+    'profile.lastName': 'Apellido',
+    'profile.email': 'Email',
+    'profile.phone': 'Teléfono',
+    'profile.address': 'Dirección',
+    'profile.city': 'Ciudad',
+    'profile.postalCode': 'Código Postal',
+    'profile.country': 'País',
+    'profile.bio': 'Biografía',
+    'profile.language': 'Idioma preferido',
+    'profile.timezone': 'Zona horaria',
+    
+    // Provider Profile
+    'provider.profile.title': 'Mi Perfil de Proveedor',
+    'provider.profile.services': 'Servicios',
+    'provider.profile.settings': 'Configuración',
+    'provider.profile.companyName': 'Nombre de la empresa',
+    
+    // Complete Profile
+    'completeProfile.title': 'Completa tu perfil',
+    'completeProfile.step1': 'Información personal',
+    'completeProfile.step2': 'Datos de contacto',
+    'completeProfile.step3': 'Preferencias',
+    'completeProfile.next': 'Siguiente',
+    'completeProfile.previous': 'Anterior',
+    'completeProfile.finish': 'Finalizar',
+    
+    // Blog
+    'blog.title': 'Blog y Noticias',
+    'blog.subtitle': 'Últimas actualizaciones',
+    'blog.description': 'Mantente informado sobre las últimas tendencias y consejos para colaborar eficazmente con proveedores de servicios franceses en el extranjero.',
+    'blog.underConstruction': 'Página en construcción',
+    'blog.comingSoon': 'Nuestro blog está actualmente en desarrollo. Vuelve pronto para descubrir nuestros artículos y noticias.',
+    'blog.backToHome': 'Volver al inicio',
+    
+    // Search
+    'search.placeholder': 'Buscar un servicio o proveedor...',
+    'search.categories': 'Todas las categorías',
+    'search.button': 'Buscar',
+    
+    // Services page
+    'services.ourServices': 'Nuestros Servicios',
+    'services.mainTitle': 'Servicios adaptados a tus necesidades',
+    'services.mainDescription': 'Descubre nuestra gama completa de servicios ofrecidos por expertos franceses establecidos en el extranjero, en diferentes campos estratégicos.',
+    'services.exploreCategory': 'Explorar esta categoría',
+    'services.availableServices': 'Servicios disponibles',
+    'services.howItWorks': '¿Cómo funciona?',
+    'services.step1': 'Describe tus necesidades',
+    'services.step2': 'Recibe presupuestos',
+    'services.step3': 'Elige tu experto',
+    'services.step4': 'Colabora eficientemente',
+    'services.experts': 'expertos',
+    'services.countries': 'países',
+    'services.cannotFind': '¿No encuentras lo que buscas?',
+    'services.networkExpanding': 'Nuestra red de expertos se expande constantemente. Si necesitas un servicio específico que no figura en nuestra lista, contáctanos y te ayudaremos a encontrar al proveedor ideal.',
+    'services.contactUs': 'Contáctanos',
+    
+    // Legal services
+    'services.legal.title': 'Servicios Legales',
+    'services.legal.description': 'Asesoramiento legal internacional para tus actividades en el extranjero',
+    'services.legal.offering1': 'Asesoramiento legal empresarial internacional',
+    'services.legal.offering2': 'Redacción y revisión de contratos internacionales',
+    'services.legal.offering3': 'Propiedad intelectual y protección de marcas',
+    'services.legal.offering4': 'Acompañamiento para establecimientos en el extranjero',
+    'services.legal.offering5': 'Litigios internacionales y arbitraje',
+    'services.legal.offering6': 'Derecho fiscal internacional',
+    'services.legal.offering7': 'Due diligence legal',
+    
+    // Accounting services
+    'services.accounting.title': 'Servicios Contables y Financieros',
+    'services.accounting.description': 'Gestión contable y financiera conforme a las normas internacionales',
+    'services.accounting.offering1': 'Contabilidad general y analítica',
+    'services.accounting.offering2': 'Optimización fiscal internacional',
+    'services.accounting.offering3': 'Control de gestión e informes financieros',
+    'services.accounting.offering4': 'Mantenimiento de libros contables',
+    'services.accounting.offering5': 'Consolidación de cuentas',
+    'services.accounting.offering6': 'Auditorías financieras',
+    'services.accounting.offering7': 'Asesoramiento en inversión internacional',
+    
+    // IT services
+    'services.it.title': 'Servicios IT y Digitales',
+    'services.it.description': 'Soluciones digitales e informáticas por expertos franceses a nivel internacional',
+    'services.it.offering1': 'Desarrollo web y móvil personalizado',
+    'services.it.offering2': 'Consultoría IT y transformación digital',
+    'services.it.offering3': 'Arquitectura de sistemas de información',
+    'services.it.offering4': 'Integración de ERP y CRM internacionales',
+    'services.it.offering5': 'Desarrollo de aplicaciones empresariales',
+    'services.it.offering6': 'Ciberseguridad internacional',
+    'services.it.offering7': 'Ciencia de datos e Inteligencia Artificial',
+    
+    // Medical services
+    'services.medical.title': 'Servicios Médicos',
+    'services.medical.description': 'Consultas y seguimientos médicos por médicos franceses expatriados',
+    'services.medical.offering1': 'Teleconsultas médicas en francés',
+    'services.medical.offering2': 'Seguimiento médico de expatriados',
+    'services.medical.offering3': 'Segunda opinión médica internacional',
+    'services.medical.offering4': 'Coordinación de atención en el extranjero',
+    'services.medical.offering5': 'Evaluaciones de salud internacionales',
+    'services.medical.offering6': 'Medicina laboral para empresas francesas',
+    'services.medical.offering7': 'Asistencia médica para viajeros',
+    
+    // Dental services
+    'services.dental.title': 'Servicios Dentales',
+    'services.dental.description': 'Atención dental de calidad francesa a nivel internacional',
+    'services.dental.offering1': 'Atención dental conservadora',
+    'services.dental.offering2': 'Prótesis dentales según estándares franceses',
+    'services.dental.offering3': 'Implantología y cirugía oral',
+    'services.dental.offering4': 'Ortodoncia para adultos y niños',
+    'services.dental.offering5': 'Estética dental',
+    'services.dental.offering6': 'Periodoncia',
+    'services.dental.offering7': 'Consultas preventivas'
+  }
+};
+
+// Provider function component
+export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  // Try to load saved language from localStorage, default to 'fr'
+  const [language, setLanguage] = useState<Language>(() => {
+    const savedLanguage = localStorage.getItem('language');
+    return (savedLanguage as Language) || 'fr';
+  });
+
+  // Update localStorage when language changes
+  useEffect(() => {
+    localStorage.setItem('language', language);
+  }, [language]);
+
+  // Function to get translations
+  const translate = (key: string): string => {
+    // Get translations for current language
+    const currentTranslations = translations[language] || {};
+    
+    // Return translation or key if not found (fallback mechanism)
+    return currentTranslations[key] || key;
+  };
+
+  // Provide context values to children
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage, translate }}>
+      {children}
+    </LanguageContext.Provider>
+  );
+};
+
+// Custom hook to use the language context
+export const useLanguage = () => {
+  const context = useContext(LanguageContext);
+  if (context === undefined) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+  return context;
+};
