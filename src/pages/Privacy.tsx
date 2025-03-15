@@ -1,11 +1,14 @@
 
 import { useLanguage } from "@/contexts/LanguageContext";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const Privacy = () => {
   const { translate } = useLanguage();
   
   return (
     <div className="min-h-screen">
+      <Navbar />
       <main className="pt-24 pb-16">
         <section className="py-12">
           <div className="container mx-auto px-4">
@@ -68,6 +71,7 @@ const Privacy = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };

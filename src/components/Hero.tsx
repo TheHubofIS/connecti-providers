@@ -1,6 +1,6 @@
 
 import { Search, ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -8,20 +8,20 @@ export default function Hero() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const { translate } = useLanguage();
+  const navigate = useNavigate();
 
   const categories = [
     { id: "all", name: translate('all') },
-    { id: "juridique", name: "Juridique" },
-    { id: "comptabilite", name: "Comptabilité" },
-    { id: "it", name: "IT" },
-    { id: "medical", name: "Médical" },
-    { id: "dentaire", name: "Dentaire" },
+    { id: "juridique", name: translate('categories.legal') },
+    { id: "comptabilite", name: translate('categories.accounting') },
+    { id: "it", name: translate('categories.it') },
+    { id: "medical", name: translate('categories.medical') },
+    { id: "dentaire", name: translate('categories.dental') },
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Logique de recherche à implémenter
-    console.log("Recherche:", { query: searchQuery, category: selectedCategory });
+    navigate(`/prestataires?query=${encodeURIComponent(searchQuery)}&category=${selectedCategory}`);
   };
 
   return (

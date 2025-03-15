@@ -2,24 +2,19 @@
 import { useState, useRef, useEffect } from "react";
 import { Search, FileText, CheckCircle, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const steps = [
   {
     id: 1,
-    title: "Recherchez un expert",
-    description: "Utilisez notre moteur de recherche avancé pour trouver le prestataire qui correspond à vos besoins spécifiques.",
     icon: Search,
   },
   {
     id: 2,
-    title: "Soumettez votre demande",
-    description: "Décrivez votre projet ou votre besoin spécifique en remplissant un formulaire RFQ (Request for Quote).",
     icon: FileText,
   },
   {
     id: 3,
-    title: "Obtenez des réponses",
-    description: "Recevez des propositions de prestataires qualifiés et choisissez celle qui vous convient le mieux.",
     icon: CheckCircle,
   },
 ];
@@ -27,6 +22,7 @@ const steps = [
 export default function HowItWorks() {
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const { translate } = useLanguage();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -55,13 +51,12 @@ export default function HowItWorks() {
       
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <span className="text-sm font-medium text-primary">Comment ça marche</span>
+          <span className="text-sm font-medium text-primary">{translate('howItWorks.subtitle')}</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">
-            Simple, rapide et efficace
+            {translate('howItWorks.title')}
           </h2>
           <p className="text-muted-foreground">
-            Notre plateforme vous permet de trouver facilement le prestataire idéal et 
-            d'obtenir rapidement des réponses à vos besoins.
+            {translate('howItWorks.description')}
           </p>
         </div>
 
@@ -85,12 +80,12 @@ export default function HowItWorks() {
                 </div>
                 
                 <div className="absolute top-6 left-6 h-16 w-16 flex items-center justify-center">
-                  <span className="text-xs font-medium text-primary/60">Étape</span>
+                  <span className="text-xs font-medium text-primary/60">{translate('howItWorks.step')}</span>
                   <span className="text-2xl font-bold text-primary/20 absolute">{step.id}</span>
                 </div>
                 
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-muted-foreground">{step.description}</p>
+                <h3 className="text-xl font-semibold mb-3">{translate(`howItWorks.step${step.id}.title`)}</h3>
+                <p className="text-muted-foreground">{translate(`howItWorks.step${step.id}.description`)}</p>
               </div>
             </div>
           ))}
@@ -101,7 +96,7 @@ export default function HowItWorks() {
             to="/comment-ca-marche"
             className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all"
           >
-            <span>En savoir plus</span>
+            <span>{translate('howItWorks.learnMore')}</span>
             <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
         </div>

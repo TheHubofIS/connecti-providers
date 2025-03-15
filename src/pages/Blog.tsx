@@ -6,6 +6,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Clock, User } from "lucide-react";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 // Blog article data with translations
 const articles = [
@@ -73,6 +75,7 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen">
+      <Navbar />
       <main className="pt-24 pb-16">
         <section className="py-12">
           <div className="container mx-auto px-4">
@@ -88,7 +91,7 @@ const Blog = () => {
 
             <div className="animate-fade-in delay-100">
               <Tabs defaultValue="all" className="w-full mb-8">
-                <div className="flex justify-center mb-6">
+                <div className="flex justify-center mb-6 overflow-x-auto pb-2">
                   <TabsList className="bg-background/50 p-1">
                     <TabsTrigger 
                       value="all" 
@@ -172,7 +175,7 @@ const Blog = () => {
                   </div>
                 </TabsContent>
                 
-                {/* Same content structure for other tabs */}
+                {/* Same content structure for other tabs with filtered results */}
                 <TabsContent value="finance" className="mt-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredArticles.map((article) => (
@@ -217,12 +220,10 @@ const Blog = () => {
                   </div>
                 </TabsContent>
                 
-                {/* Repeating for other categories */}
                 <TabsContent value="services" className="mt-0">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredArticles.map((article) => (
                       <Card key={article.id} className="overflow-hidden hover:shadow-md transition-all border border-border/60 group">
-                        {/* Card content same as above */}
                         <div className="h-48 overflow-hidden">
                           <img 
                             src={article.image} 
@@ -267,7 +268,6 @@ const Blog = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredArticles.map((article) => (
                       <Card key={article.id} className="overflow-hidden hover:shadow-md transition-all border border-border/60 group">
-                        {/* Card content same as above */}
                         <div className="h-48 overflow-hidden">
                           <img 
                             src={article.image} 
@@ -312,7 +312,6 @@ const Blog = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredArticles.map((article) => (
                       <Card key={article.id} className="overflow-hidden hover:shadow-md transition-all border border-border/60 group">
-                        {/* Card content same as above */}
                         <div className="h-48 overflow-hidden">
                           <img 
                             src={article.image} 
@@ -383,6 +382,7 @@ const Blog = () => {
           </div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
