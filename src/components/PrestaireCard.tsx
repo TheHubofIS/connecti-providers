@@ -1,6 +1,6 @@
 
 import { Star, MapPin, Clock, CheckCircle, MessageCircle, Calendar } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
@@ -13,6 +13,7 @@ type ProviderCardProps = {
 
 export default function PrestaireCard({ provider }: ProviderCardProps) {
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleContact = () => {
     toast({
@@ -20,6 +21,11 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
       description: "Veuillez vous connecter pour contacter ce prestataire.",
       variant: "default",
     });
+    
+    // Redirect to login page after a short delay
+    setTimeout(() => {
+      navigate("/connexion");
+    }, 1500);
   };
 
   const handleSave = () => {
@@ -28,6 +34,11 @@ export default function PrestaireCard({ provider }: ProviderCardProps) {
       description: "Veuillez vous connecter pour sauvegarder ce prestataire.",
       variant: "default",
     });
+    
+    // Redirect to login page after a short delay
+    setTimeout(() => {
+      navigate("/connexion");
+    }, 1500);
   };
   
   // Set defaults for optional properties

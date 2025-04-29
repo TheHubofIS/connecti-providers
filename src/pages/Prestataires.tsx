@@ -9,6 +9,8 @@ import {
   getProvidersByCategory 
 } from "@/utils/serviceData";
 import { Provider } from "@/types/provider";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import ProviderCard from "../components/ProviderCard";
 import PrestatairesFilters from "../components/PrestatairesFilters";
 import SearchBar from "../components/SearchBar";
@@ -22,6 +24,11 @@ export default function Prestataires() {
   const [showFilters, setShowFilters] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Scroll to top when the page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Parse URL query parameters
   useEffect(() => {
@@ -125,71 +132,75 @@ export default function Prestataires() {
   };
 
   return (
-    <div className="min-h-screen pb-16 pt-28 px-4">
-      <div className="container mx-auto">
-        <div className="mb-8">
-          <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-            <div>
-              <h1 className="text-3xl font-bold">{getSelectedCategoryName()}</h1>
-              <p className="text-muted-foreground mt-2">
-                Trouvez les meilleurs professionnels pour vous accompagner dans votre expatriation
-              </p>
+    <div className="min-h-screen">
+      <Navbar />
+      <div className="pb-16 pt-28 px-4">
+        <div className="container mx-auto">
+          <div className="mb-8">
+            <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
+              <div>
+                <h1 className="text-3xl font-bold">{getSelectedCategoryName()}</h1>
+                <p className="text-muted-foreground mt-2">
+                  Trouvez les meilleurs professionnels pour vous accompagner dans votre expatriation
+                </p>
+              </div>
+              
+              <Button 
+                variant="outline" 
+                className="lg:hidden"
+                onClick={() => setShowFilters(!showFilters)}
+              >
+                <Filter className="h-4 w-4 mr-2" />
+                Filtres
+              </Button>
             </div>
             
-            <Button 
-              variant="outline" 
-              className="lg:hidden"
-              onClick={() => setShowFilters(!showFilters)}
-            >
-              <Filter className="h-4 w-4 mr-2" />
-              Filtres
-            </Button>
+            <SearchBar onSearch={handleSearch} selectedCategory={selectedCategory} />
           </div>
           
-          <SearchBar onSearch={handleSearch} selectedCategory={selectedCategory} />
-        </div>
-        
-        <div className="flex flex-col lg:flex-row gap-8">
-          <aside className={`lg:w-64 shrink-0 ${showFilters ? 'block' : 'hidden'} lg:block`}>
-            <PrestatairesFilters 
-              selectedCategory={selectedCategory}
-              onCategoryChange={handleCategoryChange}
-            />
-          </aside>
-          
-          <main className="flex-1">
-            {loading ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[...Array(9)].map((_, i) => (
-                  <div 
-                    key={i} 
-                    className="bg-card animate-pulse h-64 rounded-lg border border-border/60"
-                  />
-                ))}
-              </div>
-            ) : providers.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {providers.map((provider) => (
-                  <ProviderCard key={provider.id} provider={provider} />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <h3 className="text-lg font-medium mb-2">Aucun prestataire trouvé</h3>
-                <p className="text-muted-foreground mb-6">
-                  Aucun prestataire ne correspond à vos critères de recherche.
-                </p>
-                <Button onClick={() => {
-                  setSelectedCategory("all");
-                  navigate("/prestataires");
-                }}>
-                  Voir tous les prestataires
-                </Button>
-              </div>
-            )}
-          </main>
+          <div className="flex flex-col lg:flex-row gap-8">
+            <aside className={`lg:w-64 shrink-0 ${showFilters ? 'block' : 'hidden'} lg:block`}>
+              <PrestatairesFilters 
+                selectedCategory={selectedCategory}
+                onCategoryChange={handleCategoryChange}
+              />
+            </aside>
+            
+            <main className="flex-1">
+              {loading ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[...Array(9)].map((_, i) => (
+                    <div 
+                      key={i} 
+                      className="bg-card animate-pulse h-64 rounded-lg border border-border/60"
+                    />
+                  ))}
+                </div>
+              ) : providers.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {providers.map((provider) => (
+                    <ProviderCard key={provider.id} provider={provider} />
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <h3 className="text-lg font-medium mb-2">Aucun prestataire trouvé</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Aucun prestataire ne correspond à vos critères de recherche.
+                  </p>
+                  <Button onClick={() => {
+                    setSelectedCategory("all");
+                    navigate("/prestataires");
+                  }}>
+                    Voir tous les prestataires
+                  </Button>
+                </div>
+              )}
+            </main>
+          </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

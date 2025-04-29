@@ -1,8 +1,9 @@
 
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { useEffect } from 'react';
 
 import Index from '@/pages/Index';
 import NotFound from '@/pages/NotFound';
@@ -50,10 +51,22 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 // Create a client for React Query
 const queryClient = new QueryClient();
 
+// ScrollToTop component to manage scrolling on route changes
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
+          <ScrollToTop />
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<Index />} />

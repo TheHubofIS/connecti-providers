@@ -28,6 +28,11 @@ export default function FeaturedProviders() {
     fetchProviders();
   }, []);
 
+  const handleClick = () => {
+    // Ensure scroll to top when navigating to providers page
+    window.scrollTo(0, 0);
+  };
+
   return (
     <section className="py-24 bg-muted/30">
       <div className="container px-4 mx-auto">
@@ -43,6 +48,7 @@ export default function FeaturedProviders() {
           <Link
             to="/prestataires"
             className="mt-6 md:mt-0 inline-flex items-center text-primary hover:underline"
+            onClick={handleClick}
           >
             Voir tous les prestataires
             <svg
