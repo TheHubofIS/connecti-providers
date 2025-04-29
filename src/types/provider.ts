@@ -17,7 +17,7 @@ export type Provider = {
   featured: boolean;
   available: boolean;
   
-  // Additional properties needed for PrestaireCard
+  // Additional properties needed for Provider cards and details
   title?: string;
   reviews?: number;
   location?: string;
@@ -26,4 +26,12 @@ export type Provider = {
   hourlyRate?: number;
   responseTime?: string;
   completionRate?: number;
+  
+  // Extended professional information
+  experience?: string;
+  education?: string[];
+  certifications?: string[];
+  specialties?: string[];
+  clients?: string[];
+  approach?: string;
 };
