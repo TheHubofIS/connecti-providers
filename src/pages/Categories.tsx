@@ -212,9 +212,13 @@ export default function Categories() {
   });
   
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Background gradients for visual effect */}
+      <div className="blur-gradient blur-gradient-primary absolute top-1/4 right-[10%] animate-pulse-slow"></div>
+      <div className="blur-gradient blur-gradient-secondary absolute bottom-1/4 left-[10%] animate-pulse-slow"></div>
+      
       <Navbar />
-      <main className="pt-24 pb-16">
+      <main className="pt-24 pb-16 relative z-10">
         <section className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center mb-12 animate-fade-in">
             <span className="text-sm font-medium text-primary">
@@ -287,7 +291,7 @@ export default function Categories() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {filteredCategories.map((category) => (
                     <Link to={`/services/${category.id}`} key={category.id}>
-                      <div className="bg-card border border-border rounded-xl overflow-hidden h-full hover:shadow-md transition-all group">
+                      <div className="bg-card border border-border rounded-xl overflow-hidden h-full hover:shadow-md transition-all group hover-lift">
                         <div className="p-6">
                           <div className="flex items-start justify-between mb-4">
                             <div className="flex items-center">

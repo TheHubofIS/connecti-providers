@@ -67,14 +67,14 @@ const Navbar = () => {
                 variant="ghost" 
                 size="sm"
                 onClick={() => navigate(-1)} 
-                className="mr-4"
+                className="mr-4 hover-lift"
                 aria-label={translate('back')}
               >
                 <ArrowLeft className="h-4 w-4 mr-2" /> {translate('back')}
               </Button>
               <Link
                 to="/"
-                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors"
+                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors hover-lift"
               >
                 <Home className="h-4 w-4 mr-2" />
                 {translate('home')}
@@ -83,7 +83,7 @@ const Navbar = () => {
           ) : (
             <Link
               to="/"
-              className="text-2xl font-bold text-primary transition-all duration-300"
+              className="text-2xl font-bold text-primary transition-all duration-300 hover-lift"
             >
               {translate('siteName')}
             </Link>
@@ -113,13 +113,13 @@ const Navbar = () => {
                 <div className="flex items-center space-x-4">
                   <Link
                     to={user?.role === "provider" ? "/fournisseur/dashboard" : "/client/dashboard"}
-                    className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+                    className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all hover-lift"
                   >
                     {translate('dashboard')}
                   </Link>
                   <button
                     onClick={logout}
-                    className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
+                    className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all hover-lift"
                   >
                     {translate('logout')}
                   </button>
@@ -128,13 +128,13 @@ const Navbar = () => {
                 <>
                   <Link
                     to="/connexion"
-                    className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+                    className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all hover-lift"
                   >
                     {translate('login')}
                   </Link>
                   <Link
                     to="/inscription-client"
-                    className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all"
+                    className="px-4 py-2 rounded-full bg-primary text-white hover:bg-primary/90 transition-all hover-lift"
                   >
                     {translate('register')}
                   </Link>
@@ -222,6 +222,6 @@ const Navbar = () => {
       </div>
     </header>
   );
-};
+}
 
 export default Navbar;

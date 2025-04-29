@@ -25,10 +25,12 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative min-h-screen pt-24 pb-16 flex flex-col justify-center">
-      {/* Background gradients */}
-      <div className="blur-gradient blur-gradient-primary absolute top-1/4 right-[10%]"></div>
-      <div className="blur-gradient blur-gradient-secondary absolute bottom-1/4 left-[10%]"></div>
+    <div className="relative min-h-screen pt-24 pb-16 flex flex-col justify-center overflow-hidden">
+      {/* Enhanced background gradients */}
+      <div className="blur-gradient blur-gradient-primary absolute top-1/4 right-[10%] animate-pulse"></div>
+      <div className="blur-gradient blur-gradient-secondary absolute bottom-1/4 left-[10%] animate-pulse"></div>
+      <div className="blur-gradient blur-gradient-primary opacity-20 absolute top-[60%] left-[30%]"></div>
+      <div className="blur-gradient blur-gradient-secondary opacity-20 absolute bottom-[70%] right-[20%]"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
@@ -82,14 +84,14 @@ export default function Hero() {
           <div className="flex flex-wrap justify-center gap-4 mt-8 animate-fade-in delay-400">
             <Link
               to="/comment-ca-marche"
-              className="px-6 py-3 rounded-lg border border-primary/20 text-primary hover:bg-primary/5 transition-all flex items-center gap-2"
+              className="px-6 py-3 rounded-lg border border-primary/20 text-primary hover:bg-primary/5 transition-all flex items-center gap-2 hover-lift"
             >
               <span>{translate('hero.btnHowItWorks')}</span>
               <ArrowRight className="h-4 w-4" />
             </Link>
             <Link
               to="/prestataires"
-              className="px-6 py-3 rounded-lg bg-foreground dark:bg-foreground/90 text-background dark:text-background hover:bg-foreground/90 dark:hover:bg-foreground/80 transition-all"
+              className="px-6 py-3 rounded-lg bg-foreground dark:bg-foreground/90 text-background dark:text-background hover:bg-foreground/90 dark:hover:bg-foreground/80 transition-all hover-lift"
             >
               {translate('hero.btnBrowseProviders')}
             </Link>

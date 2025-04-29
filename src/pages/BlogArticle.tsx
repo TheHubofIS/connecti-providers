@@ -5,6 +5,7 @@ import { ArrowLeft, Calendar, User, Clock, Tag, Share2, Bookmark } from "lucide-
 import { useToast } from "@/hooks/use-toast";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge"; // Fixed missing import
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
