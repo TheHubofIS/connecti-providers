@@ -1,5 +1,5 @@
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -22,6 +22,7 @@ import Login from '@/pages/Login';
 import Register from '@/pages/Register';
 import InscriptionClient from '@/pages/InscriptionClient';
 import InscriptionPrestataire from '@/pages/InscriptionPrestataire';
+import Connexion from '@/pages/Connexion';
 
 // Protected routes
 import ClientDashboard from '@/pages/client/Dashboard';
@@ -44,6 +45,7 @@ import AdminDashboard from '@/pages/admin/Dashboard';
 import Privacy from '@/pages/Privacy';
 import Terms from '@/pages/Terms';
 import Support from '@/pages/Support';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 // Create a client for React Query
 const queryClient = new QueryClient();
@@ -52,7 +54,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <LanguageProvider>
-        <BrowserRouter>
           <Routes>
             {/* Public routes */}
             <Route path="/" element={<Index />} />
@@ -68,27 +69,72 @@ function App() {
             <Route path="/categories" element={<Categories />} />
             
             {/* Authentication routes */}
-            <Route path="/connexion" element={<Login />} />
+            <Route path="/connexion" element={<Connexion />} />
+            <Route path="/login" element={<Login />} />
             <Route path="/inscription" element={<Register />} />
             <Route path="/inscription-client" element={<InscriptionClient />} />
             <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
             
             {/* Client routes */}
-            <Route path="/client/dashboard" element={<ClientDashboard />} />
-            <Route path="/client/profile" element={<ClientProfile />} />
-            <Route path="/client/appointments" element={<ClientAppointments />} />
-            <Route path="/client/messages" element={<ClientMessages />} />
-            <Route path="/client/complete-profile" element={<ClientCompleteProfile />} />
+            <Route path="/client/dashboard" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ClientDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/client/profile" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ClientProfile />
+              </ProtectedRoute>
+            } />
+            <Route path="/client/appointments" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ClientAppointments />
+              </ProtectedRoute>
+            } />
+            <Route path="/client/messages" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ClientMessages />
+              </ProtectedRoute>
+            } />
+            <Route path="/client/complete-profile" element={
+              <ProtectedRoute allowedRoles={["client", "admin"]}>
+                <ClientCompleteProfile />
+              </ProtectedRoute>
+            } />
             
             {/* Provider routes */}
-            <Route path="/fournisseur/dashboard" element={<ProviderDashboard />} />
-            <Route path="/fournisseur/profile" element={<ProviderProfile />} />
-            <Route path="/fournisseur/appointments" element={<ProviderAppointments />} />
-            <Route path="/fournisseur/messages" element={<ProviderMessages />} />
-            <Route path="/fournisseur/complete-profile" element={<ProviderCompleteProfile />} />
+            <Route path="/fournisseur/dashboard" element={
+              <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                <ProviderDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/fournisseur/profile" element={
+              <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                <ProviderProfile />
+              </ProtectedRoute>
+            } />
+            <Route path="/fournisseur/appointments" element={
+              <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                <ProviderAppointments />
+              </ProtectedRoute>
+            } />
+            <Route path="/fournisseur/messages" element={
+              <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                <ProviderMessages />
+              </ProtectedRoute>
+            } />
+            <Route path="/fournisseur/complete-profile" element={
+              <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                <ProviderCompleteProfile />
+              </ProtectedRoute>
+            } />
             
             {/* Admin routes */}
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/dashboard" element={
+              <ProtectedRoute allowedRoles={["admin"]}>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } />
             
             {/* Static routes */}
             <Route path="/privacy" element={<Privacy />} />
@@ -100,7 +146,6 @@ function App() {
           </Routes>
           
           <Toaster />
-        </BrowserRouter>
       </LanguageProvider>
     </QueryClientProvider>
   );
