@@ -27,6 +27,8 @@ interface AuthContextType {
   logout: () => void;
   isAuthenticated: boolean;
   updateUser: (userData: Partial<User>) => void;
+  forgotPassword: (email: string) => Promise<void>;
+  resetPassword: (token: string, password: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -179,6 +181,54 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  // Mock forgot password function
+  const forgotPassword = async (email: string) => {
+    try {
+      setLoading(true);
+      
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // In a real app, this would send an email with a reset link
+      console.log("Password reset email sent to:", email);
+      
+      // Generate a reset token (in a real app, this would be done by the backend)
+      const resetToken = Math.random().toString(36).substring(2, 15);
+      
+      // Here we would typically send an email with the reset link
+      // For this demo, we'll just log it
+      console.log(`Reset link: ${window.location.origin}/reset-password?token=${resetToken}`);
+      
+      return true;
+    } catch (error) {
+      console.error("Error sending password reset:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Mock reset password function
+  const resetPassword = async (token: string, password: string) => {
+    try {
+      setLoading(true);
+      
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // In a real app, this would validate the token and update the password
+      console.log("Password reset with token:", token);
+      console.log("New password (not shown in a real app):", password);
+      
+      return true;
+    } catch (error) {
+      console.error("Error resetting password:", error);
+      throw error;
+    } finally {
+      setLoading(false);
+    }
+  };
+
   // Mock register function - in a real app, this would make an API call
   const register = async (email: string, password: string, name: string, role: UserRole) => {
     try {
@@ -246,7 +296,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         register,
         logout,
         isAuthenticated: !!user,
-        updateUser
+        updateUser,
+        forgotPassword,
+        resetPassword
       }}
     >
       {children}

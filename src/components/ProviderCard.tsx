@@ -8,14 +8,17 @@ import { useToast } from '@/hooks/use-toast';
 import { Provider } from '@/types/provider';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
+import { useMessages } from '@/contexts/MessageContext';
 
 const ProviderCard = ({ provider }: { provider: Provider }) => {
   const { toast } = useToast();
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const messagesContext = useMessages || null;
 
-  const handleContact = (e: React.MouseEvent) => {
+  const handleContact = async (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent event bubbling
+    e.stopPropagation(); // Stop propagation to parent elements
     
     if (!isAuthenticated) {
       toast({
@@ -28,18 +31,43 @@ const ProviderCard = ({ provider }: { provider: Provider }) => {
       setTimeout(() => {
         navigate("/connexion");
       }, 1500);
-    } else {
+      
+      return;
+    }
+    
+    try {
       // If user is authenticated, navigate to messaging with this provider
-      navigate(`/client/messages?providerId=${provider.id}`);
+      if (messagesContext && user) {
+        // This would be implemented in a real app to start a conversation with the provider
+        // For now, we'll just navigate
+        navigate(`/client/messages?providerId=${provider.id}`);
+      } else {
+        navigate(`/client/messages`);
+      }
+      
       toast({
         title: "Contact",
         description: `Vous pouvez maintenant discuter avec ${provider.name}.`,
       });
+    } catch (error) {
+      console.error("Error connecting to messages:", error);
+      toast({
+        title: "Erreur",
+        description: "Une erreur est survenue lors de la connexion au système de messagerie.",
+        variant: "destructive",
+      });
     }
   };
 
+  const handleCardClick = () => {
+    navigate(`/prestataires/${provider.id}`);
+  };
+
   return (
-    <div className="bg-card rounded-lg border border-border overflow-hidden hover:shadow-lg transition-shadow">
+    <div 
+      className="bg-card rounded-lg border border-border overflow-hidden hover:shadow-lg transition-shadow cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="p-6">
         <div className="flex items-start justify-between">
           <div className="flex items-start space-x-4">
@@ -87,7 +115,11 @@ const ProviderCard = ({ provider }: { provider: Provider }) => {
             <span className="font-semibold">{provider.priceLevel || `${provider.hourlyRate}€/h`}</span>
             <span className="text-muted-foreground"> · {provider.languages?.join(', ') || 'Français'}</span>
           </div>
-          <Button onClick={handleContact} className="flex items-center gap-2">
+          <Button 
+            onClick={handleContact} 
+            className="flex items-center gap-2"
+            type="button"
+          >
             <MessageCircle className="h-4 w-4" />
             Contacter
           </Button>

@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -40,6 +40,9 @@ const ForgotPassword = () => {
       
       // In a real app, this would call an API to send password reset link
       console.log("Password reset requested for:", email);
+      
+      // Send an email (simulated)
+      sendResetEmail(email);
     } catch (error) {
       console.error("Error requesting password reset:", error);
       toast({
@@ -50,6 +53,32 @@ const ForgotPassword = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+  
+  // Function to simulate sending a reset email
+  const sendResetEmail = (email: string) => {
+    // In a real app, this would be handled by a backend service
+    // Here we just simulate the process
+    const resetLink = `${window.location.origin}/reset-password?token=${generateMockToken()}`;
+    
+    console.log("Reset email would be sent to:", email);
+    console.log("With reset link:", resetLink);
+    
+    // Show toast to indicate email sent (for demo purposes)
+    toast({
+      title: "Email envoyé",
+      description: `Un email de réinitialisation a été envoyé à ${email}`,
+      action: (
+        <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center">
+          <Check className="h-4 w-4 text-primary" />
+        </div>
+      ),
+    });
+  };
+  
+  // Generate a mock token for demo purposes
+  const generateMockToken = () => {
+    return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   };
 
   // Content to show after form submission
@@ -65,7 +94,7 @@ const ForgotPassword = () => {
         <Button 
           type="button" 
           className="w-full"
-          onClick={() => setEmail("")}
+          onClick={() => setIsSubmitted(false)}
           variant="outline"
         >
           Utiliser une autre adresse e-mail

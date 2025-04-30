@@ -5,6 +5,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import { Send, Loader2 } from "lucide-react";
 
 export default function ClientMessages() {
@@ -26,6 +27,8 @@ export default function ClientMessages() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Force scroll to top when component mounts
+    window.scrollTo(0, 0);
     getConversations();
   }, []);
 
@@ -57,9 +60,9 @@ export default function ClientMessages() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
-      <div className="container mx-auto py-24 px-4">
+      <div className="container mx-auto py-24 px-4 flex-grow">
         <h1 className="text-3xl font-bold mb-8">Messagerie</h1>
         
         <div className="grid md:grid-cols-3 gap-6 h-[70vh]">
@@ -179,6 +182,7 @@ export default function ClientMessages() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }
