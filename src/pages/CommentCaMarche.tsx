@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { ArrowRight, HelpCircle, FileText, MessageSquare, Briefcase } from "lucide-react";
@@ -7,6 +8,11 @@ import { useLanguage } from "@/contexts/LanguageContext";
 
 const CommentCaMarche = () => {
   const { translate } = useLanguage();
+  
+  // Scroll to top when the page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   return (
     <div className="min-h-screen">
@@ -50,6 +56,7 @@ const CommentCaMarche = () => {
                   <Link
                     to="/inscription-client"
                     className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all"
+                    onClick={() => window.scrollTo(0, 0)}
                   >
                     <span>{translate('howItWorksPage.registerAsBusiness')}</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -82,6 +89,7 @@ const CommentCaMarche = () => {
                   <Link
                     to="/inscription-prestataire"
                     className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all"
+                    onClick={() => window.scrollTo(0, 0)}
                   >
                     <span>{translate('howItWorksPage.registerAsProvider')}</span>
                     <ArrowRight className="ml-2 h-4 w-4" />
@@ -111,6 +119,7 @@ const CommentCaMarche = () => {
                 <Link
                   to="/contact"
                   className="inline-flex items-center px-6 py-3 border border-primary/20 rounded-lg text-primary hover:bg-primary/5 transition-all"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <span>{translate('howItWorksPage.moreQuestions')}</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -130,6 +139,7 @@ const CommentCaMarche = () => {
                 <Link
                   to="/ressources"
                   className="flex items-center justify-center text-primary font-medium"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <span>{translate('howItWorksPage.resources.cta1')}</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -147,6 +157,7 @@ const CommentCaMarche = () => {
                 <Link
                   to="/support"
                   className="flex items-center justify-center text-primary font-medium"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <span>{translate('howItWorksPage.resources.cta2')}</span>
                   <ArrowRight className="ml-2 h-4 w-4" />
@@ -164,6 +175,7 @@ const CommentCaMarche = () => {
                 <Link
                   to="/success-stories"
                   className="flex items-center justify-center text-primary font-medium"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   <span>{translate('howItWorksPage.resources.cta3')}</span>
                   <ArrowRight className="ml-2 h-4 w-4" />

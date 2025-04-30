@@ -1,4 +1,5 @@
 
+import { useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, Calendar, User, Tag, Clock } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -7,6 +8,11 @@ import Footer from "@/components/Footer";
 
 const Blog = () => {
   const { translate } = useLanguage();
+  
+  // Scroll to top when the page loads
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   
   const blogArticles = [
     {
@@ -95,6 +101,10 @@ const Blog = () => {
                       src={article.image} 
                       alt={article.title} 
                       className="h-full w-full object-cover"
+                      onError={(e) => {
+                        // Fallback for broken images
+                        (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1200&q=80";
+                      }}
                     />
                     <div className="absolute top-3 right-3 bg-primary/90 text-white text-xs font-medium px-2 py-1 rounded">
                       {article.category}
@@ -123,6 +133,7 @@ const Blog = () => {
                     <Link
                       to={`/blog/${article.id}`}
                       className="inline-flex items-center text-primary font-medium hover:underline"
+                      onClick={() => window.scrollTo(0, 0)}
                     >
                       <span>Lire l'article</span>
                       <ArrowRight className="ml-1 h-4 w-4" />
@@ -136,6 +147,7 @@ const Blog = () => {
               <Link
                 to="/categories"
                 className="inline-flex items-center px-6 py-3 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all"
+                onClick={() => window.scrollTo(0, 0)}
               >
                 <span>Parcourir toutes les catégories</span>
                 <ArrowRight className="ml-2 h-4 w-4" />

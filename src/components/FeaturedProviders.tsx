@@ -10,6 +10,9 @@ export default function FeaturedProviders() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Force scroll to top when component mounts
+    window.scrollTo(0, 0);
+    
     // Simulate API call with a small delay
     const fetchProviders = async () => {
       setLoading(true);

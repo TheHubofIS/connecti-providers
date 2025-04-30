@@ -7,21 +7,35 @@ import { Button } from './ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Provider } from '@/types/provider';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/contexts/AuthContext';
 
 const ProviderCard = ({ provider }: { provider: Provider }) => {
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuth();
 
-  const handleContact = () => {
-    toast({
-      title: "Connexion requise",
-      description: "Veuillez vous connecter pour contacter ce prestataire.",
-    });
+  const handleContact = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent event bubbling
     
-    // Redirect to login page after a short delay
-    setTimeout(() => {
-      navigate("/connexion");
-    }, 1500);
+    if (!isAuthenticated) {
+      toast({
+        title: "Connexion requise",
+        description: "Veuillez vous connecter pour contacter ce prestataire.",
+        variant: "default",
+      });
+      
+      // Redirect to login page after a short delay
+      setTimeout(() => {
+        navigate("/connexion");
+      }, 1500);
+    } else {
+      // If user is authenticated, navigate to messaging with this provider
+      navigate(`/client/messages?providerId=${provider.id}`);
+      toast({
+        title: "Contact",
+        description: `Vous pouvez maintenant discuter avec ${provider.name}.`,
+      });
+    }
   };
 
   return (

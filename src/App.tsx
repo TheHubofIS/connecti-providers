@@ -25,6 +25,7 @@ import Register from '@/pages/Register';
 import InscriptionClient from '@/pages/InscriptionClient';
 import InscriptionPrestataire from '@/pages/InscriptionPrestataire';
 import Connexion from '@/pages/Connexion';
+import ForgotPassword from '@/pages/ForgotPassword';
 
 // Protected routes
 import ClientDashboard from '@/pages/client/Dashboard';
@@ -88,68 +89,65 @@ function App() {
             <Route path="/inscription" element={<Register />} />
             <Route path="/inscription-client" element={<InscriptionClient />} />
             <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             
             {/* Client routes - wrapped with AppointmentProvider */}
-            <Route path="/client" element={<AppointmentProvider>
-              <Routes>
-                <Route path="dashboard" element={
-                  <ProtectedRoute allowedRoles={["client", "admin"]}>
-                    <ClientDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="profile" element={
-                  <ProtectedRoute allowedRoles={["client", "admin"]}>
-                    <ClientProfile />
-                  </ProtectedRoute>
-                } />
-                <Route path="appointments" element={
-                  <ProtectedRoute allowedRoles={["client", "admin"]}>
-                    <ClientAppointments />
-                  </ProtectedRoute>
-                } />
-                <Route path="messages" element={
-                  <ProtectedRoute allowedRoles={["client", "admin"]}>
-                    <ClientMessages />
-                  </ProtectedRoute>
-                } />
-                <Route path="complete-profile" element={
-                  <ProtectedRoute allowedRoles={["client", "admin"]}>
-                    <ClientCompleteProfile />
-                  </ProtectedRoute>
-                } />
-              </Routes>
-            </AppointmentProvider>} />
+            <Route element={<AppointmentProvider><div className="w-full"><Routes>
+              <Route path="/client/dashboard" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ClientDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/client/profile" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ClientProfile />
+                </ProtectedRoute>
+              } />
+              <Route path="/client/appointments" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ClientAppointments />
+                </ProtectedRoute>
+              } />
+              <Route path="/client/messages" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ClientMessages />
+                </ProtectedRoute>
+              } />
+              <Route path="/client/complete-profile" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ClientCompleteProfile />
+                </ProtectedRoute>
+              } />
+            </Routes></div></AppointmentProvider>} />
             
             {/* Provider routes - also wrapped with AppointmentProvider */}
-            <Route path="/fournisseur" element={<AppointmentProvider>
-              <Routes>
-                <Route path="dashboard" element={
-                  <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                    <ProviderDashboard />
-                  </ProtectedRoute>
-                } />
-                <Route path="profile" element={
-                  <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                    <ProviderProfile />
-                  </ProtectedRoute>
-                } />
-                <Route path="appointments" element={
-                  <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                    <ProviderAppointments />
-                  </ProtectedRoute>
-                } />
-                <Route path="messages" element={
-                  <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                    <ProviderMessages />
-                  </ProtectedRoute>
-                } />
-                <Route path="complete-profile" element={
-                  <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                    <ProviderCompleteProfile />
-                  </ProtectedRoute>
-                } />
-              </Routes>
-            </AppointmentProvider>} />
+            <Route element={<AppointmentProvider><div className="w-full"><Routes>
+              <Route path="/fournisseur/dashboard" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <ProviderDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/profile" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <ProviderProfile />
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/appointments" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <ProviderAppointments />
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/messages" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <ProviderMessages />
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/complete-profile" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <ProviderCompleteProfile />
+                </ProtectedRoute>
+              } />
+            </Routes></div></AppointmentProvider>} />
             
             {/* Admin routes */}
             <Route path="/admin/dashboard" element={

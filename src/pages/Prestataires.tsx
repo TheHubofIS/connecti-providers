@@ -121,6 +121,9 @@ export default function Prestataires() {
       pathname: location.pathname,
       search: searchParams.toString()
     });
+
+    // Scroll back to top on category change
+    window.scrollTo(0, 0);
   };
 
   // Get selected category name
