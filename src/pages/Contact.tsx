@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -510,7 +509,8 @@ const Contact = () => {
         </div>
       </div>
       
-      <style jsx global>{`
+      <style>
+        {`
         .map-skeleton {
           background: linear-gradient(-45deg, #f3f4f6 25%, #e5e7eb 50%, #f3f4f6 75%);
           background-size: 200% 200%;
@@ -533,7 +533,8 @@ const Contact = () => {
         .map-loaded > div:last-child {
           opacity: 1;
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };

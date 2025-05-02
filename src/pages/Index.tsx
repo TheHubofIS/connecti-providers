@@ -218,14 +218,16 @@ const Index = () => {
       <Footer />
       
       {/* Style pour les animations de parallaxe */}
-      <style jsx global>{`
+      <style>
+        {`
         .parallax-zoom {
           transition: transform 0.3s ease-out;
         }
         .parallax-zoom:hover {
           transform: scale(1.05);
         }
-      `}</style>
+        `}
+      </style>
     </div>
   );
 };

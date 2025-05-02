@@ -171,7 +171,9 @@ export function ThemeToggle() {
         />
       )}
       
-      <style jsx global>{`
+      {/* Use regular style tag without jsx and global properties */}
+      <style>
+        {`
         @keyframes twinkle {
           0%, 100% { opacity: 0.7; }
           50% { opacity: 0.3; }
@@ -198,7 +200,8 @@ export function ThemeToggle() {
         .animate-reverse-spin {
           animation: reverse-spin 1s ease-in-out;
         }
-      `}</style>
+        `}
+      </style>
     </button>
   );
 }
