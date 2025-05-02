@@ -1,4 +1,3 @@
-
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
@@ -182,7 +181,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   // Mock forgot password function
-  const forgotPassword = async (email: string) => {
+  const forgotPassword = async (email: string): Promise<void> => {
     try {
       setLoading(true);
       
@@ -199,7 +198,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       // For this demo, we'll just log it
       console.log(`Reset link: ${window.location.origin}/reset-password?token=${resetToken}`);
       
-      return true;
+      // No return value (void)
     } catch (error) {
       console.error("Error sending password reset:", error);
       throw error;
@@ -209,7 +208,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   // Mock reset password function
-  const resetPassword = async (token: string, password: string) => {
+  const resetPassword = async (token: string, password: string): Promise<void> => {
     try {
       setLoading(true);
       
@@ -220,7 +219,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.log("Password reset with token:", token);
       console.log("New password (not shown in a real app):", password);
       
-      return true;
+      // No return value (void)
     } catch (error) {
       console.error("Error resetting password:", error);
       throw error;
