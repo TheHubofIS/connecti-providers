@@ -1,10 +1,13 @@
 
 import { Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [isMounted, setIsMounted] = useState(false);
+  const [isHovering, setIsHovering] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -16,6 +19,9 @@ export function ThemeToggle() {
   }, []);
 
   const toggleTheme = () => {
+    setIsAnimating(true);
+    setTimeout(() => setIsAnimating(false), 750);
+    
     if (theme === "light") {
       setTheme("dark");
       document.documentElement.classList.add("dark");
@@ -30,54 +36,169 @@ export function ThemeToggle() {
   if (!isMounted) {
     return null;
   }
+  
+  const stars = Array.from({ length: 6 }).map((_, i) => {
+    const size = Math.random() * 3 + 2;
+    const top = Math.random() * 40;
+    const left = Math.random() * 100;
+    const delay = Math.random() * 0.5;
+    
+    return {
+      size,
+      style: {
+        top: `${top}%`,
+        left: `${left}%`,
+        animationDelay: `${delay}s`
+      }
+    };
+  });
+
+  const clouds = Array.from({ length: 4 }).map((_, i) => {
+    const size = Math.random() * 30 + 20;
+    const top = Math.random() * 60 + 15;
+    const left = Math.random() * 100;
+    const delay = Math.random() * 0.5;
+    
+    return {
+      size,
+      style: {
+        top: `${top}%`,
+        left: `${left}%`,
+        width: `${size}px`,
+        height: `${size / 2}px`,
+        animationDelay: `${delay}s`
+      }
+    };
+  });
 
   return (
     <button
       onClick={toggleTheme}
-      className="relative p-2 rounded-full bg-secondary/80 text-secondary-foreground hover:bg-secondary/90 transition-all duration-500 overflow-hidden"
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
+      className={cn(
+        "relative p-2 rounded-full text-secondary-foreground transition-all duration-500 overflow-hidden",
+        "hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary/40 focus:ring-offset-2 focus:ring-offset-background",
+        theme === "light" ? "bg-blue-50 dark:bg-blue-900/20" : "bg-slate-800"
+      )}
       aria-label="Toggle theme"
     >
-      <div className="relative z-10 transition-transform duration-500">
+      <div 
+        className={cn(
+          "relative z-10 transition-transform duration-500", 
+          isAnimating && (theme === "light" ? "animate-spin-slow" : "animate-reverse-spin")
+        )}
+      >
         {theme === "light" ? (
-          <Moon className="h-5 w-5 transition-all scale-100" />
+          <Moon 
+            className={cn(
+              "h-5 w-5 transition-all scale-100", 
+              isHovering ? "text-indigo-600" : "text-slate-700"
+            )} 
+          />
         ) : (
-          <Sun className="h-5 w-5 transition-all scale-100" />
+          <Sun 
+            className={cn(
+              "h-5 w-5 transition-all scale-100", 
+              isHovering ? "text-amber-300" : "text-amber-200"
+            )} 
+          />
         )}
       </div>
       
       {/* Background animation */}
       <div 
-        className={`absolute inset-0 transition-all duration-500 ${
+        className={cn(
+          "absolute inset-0 transition-all duration-500", 
           theme === 'light' 
-            ? 'bg-secondary/80' 
-            : 'bg-secondary/90'
-        }`}
+            ? 'bg-gradient-to-br from-blue-50 to-blue-100' 
+            : 'bg-gradient-to-br from-slate-800 to-slate-900'
+        )}
       />
       
-      {/* Circle animations */}
-      <div 
-        className={`absolute w-20 h-20 rounded-full transition-all duration-500 ${
-          theme === 'light' 
-            ? 'bg-blue-200/30 scale-0' 
-            : 'bg-amber-400/20 scale-100'
-        }`} 
-        style={{
-          top: '-150%',
-          left: '-150%',
-        }}
-      />
+      {/* Dark mode stars animations */}
+      {theme === "dark" && stars.map((star, i) => (
+        <div
+          key={i}
+          className={cn(
+            "absolute rounded-full bg-white transition-opacity duration-500",
+            isHovering ? "animate-twinkle opacity-100" : "opacity-0"
+          )}
+          style={{
+            width: `${star.size}px`,
+            height: `${star.size}px`,
+            ...star.style,
+          }}
+        />
+      ))}
       
-      <div 
-        className={`absolute w-16 h-16 rounded-full transition-all duration-500 ${
-          theme === 'light' 
-            ? 'bg-blue-300/30 scale-0' 
-            : 'bg-amber-300/30 scale-100'
-        }`} 
-        style={{
-          top: '100%',
-          right: '-80%',
-        }}
-      />
+      {/* Light mode clouds animations */}
+      {theme === "light" && clouds.map((cloud, i) => (
+        <div
+          key={i}
+          className={cn(
+            "absolute bg-white rounded-full transition-opacity duration-500",
+            isHovering ? "opacity-80" : "opacity-0"
+          )}
+          style={cloud.style}
+        />
+      ))}
+
+      {/* Sun/moon animations */}
+      {theme === 'light' ? (
+        <div 
+          className={cn(
+            "absolute w-12 h-12 rounded-full transition-all duration-500",
+            isHovering ? "bg-amber-100 scale-100" : "bg-amber-200/20 scale-0"
+          )} 
+          style={{
+            top: '60%',
+            left: '-60%',
+            filter: 'blur(6px)',
+          }}
+        />
+      ) : (
+        <div 
+          className={cn(
+            "absolute w-12 h-12 rounded-full transition-all duration-500",
+            isHovering ? "bg-indigo-500/20 scale-100" : "bg-indigo-400/10 scale-0"
+          )} 
+          style={{
+            top: '-60%',
+            left: '60%',
+            filter: 'blur(8px)',
+          }}
+        />
+      )}
+      
+      <style jsx global>{`
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.7; }
+          50% { opacity: 0.3; }
+        }
+        
+        @keyframes spin-slow {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes reverse-spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(-360deg); }
+        }
+        
+        .animate-twinkle {
+          animation: twinkle 3s infinite ease-in-out;
+        }
+        
+        .animate-spin-slow {
+          animation: spin-slow 1s ease-in-out;
+        }
+        
+        .animate-reverse-spin {
+          animation: reverse-spin 1s ease-in-out;
+        }
+      `}</style>
     </button>
   );
 }

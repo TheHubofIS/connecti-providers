@@ -190,19 +190,19 @@
 /* Float animation */
 @keyframes float {
   0% {
-    transform: translatey(0px) translateX(0px);
+    transform: translatey(0px) translateX(0px) rotate(0deg);
   }
   25% {
-    transform: translatey(-10px) translateX(5px);
+    transform: translatey(-10px) translateX(5px) rotate(2deg);
   }
   50% {
-    transform: translatey(0px) translateX(10px);
+    transform: translatey(0px) translateX(10px) rotate(0deg);
   }
   75% {
-    transform: translatey(10px) translateX(5px);
+    transform: translatey(10px) translateX(5px) rotate(-2deg);
   }
   100% {
-    transform: translatey(0px) translateX(0px);
+    transform: translatey(0px) translateX(0px) rotate(0deg);
   }
 }
 
@@ -355,3 +355,122 @@
 .staggered-list.visible > *:nth-child(4) { animation-delay: 0.4s; }
 .staggered-list.visible > *:nth-child(5) { animation-delay: 0.5s; }
 .staggered-list.visible > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Shiny button effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: transform 0.8s;
+}
+
+.btn-shine:hover::after {
+  transform: rotate(30deg) translateX(100%);
+}
+
+/* Spotlight hover effect */
+.spotlight {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: -100%;
+  background: radial-gradient(
+    circle at var(--x) var(--y),
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0) 50%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* 3D card flip effect */
+.card-3d {
+  perspective: 1000px;
+}
+
+.card-3d-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card-3d:hover .card-3d-inner {
+  transform: rotateY(180deg);
+}
+
+.card-3d-front, .card-3d-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.card-3d-back {
+  transform: rotateY(180deg);
+}
+
+/* Typing animation */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+.typing-animation {
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid hsl(var(--primary));
+  animation: 
+    typing 3s steps(40, end),
+    blink 1s step-end infinite;
+}
+
+/* Parallax scrolling effect */
+.parallax-container {
+  perspective: 1px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 100vh;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.parallax-layer-back {
+  transform: translateZ(-1px) scale(2);
+}
+
+.parallax-layer-base {
+  transform: translateZ(0);
+}
