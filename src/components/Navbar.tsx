@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
-import { Menu, X, Home, ArrowLeft } from "lucide-react";
+import { Menu, X, Home, ArrowLeft, Settings } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -50,6 +50,9 @@ const Navbar = () => {
                      location.pathname.includes('/inscription');
   
   const showBackButton = isDashboardPage || isAuthPage;
+  
+  // Check if current user is admin
+  const isAdmin = user?.role === "admin";
 
   return (
     <header
@@ -111,6 +114,15 @@ const Navbar = () => {
               
               {isAuthenticated ? (
                 <div className="flex items-center space-x-4">
+                  {isAdmin && (
+                    <Link
+                      to="/admin/dashboard"
+                      className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all hover-lift flex items-center"
+                    >
+                      <Settings className="h-4 w-4 mr-2" />
+                      Administration
+                    </Link>
+                  )}
                   <Link
                     to={user?.role === "provider" ? "/fournisseur/dashboard" : "/client/dashboard"}
                     className="px-4 py-2 rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all hover-lift"
@@ -182,6 +194,16 @@ const Navbar = () => {
           <div className="flex flex-col space-y-3 pt-4 border-t border-border">
             {isAuthenticated ? (
               <>
+                {isAdmin && (
+                  <Link
+                    to="/admin/dashboard"
+                    className="py-2 px-4 text-center flex items-center justify-center rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <Settings className="h-4 w-4 mr-2" />
+                    Administration
+                  </Link>
+                )}
                 <Link
                   to={user?.role === "provider" ? "/fournisseur/dashboard" : "/client/dashboard"}
                   className="py-2 px-4 text-center rounded-full border border-primary/20 text-primary hover:bg-primary/5 transition-all"

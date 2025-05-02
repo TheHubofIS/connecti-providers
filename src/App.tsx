@@ -5,8 +5,10 @@ import { Toaster } from '@/components/ui/toaster';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AppointmentProvider } from './contexts/AppointmentContext';
 import { MessageProvider } from './contexts/MessageContext';
+import { AuthProvider } from './contexts/AuthContext';
 import { useEffect } from 'react';
 
+// Public pages
 import Index from '@/pages/Index';
 import NotFound from '@/pages/NotFound';
 import Prestataires from '@/pages/Prestataires';
@@ -44,7 +46,14 @@ import ProviderMessages from '@/pages/fournisseur/Messages';
 import ProviderCompleteProfile from '@/pages/fournisseur/CompleteProfile';
 
 // Admin routes
+import AdminLayout from '@/components/admin/AdminLayout';
 import AdminDashboard from '@/pages/admin/Dashboard';
+import ContentManager from '@/pages/admin/ContentManager';
+import MediaLibrary from '@/pages/admin/MediaLibrary';
+import LanguageManager from '@/pages/admin/LanguageManager';
+import MenuManager from '@/pages/admin/MenuManager';
+import UserManager from '@/pages/admin/UserManager';
+import AdminProfile from '@/pages/admin/Profile';
 
 // Static routes
 import Privacy from '@/pages/Privacy';
@@ -69,115 +78,129 @@ function ScrollToTop() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider>
-          <ScrollToTop />
-          <Routes>
-            {/* Public routes */}
-            <Route path="/" element={<Index />} />
-            <Route path="/prestataires" element={<Prestataires />} />
-            <Route path="/prestataires/:providerId" element={<ProviderDetail />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/services/:serviceId" element={<ServiceDetail />} />
-            <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:articleId" element={<BlogArticle />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/categories" element={<Categories />} />
+      <AuthProvider>
+        <LanguageProvider>
+            <ScrollToTop />
+            <Routes>
+              {/* Public routes */}
+              <Route path="/" element={<Index />} />
+              <Route path="/prestataires" element={<Prestataires />} />
+              <Route path="/prestataires/:providerId" element={<ProviderDetail />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/:serviceId" element={<ServiceDetail />} />
+              <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:articleId" element={<BlogArticle />} />
+              <Route path="/faq" element={<FAQ />} />
+              <Route path="/categories" element={<Categories />} />
+              
+              {/* Authentication routes */}
+              <Route path="/connexion" element={<Connexion />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/inscription" element={<Register />} />
+              <Route path="/inscription-client" element={<InscriptionClient />} />
+              <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              
+              {/* Client routes */}
+              <Route path="/client/dashboard" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <AppointmentProvider>
+                    <ClientDashboard />
+                  </AppointmentProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/client/profile" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ClientProfile />
+                </ProtectedRoute>
+              } />
+              <Route path="/client/appointments" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <AppointmentProvider>
+                    <ClientAppointments />
+                  </AppointmentProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/client/messages" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <MessageProvider>
+                    <ClientMessages />
+                  </MessageProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/client/complete-profile" element={
+                <ProtectedRoute allowedRoles={["client", "admin"]}>
+                  <ClientCompleteProfile />
+                </ProtectedRoute>
+              } />
+              
+              {/* Provider routes */}
+              <Route path="/fournisseur/dashboard" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <AppointmentProvider>
+                    <ProviderDashboard />
+                  </AppointmentProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/profile" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <ProviderProfile />
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/appointments" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <AppointmentProvider>
+                    <ProviderAppointments />
+                  </AppointmentProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/messages" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <MessageProvider>
+                    <ProviderMessages />
+                  </MessageProvider>
+                </ProtectedRoute>
+              } />
+              <Route path="/fournisseur/complete-profile" element={
+                <ProtectedRoute allowedRoles={["provider", "admin"]}>
+                  <ProviderCompleteProfile />
+                </ProtectedRoute>
+              } />
+              
+              {/* Admin routes */}
+              <Route path="/admin" element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }>
+                <Route index element={<AdminDashboard />} />
+                <Route path="dashboard" element={<AdminDashboard />} />
+                <Route path="content/pages" element={<ContentManager />} />
+                <Route path="content/layouts" element={<ContentManager />} />
+                <Route path="content/menus" element={<MenuManager />} />
+                <Route path="media" element={<MediaLibrary />} />
+                <Route path="translations" element={<LanguageManager />} />
+                <Route path="settings/languages" element={<LanguageManager />} />
+                <Route path="profile" element={<AdminProfile />} />
+                <Route path="users" element={<UserManager />} />
+                <Route path="providers" element={<AdminDashboard />} />
+              </Route>
+              
+              {/* Static routes */}
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/support" element={<Support />} />
+              
+              {/* 404 page */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
             
-            {/* Authentication routes */}
-            <Route path="/connexion" element={<Connexion />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/inscription" element={<Register />} />
-            <Route path="/inscription-client" element={<InscriptionClient />} />
-            <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password" element={<ResetPassword />} />
-            
-            {/* Client routes */}
-            <Route path="/client/dashboard" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <AppointmentProvider>
-                  <ClientDashboard />
-                </AppointmentProvider>
-              </ProtectedRoute>
-            } />
-            <Route path="/client/profile" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <ClientProfile />
-              </ProtectedRoute>
-            } />
-            <Route path="/client/appointments" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <AppointmentProvider>
-                  <ClientAppointments />
-                </AppointmentProvider>
-              </ProtectedRoute>
-            } />
-            <Route path="/client/messages" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <MessageProvider>
-                  <ClientMessages />
-                </MessageProvider>
-              </ProtectedRoute>
-            } />
-            <Route path="/client/complete-profile" element={
-              <ProtectedRoute allowedRoles={["client", "admin"]}>
-                <ClientCompleteProfile />
-              </ProtectedRoute>
-            } />
-            
-            {/* Provider routes */}
-            <Route path="/fournisseur/dashboard" element={
-              <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                <AppointmentProvider>
-                  <ProviderDashboard />
-                </AppointmentProvider>
-              </ProtectedRoute>
-            } />
-            <Route path="/fournisseur/profile" element={
-              <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                <ProviderProfile />
-              </ProtectedRoute>
-            } />
-            <Route path="/fournisseur/appointments" element={
-              <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                <AppointmentProvider>
-                  <ProviderAppointments />
-                </AppointmentProvider>
-              </ProtectedRoute>
-            } />
-            <Route path="/fournisseur/messages" element={
-              <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                <MessageProvider>
-                  <ProviderMessages />
-                </MessageProvider>
-              </ProtectedRoute>
-            } />
-            <Route path="/fournisseur/complete-profile" element={
-              <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                <ProviderCompleteProfile />
-              </ProtectedRoute>
-            } />
-            
-            {/* Admin routes */}
-            <Route path="/admin/dashboard" element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <AdminDashboard />
-              </ProtectedRoute>
-            } />
-            
-            {/* Static routes */}
-            <Route path="/privacy" element={<Privacy />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/support" element={<Support />} />
-            
-            {/* 404 page */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-          
-          <Toaster />
-      </LanguageProvider>
+            <Toaster />
+        </LanguageProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
