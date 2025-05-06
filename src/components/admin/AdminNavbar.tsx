@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Language } from "@/types/auth";
 
 const AdminNavbar = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -31,9 +32,9 @@ const AdminNavbar = () => {
   const { translate, language, setLanguage } = useLanguage();
   
   const languages = [
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' }
+    { code: 'fr' as Language, name: 'Français', flag: '🇫🇷' },
+    { code: 'en' as Language, name: 'English', flag: '🇬🇧' },
+    { code: 'es' as Language, name: 'Español', flag: '🇪🇸' }
   ];
 
   return (

@@ -1,207 +1,60 @@
 
-import { Routes, Route, useLocation } from 'react-router-dom';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { Toaster } from '@/components/ui/toaster';
-import { LanguageProvider } from './contexts/LanguageContext';
-import { AppointmentProvider } from './contexts/AppointmentContext';
-import { MessageProvider } from './contexts/MessageContext';
-import { AuthProvider } from './contexts/AuthContext';
-import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "@/contexts/ThemeContext";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import { Toaster } from "@/components/ui/toaster";
+import { Layout } from "@/components/ui/layout";
+import AdminLayout from "@/components/admin/AdminLayout";
+import HomePage from "@/pages/Home";
+import LoginPage from "@/pages/Login";
+import RegisterPage from "@/pages/Register";
+import NotFoundPage from "@/pages/NotFound";
 
-// Public pages
-import Index from '@/pages/Index';
-import NotFound from '@/pages/NotFound';
-import Prestataires from '@/pages/Prestataires';
-import ProviderDetail from '@/pages/ProviderDetail';
-import Services from '@/pages/Services';
-import ServiceDetail from '@/pages/ServiceDetail';
-import CommentCaMarche from '@/pages/CommentCaMarche';
-import Contact from '@/pages/Contact';
-import Blog from '@/pages/Blog';
-import BlogArticle from '@/pages/BlogArticle';
-import FAQ from '@/pages/FAQ';
-import Categories from '@/pages/Categories';
-
-// Login and Registration routes
-import Login from '@/pages/Login';
-import Register from '@/pages/Register';
-import InscriptionClient from '@/pages/InscriptionClient';
-import InscriptionPrestataire from '@/pages/InscriptionPrestataire';
-import Connexion from '@/pages/Connexion';
-import ForgotPassword from '@/pages/ForgotPassword';
-import ResetPassword from '@/pages/ResetPassword';
-
-// Protected routes
-import ClientDashboard from '@/pages/client/Dashboard';
-import ClientProfile from '@/pages/client/Profile';
-import ClientAppointments from '@/pages/client/Appointments';
-import ClientMessages from '@/pages/client/Messages';
-import ClientCompleteProfile from '@/pages/client/CompleteProfile';
-
-// Provider routes
-import ProviderDashboard from '@/pages/fournisseur/Dashboard';
-import ProviderProfile from '@/pages/fournisseur/Profile';
-import ProviderAppointments from '@/pages/fournisseur/Appointments';
-import ProviderMessages from '@/pages/fournisseur/Messages';
-import ProviderCompleteProfile from '@/pages/fournisseur/CompleteProfile';
-
-// Admin routes
-import AdminLayout from '@/components/admin/AdminLayout';
-import AdminDashboard from '@/pages/admin/Dashboard';
-import ContentManager from '@/pages/admin/ContentManager';
-import MediaLibrary from '@/pages/admin/MediaLibrary';
-import LanguageManager from '@/pages/admin/LanguageManager';
-import MenuManager from '@/pages/admin/MenuManager';
-import UserManager from '@/pages/admin/UserManager';
-import AdminProfile from '@/pages/admin/Profile';
-
-// Static routes
-import Privacy from '@/pages/Privacy';
-import Terms from '@/pages/Terms';
-import Support from '@/pages/Support';
-import ProtectedRoute from '@/components/ProtectedRoute';
-
-// Create a client for React Query
-const queryClient = new QueryClient();
-
-// ScrollToTop component to manage scrolling on route changes
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-  
-  return null;
-}
+// Pages admin
+import Dashboard from "@/pages/admin/Dashboard";
+import ContentManager from "@/pages/admin/ContentManager";
+import MediaLibrary from "@/pages/admin/MediaLibrary"; 
+import MenuManager from "@/pages/admin/MenuManager";
+import LanguageManager from "@/pages/admin/LanguageManager";
+import UsersManager from "@/pages/admin/UsersManager";
+import RolesManager from "@/pages/admin/RolesManager";
+import ProfilePage from "@/pages/admin/Profile";
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
       <AuthProvider>
         <LanguageProvider>
-            <ScrollToTop />
+          <Router>
             <Routes>
-              {/* Public routes */}
-              <Route path="/" element={<Index />} />
-              <Route path="/prestataires" element={<Prestataires />} />
-              <Route path="/prestataires/:providerId" element={<ProviderDetail />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/services/:serviceId" element={<ServiceDetail />} />
-              <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:articleId" element={<BlogArticle />} />
-              <Route path="/faq" element={<FAQ />} />
-              <Route path="/categories" element={<Categories />} />
-              
-              {/* Authentication routes */}
-              <Route path="/connexion" element={<Connexion />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/inscription" element={<Register />} />
-              <Route path="/inscription-client" element={<InscriptionClient />} />
-              <Route path="/inscription-prestataire" element={<InscriptionPrestataire />} />
-              <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
-              
-              {/* Client routes */}
-              <Route path="/client/dashboard" element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
-                  <AppointmentProvider>
-                    <ClientDashboard />
-                  </AppointmentProvider>
-                </ProtectedRoute>
-              } />
-              <Route path="/client/profile" element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
-                  <ClientProfile />
-                </ProtectedRoute>
-              } />
-              <Route path="/client/appointments" element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
-                  <AppointmentProvider>
-                    <ClientAppointments />
-                  </AppointmentProvider>
-                </ProtectedRoute>
-              } />
-              <Route path="/client/messages" element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
-                  <MessageProvider>
-                    <ClientMessages />
-                  </MessageProvider>
-                </ProtectedRoute>
-              } />
-              <Route path="/client/complete-profile" element={
-                <ProtectedRoute allowedRoles={["client", "admin"]}>
-                  <ClientCompleteProfile />
-                </ProtectedRoute>
-              } />
-              
-              {/* Provider routes */}
-              <Route path="/fournisseur/dashboard" element={
-                <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                  <AppointmentProvider>
-                    <ProviderDashboard />
-                  </AppointmentProvider>
-                </ProtectedRoute>
-              } />
-              <Route path="/fournisseur/profile" element={
-                <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                  <ProviderProfile />
-                </ProtectedRoute>
-              } />
-              <Route path="/fournisseur/appointments" element={
-                <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                  <AppointmentProvider>
-                    <ProviderAppointments />
-                  </AppointmentProvider>
-                </ProtectedRoute>
-              } />
-              <Route path="/fournisseur/messages" element={
-                <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                  <MessageProvider>
-                    <ProviderMessages />
-                  </MessageProvider>
-                </ProtectedRoute>
-              } />
-              <Route path="/fournisseur/complete-profile" element={
-                <ProtectedRoute allowedRoles={["provider", "admin"]}>
-                  <ProviderCompleteProfile />
-                </ProtectedRoute>
-              } />
-              
-              {/* Admin routes */}
-              <Route path="/admin" element={
-                <ProtectedRoute allowedRoles={["admin"]}>
-                  <AdminLayout />
-                </ProtectedRoute>
-              }>
-                <Route index element={<AdminDashboard />} />
-                <Route path="dashboard" element={<AdminDashboard />} />
-                <Route path="content/pages" element={<ContentManager />} />
-                <Route path="content/layouts" element={<ContentManager />} />
-                <Route path="content/menus" element={<MenuManager />} />
-                <Route path="media" element={<MediaLibrary />} />
-                <Route path="translations" element={<LanguageManager />} />
-                <Route path="settings/languages" element={<LanguageManager />} />
-                <Route path="profile" element={<AdminProfile />} />
-                <Route path="users" element={<UserManager />} />
-                <Route path="providers" element={<AdminDashboard />} />
+              {/* Routes publiques */}
+              <Route element={<Layout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/connexion" element={<LoginPage />} />
+                <Route path="/inscription" element={<RegisterPage />} />
               </Route>
               
-              {/* Static routes */}
-              <Route path="/privacy" element={<Privacy />} />
-              <Route path="/terms" element={<Terms />} />
-              <Route path="/support" element={<Support />} />
+              {/* Routes admin */}
+              <Route path="/admin" element={<AdminLayout />}>
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="content/pages" element={<ContentManager />} />
+                <Route path="media" element={<MediaLibrary />} />
+                <Route path="content/menus" element={<MenuManager />} />
+                <Route path="settings/languages" element={<LanguageManager />} />
+                <Route path="users" element={<UsersManager />} />
+                <Route path="settings/roles" element={<RolesManager />} />
+                <Route path="profile" element={<ProfilePage />} />
+              </Route>
               
-              {/* 404 page */}
-              <Route path="*" element={<NotFound />} />
+              {/* Page 404 */}
+              <Route path="*" element={<NotFoundPage />} />
             </Routes>
-            
-            <Toaster />
+          </Router>
+          <Toaster />
         </LanguageProvider>
       </AuthProvider>
-    </QueryClientProvider>
+    </ThemeProvider>
   );
 }
 
