@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { findProviderById } from "@/utils/serviceData";
@@ -22,7 +21,7 @@ export default function ProviderDetail() {
       setLoading(true);
       try {
         if (providerId) {
-          // Simulate network delay
+          // Simuler une légère latence réseau
           await new Promise(resolve => setTimeout(resolve, 500));
           const foundProvider = findProviderById(providerId);
           setProvider(foundProvider);
@@ -264,11 +263,11 @@ export default function ProviderDetail() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 blur-sm">
                   <div className="flex items-center">
                     <Phone className="h-4 w-4 mr-2 text-muted-foreground" />
-                    <span>+33 6 12 34 56 78</span>
+                    <span>+33 6 {randomInt(10, 99)} {randomInt(10, 99)} {randomInt(10, 99)} {randomInt(10, 99)}</span>
                   </div>
                   <div className="flex items-center">
                     <Globe className="h-4 w-4 mr-2 text-muted-foreground" />
-                    <span>www.example-provider.com</span>
+                    <span>www.{provider.name.toLowerCase().replace(' ', '')}-{provider.category.toLowerCase()}.fr</span>
                   </div>
                 </div>
               </div>
@@ -371,4 +370,8 @@ export default function ProviderDetail() {
       </div>
     </div>
   );
+}
+
+function randomInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
